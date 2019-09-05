@@ -1,2 +1,0 @@
-# ComuniDADOSReact
-Created with CodeSandbox
