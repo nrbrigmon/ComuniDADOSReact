@@ -1,14 +1,15 @@
 import React, { Component } from "react";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
-
-import Select from 'react-select';
+import Select from "@material-ui/core/Select";
 
 import * as _metrics from "constants/metrics";
+
 
 class MetricAppBarGeography extends Component {
 
 	_makeGeographySelection = (e) => {
+		console.log(e)
 		//the first action will update the app bar display
 		this.props.selectMetricLayer(e.target.value);
 		//the second action will update the map layer
@@ -16,25 +17,24 @@ class MetricAppBarGeography extends Component {
 	}
   render() {
 		const { classes } = this.props;
-		// console.log(this.props)
-    return (
-				<FormControl className={classes.formControl}>
+		// console.log(_metrics.geography_options)
+    return ( 
+			<FormControl className={classes.formControl}>
 					<Select
-						placeholder={"Select a Geography"}
-						value={this.props.metricSelection}
+						displayEmpty
+						value={""}
 						onChange={this._makeGeographySelection}
-						className={classes.display}
 					>
 						<MenuItem value="" disabled>
-							Select a Geography
+							Select Geography
 						</MenuItem>
 						{ _metrics.geography_options.map( (elem, idx) => {
 								return (
-									<MenuItem key={idx} value={elem.file_name} > {elem.display_name }</MenuItem>
+									<MenuItem key={idx} value={elem.value} > {elem.label }</MenuItem>
 								)
 							})
 						}
-					</Select>
+						</Select>
 				</FormControl>
     );
   }

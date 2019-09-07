@@ -10,23 +10,19 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import headerStyle from "styles/HeaderStyle";
 import HeaderLinks from "./HeaderLinks";
 
+import { connect } from "react-redux";
+import * as actions from "actions";
+
 class Header extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      mobileOpen: false
-    };
-    this.handleDrawerToggle = this.handleDrawerToggle.bind(this);
-  }
-  handleDrawerToggle() {
-    this.setState({ mobileOpen: !this.state.mobileOpen });
+  _handleDrawerToggle = () => {
+    this.props.toggleDrawer(!this.props.navDrawer)
   }
 
   render() {
     const { classes } = this.props;
     return (
       <div className={classes.root}>
-        <AppBar position="static">
+        <AppBar position="static" className={classes.root}>
           <Toolbar>
             <Typography variant="h6" className={classes.title}>
               COMUNIDADOS
@@ -37,7 +33,7 @@ class Header extends Component {
               color="inherit"
               aria-label="menu"
               className={classes.menuButton}
-              onClick={this.handleDrawerToggle}
+              onClick={this._handleDrawerToggle}
             >
               <MenuIcon />
             </IconButton>
@@ -45,10 +41,10 @@ class Header extends Component {
 
           <Drawer
             anchor="right"
-            open={this.state.mobileOpen}
-            onClose={this.handleDrawerToggle}
+            open={this.props.navDrawer}
+            onClose={this._handleDrawerToggle}
           >
-            <HeaderLinks />
+            <HeaderLinks {...this.props} />
           </Drawer>
         </AppBar>
       </div>
@@ -56,4 +52,11 @@ class Header extends Component {
   }
 }
 
-export default withStyles(headerStyle)(Header);
+function mapStateToProps(state) {
+  return {
+		navLocation: state.navLocation,
+		navDrawer: state.navDrawer
+  };
+}
+
+export default withStyles(headerStyle)(connect(mapStateToProps, actions)(Header));

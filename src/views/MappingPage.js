@@ -7,9 +7,11 @@ import { connect } from "react-redux";
 import * as actions from "actions";
 
 class MappingPage extends Component {
-
+	componentDidMount(){
+		this.props.setLocation(this.props.history)
+	}
   render() {
-    let { mapLayers } = this.props;
+		let { mapLayers } = this.props;
     return (
       <div>
         <MetricAppBar {...this.props} />

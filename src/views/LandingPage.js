@@ -1,14 +1,22 @@
 import React, { Component } from "react";
-import Header from "components/Header/Header";
+
+import { connect } from "react-redux";
+import * as actions from "actions";
 
 class LandingPage extends Component {
+	componentDidMount(){
+		this.props.setLocation(this.props.history)
+	}
   render() {
     return (
       <div>
-        <Header />
         LandingPage
       </div>
     );
   }
 }
-export default LandingPage;
+
+export default connect(
+  null,
+  actions
+)(LandingPage);

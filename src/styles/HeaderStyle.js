@@ -1,13 +1,16 @@
 export default theme => ({
   root: {
-    flexGrow: 1
+		flexGrow: 1,
+		background: "white",
+		color: "black"
   },
   menuButton: {
-    paddingRight: 0,
     marginRight: theme.spacing(0)
+		,color:"black"
   },
   title: {
-    flexGrow: 1,
-    marginLeft: theme.spacing(0)
+		flexGrow: 1
+		,color:"black"
+    ,marginLeft: theme.spacing(0)
   }
 });

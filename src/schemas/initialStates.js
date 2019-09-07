@@ -4,5 +4,6 @@ export default {
   },
 	randomId: "32432",
 	mapLayers: {},
-	metricSelection: ''
+	metricSelection: null,
+	preferredLanguage: 'en'
 };
