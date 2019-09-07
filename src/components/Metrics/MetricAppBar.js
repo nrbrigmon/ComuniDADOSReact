@@ -3,10 +3,9 @@ import Grid from "@material-ui/core/Grid";
 import AppBar from "@material-ui/core/AppBar";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Toolbar from "@material-ui/core/Toolbar";
-import metricStyles from "../../styles/MetricAppBarStyle";
-import MenuItem from "@material-ui/core/MenuItem";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
+import metricStyles from "styles/MetricAppBarStyle";
+import MetricAppBarSelection from 'components/Metrics/MetricAppBarSelection';
+import MetricAppBarGeography from 'components/Metrics/MetricAppBarGeography';
 
 class MetricAppBar extends Component {
   render() {
@@ -18,41 +17,10 @@ class MetricAppBar extends Component {
             <Grid item xs={12}>
               <Grid container justify="center">
                 {/* First item is for choosing geography */}
-                <FormControl className={classes.formControl}>
-                  <Select
-                    displayEmpty
-                    value={""}
-                    inputProps={{
-                      name: "age",
-                      id: "demo-controlled-open-select"
-                    }}
-                  >
-                    <MenuItem value="" disabled>
-                      Select a Geography
-                    </MenuItem>
-                    <MenuItem value={10}>Ten</MenuItem>
-                    <MenuItem value={20}>Twenty</MenuItem>
-                    <MenuItem value={30}>Thirty</MenuItem>
-                  </Select>
-                </FormControl>
+								<MetricAppBarGeography {...this.props} />
+
                 {/* Second item is for choosing a metric */}
-                <FormControl className={classes.formControl}>
-                  <Select
-                    displayEmpty
-                    value={""}
-                    inputProps={{
-                      name: "age",
-                      id: "demo-controlled-open-select"
-                    }}
-                  >
-                    <MenuItem value="" disabled>
-                      Select a Metric
-                    </MenuItem>
-                    <MenuItem value={10}>Ten</MenuItem>
-                    <MenuItem value={20}>Twenty</MenuItem>
-                    <MenuItem value={30}>Thirty</MenuItem>
-                  </Select>
-                </FormControl>
+                <MetricAppBarSelection {...this.props} />
               </Grid>
             </Grid>
           </Toolbar>

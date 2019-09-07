@@ -1,9 +1,8 @@
-//   import axios from 'axios';
+import axios from "axios";
 
-// export const loadMapLayer = (map_layer_id) => {
-// 	const action = {
-// 		type: 'LOAD_MAP_LAYER',
-// 		map_layer_id
-// 	}
-// 	return action;
-// }
+export const fetchMapLayer = map_layer_id => async dispatch => {
+		// map_layer_id = "sao_districts"
+		const res = await axios.get("../temp_data/" + map_layer_id + ".json");
+		// console.log(res.data.);
+		dispatch({type: "GET_MAP_LAYER", payload: res.data});
+};

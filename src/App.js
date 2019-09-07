@@ -2,25 +2,24 @@ import React, { Component } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import CssBaseline from "@material-ui/core/CssBaseline";
-import indexRoutes from "./routes/indexRoutes";
+import indexRoutes from "routes/indexRoutes";
 
-import { connect } from "react-redux";
-import * as actions from "./actions";
+import Header from "components/Header/Header";
+
 
 class App extends Component {
   componentDidMount() {
     // console.log("baseline mounted")
-    //fetchUser will get name, info, if exists
-    console.log(this.props.fetchRandomId());
   }
 
   render() {
     // let hist = createBrowserHistory();
-    console.log(this.props);
+    // console.log(this.props);
     return (
       <div>
         {/* inside app, w router */}
         <CssBaseline />
+        <Header />
         <BrowserRouter>
           {/* <Router history={hist}> */}
           <Switch>
@@ -46,14 +45,4 @@ class App extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    user: state.user,
-    randomId: state.randomId
-  };
-}
-
-export default connect(
-  mapStateToProps,
-  actions
-)(App);
+export default App;

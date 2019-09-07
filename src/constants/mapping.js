@@ -1,12 +1,33 @@
-import L from "leaflet";
+import React from "react";
+import { TileLayer, LayersControl } from "react-leaflet";
 
+// CSS for main Map
 export const MAP_CSS = {
   height: "500px"
 };
-export const MAP_CENTER_COORDS = [30.2764099, -97.7507724];
 
-//MORE PROVIDERS HERE: https://leaflet-extras.github.io/leaflet-providers/preview/
+// Map Options for Map
+export const MAP_CENTER_COORDS = [-23.6321, -46.453];
 
+//Map Base Map PROVIDERS HERE: https://leaflet-extras.github.io/leaflet-providers/preview/
+export const BASE_MAP_OPTIONS = (
+  <LayersControl position="topright">
+    <LayersControl.BaseLayer name="OSM B&W" checked={true}>
+      <TileLayer
+        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+        url="https://tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png"
+      />
+    </LayersControl.BaseLayer>
+    <LayersControl.BaseLayer name="OSM">
+      <TileLayer
+        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+      />
+    </LayersControl.BaseLayer>
+  </LayersControl>
+);
+
+/*
 export const BW_Map = L.tileLayer(
   "https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}{r}.png",
   {
@@ -53,3 +74,4 @@ export const HYBRID_Aerial = L.layerGroup([
     }
   )
 ]);
+*/

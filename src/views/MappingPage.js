@@ -1,19 +1,33 @@
 import React, { Component } from "react";
-import Header from "../components/Header/Header";
-import MetricAppBar from "../components/Metrics/MetricAppBar";
-import LeafletMap from "../components/Map/LeafletMap";
-import LeafletMapLegend from "../components/Map/LeafletMapLegend";
+import MetricAppBar from "components/Metrics/MetricAppBar";
+import LeafletMap from "components/Map/LeafletMap";
+import LeafletMapLegend from "components/Map/LeafletMapLegend";
+
+import { connect } from "react-redux";
+import * as actions from "actions";
 
 class MappingPage extends Component {
+
   render() {
+    let { mapLayers } = this.props;
     return (
       <div>
-        <Header />
-        <MetricAppBar />
-        <LeafletMap />
+        <MetricAppBar {...this.props} />
+        <LeafletMap {...mapLayers} />
         <LeafletMapLegend />
       </div>
     );
   }
 }
-export default MappingPage;
+
+function mapStateToProps(state) {
+  return {
+		mapLayers: state.mapLayers,
+		metricSelection: state.metricSelection
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  actions
+)(MappingPage);
