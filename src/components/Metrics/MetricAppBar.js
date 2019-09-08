@@ -1,15 +1,14 @@
 import React, { Component } from "react";
 import Grid from "@material-ui/core/Grid";
 import AppBar from "@material-ui/core/AppBar";
-import withStyles from "@material-ui/core/styles/withStyles";
 import Toolbar from "@material-ui/core/Toolbar";
-import metricStyles from "styles/MetricAppBarStyle";
 import MetricAppBarSelection from 'components/Metrics/MetricAppBarSelection';
 import MetricAppBarGeography from 'components/Metrics/MetricAppBarGeography';
 
 class MetricAppBar extends Component {
   render() {
-    const { classes } = this.props;
+		const { classes } = this.props;
+		// console.log(classes)
     return (
       <div>
         <AppBar position="static" className={classes.root}>
@@ -30,4 +29,4 @@ class MetricAppBar extends Component {
   }
 }
 
-export default withStyles(metricStyles)(MetricAppBar);
+export default MetricAppBar;

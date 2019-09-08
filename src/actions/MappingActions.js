@@ -6,3 +6,11 @@ export const fetchMapLayer = map_layer_id => async dispatch => {
 		// console.log(res.data.);
 		dispatch({type: "GET_MAP_LAYER", payload: res.data});
 };
+
+export const updateLayerStyles = (obj) => {
+	const action = {
+		type: "UPDATE_LAYER_STYLE",
+		payload: obj
+  };
+  return action;
+}

@@ -12,11 +12,11 @@ class LeafletMap extends Component {
     const position = _constants.MAP_CENTER_COORDS;
     const { classes } = this.props;
     let mappedData = this.props;
-    let my_object = <div />;
+    let leaflet_layer = <div />;
     // console.log(this.props);
     if (mappedData.type) {
-      // console.log("data");
-      my_object = (
+      // leaflet_layer.log("data");
+      leaflet_layer = (
         <FeatureGroup >
 					<GeoJSON 
 						data={this.props} 
@@ -28,7 +28,7 @@ class LeafletMap extends Component {
 
     return (
       <Map className={classes.map} center={position} zoom={14}>
-        {my_object}
+        {leaflet_layer}
 
         {_constants.BASE_MAP_OPTIONS}
       </Map>

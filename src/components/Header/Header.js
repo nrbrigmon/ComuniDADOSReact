@@ -42,7 +42,8 @@ class Header extends Component {
           <Drawer
             anchor="right"
             open={this.props.navDrawer}
-            onClose={this._handleDrawerToggle}
+						onClose={this._handleDrawerToggle}
+						className={classes.drawer}
           >
             <HeaderLinks {...this.props} />
           </Drawer>

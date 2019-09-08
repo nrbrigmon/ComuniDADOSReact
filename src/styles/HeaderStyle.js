@@ -12,5 +12,8 @@ export default theme => ({
 		flexGrow: 1
 		,color:"black"
     ,marginLeft: theme.spacing(0)
-  }
+	},
+	drawer: {
+		width: "250px"
+	}
 });

@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import MetricAppBar from "components/Metrics/MetricAppBar";
 import LeafletMap from "components/Map/LeafletMap";
 import LeafletMapLegend from "components/Map/LeafletMapLegend";
+import Grid from "@material-ui/core/Grid";
+import withStyles from "@material-ui/core/styles/withStyles";
+import mapStyle from "styles/MapStyle";
 
 import { connect } from "react-redux";
 import * as actions from "actions";
@@ -11,11 +14,18 @@ class MappingPage extends Component {
 		this.props.setLocation(this.props.history)
 	}
   render() {
-		let { mapLayers } = this.props;
+		let { mapLayers, classes } = this.props;
     return (
-      <div>
+			<div>
         <MetricAppBar {...this.props} />
-        <LeafletMap {...mapLayers} />
+      	<Grid container spacing={0}>
+        	<Grid item xs={6} className={classes.mapContainer}>
+						<LeafletMap {...mapLayers} />
+					</Grid>
+					<Grid item xs={6} className={classes.mapContainer}>
+						<LeafletMap {...mapLayers} />
+					</Grid>
+				</Grid>
         <LeafletMapLegend />
       </div>
     );
@@ -29,7 +39,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  actions
-)(MappingPage);
+export default withStyles(mapStyle)(connect(mapStateToProps, actions)(MappingPage));

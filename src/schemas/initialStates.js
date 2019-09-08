@@ -3,7 +3,7 @@ export default {
     id: 0
   },
 	randomId: "32432",
-	mapLayers: {},
+	mapLayers: null,
 	metricSelection: null,
 	preferredLanguage: 'en'
 };

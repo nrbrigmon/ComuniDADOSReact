@@ -8,9 +8,15 @@ import * as _metrics from "constants/metrics";
 class MetricAppBarSelection extends Component {
 	
 	_makeMetricSelection = (e) => {
-		console.log(e.target);
-		// this.props.selectMetricLayer(e.target.value);
-		// this.props.fetchMapLayer(e.target.value);
+		//if there is a map layer available, run functions
+		if (this.props.mapLayers){
+			//grab object by key-value
+			let metricObj = _metrics.district_metrics.filter( elem => {
+				return elem.label === e.target.value
+			})
+			this.props.updateLayerStyles(metricObj);
+
+		}
 	}
 
   render() {
@@ -20,14 +26,14 @@ class MetricAppBarSelection extends Component {
 					<Select
 						displayEmpty
 						value={""}
-						onChange={this.props._makeMetricSelection}
+						onChange={this._makeMetricSelection}
 					>
 						<MenuItem value="" disabled>
 							Select a Metric
 						</MenuItem>
 						{ _metrics.district_metrics.map( (elem, idx) => {
 								return (
-									<MenuItem key={idx} value={elem.label} > {elem.alias_name }</MenuItem>
+									<MenuItem key={idx} value={elem.label} data={elem}> {elem.alias_name }</MenuItem>
 								)
 							})
 						}

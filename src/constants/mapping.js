@@ -1,10 +1,21 @@
 import React from "react";
-import { TileLayer, LayersControl } from "react-leaflet";
+import { TileLayer, LayersControl, LayerGroup } from "react-leaflet";
 
 // CSS for main Map
 export const MAP_CSS = {
   height: "500px"
 };
+
+//currently need two seperate variables to feed the two map panes...
+export const HELIO_MAP = {
+	coordinates: [-23.6135, -46.59]
+	,prefix: "helio"
+}
+
+export const SAO_MAP = {
+	coordinates: [-23.6321, -46.453]
+	,prefix: "sao"
+}
 
 // Map Options for Map
 export const MAP_CENTER_COORDS = [-23.6321, -46.453];
@@ -23,6 +34,24 @@ export const BASE_MAP_OPTIONS = (
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
+    </LayersControl.BaseLayer>
+    <LayersControl.BaseLayer name="Aerial Hybrid">
+			<LayerGroup>
+				<TileLayer
+					attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+					url="http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
+				/>
+				<TileLayer
+					attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+					url="http://stamen-tiles-{s}.a.ssl.fastly.net/toner-lines/{z}/{x}/{y}.{ext}"
+					ext="png"
+				/>
+				<TileLayer
+					attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+					url="http://stamen-tiles-{s}.a.ssl.fastly.net/toner-labels/{z}/{x}/{y}.{ext}"
+					ext="png"
+				/>
+			</LayerGroup>
     </LayersControl.BaseLayer>
   </LayersControl>
 );

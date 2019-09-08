@@ -14,7 +14,7 @@ const store = createStore(reducers, initialState, applyMiddleware(reduxThunk));
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <App height={"100vh"} />
   </Provider>,
   document.getElementById("root")
 );
