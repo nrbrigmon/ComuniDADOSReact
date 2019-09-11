@@ -8,18 +8,26 @@ import * as _util from "utils/mapping_utils";
 
 
 class LeafletMap extends Component {
+
+	componentDidMount(){
+		// console.log(this.props)
+		//load layers on mount
+		this.props.fetchMapLayerById(this.props.map_constants.prefix, this.props.mapLayers.type);
+	}
+
   render() {
-    const position = _constants.MAP_CENTER_COORDS;
-    const { classes } = this.props;
-    let mappedData = this.props;
+    let { coordinates, prefix } = this.props.map_constants;
+		let { classes } = this.props;
+		let object_check = Object.keys(this.props.mapLayers[prefix]).length
     let leaflet_layer = <div />;
-    // console.log(this.props);
-    if (mappedData.type) {
-      // leaflet_layer.log("data");
+		console.log(object_check)
+    
+    if (object_check > 0) {
+      // use the mapped data prefix to get data key 
       leaflet_layer = (
         <FeatureGroup >
 					<GeoJSON 
-						data={this.props} 
+						data={this.props.mapLayers[prefix]} 
 						onEachFeature={_util.basic_popup} 
 						style={_util.initial_style} />
         </FeatureGroup>
@@ -27,7 +35,7 @@ class LeafletMap extends Component {
     }
 
     return (
-      <Map className={classes.map} center={position} zoom={14}>
+      <Map className={classes.map} center={coordinates} zoom={14}>
         {leaflet_layer}
 
         {_constants.BASE_MAP_OPTIONS}

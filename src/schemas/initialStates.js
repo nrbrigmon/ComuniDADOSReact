@@ -3,7 +3,11 @@ export default {
     id: 0
   },
 	randomId: "32432",
-	mapLayers: null,
+	mapLayers: {
+		helio: {},
+		sao: {},
+		type: "districts"
+	},
 	metricSelection: null,
 	preferredLanguage: 'en'
 };

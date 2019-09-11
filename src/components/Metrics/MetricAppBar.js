@@ -4,6 +4,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import MetricAppBarSelection from 'components/Metrics/MetricAppBarSelection';
 import MetricAppBarGeography from 'components/Metrics/MetricAppBarGeography';
+import { HELIO_MAP, SAO_MAP} from "constants/mapping";
 
 class MetricAppBar extends Component {
   render() {
@@ -16,10 +17,10 @@ class MetricAppBar extends Component {
             <Grid item xs={12}>
               <Grid container justify="center">
                 {/* First item is for choosing geography */}
-								<MetricAppBarGeography {...this.props} />
+								<MetricAppBarGeography {...this.props} {...HELIO_MAP} />
 
                 {/* Second item is for choosing a metric */}
-                <MetricAppBarSelection {...this.props} />
+                <MetricAppBarSelection {...this.props} {...SAO_MAP} />
               </Grid>
             </Grid>
           </Toolbar>

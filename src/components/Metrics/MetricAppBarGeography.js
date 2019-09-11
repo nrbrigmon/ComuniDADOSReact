@@ -9,11 +9,12 @@ import * as _metrics from "constants/metrics";
 class MetricAppBarGeography extends Component {
 
 	_makeGeographySelection = (e) => {
-		console.log(e)
+		// console.log(e)
+		// console.log(this.props);
 		//the first action will update the app bar display
-		this.props.selectMetricLayer(e.target.value);
+		// this.props.selectMetricLayer(e.target.value);
 		//the second action will update the map layer
-		this.props.fetchMapLayer(e.target.value);
+		// this.props.fetchMapLayer(e.target.value);
 	}
   render() {
 		const { classes } = this.props;
