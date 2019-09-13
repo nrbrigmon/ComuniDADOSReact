@@ -1,37 +1,13 @@
 import * as _lkp from "constants/lookup_variables";
 
 /* UTILITY FUNCTIONS*/
-var toTitleCase = function(str) {
+let toTitleCase = function(str) {
 	return str.replace(/\w\S*/g, function(txt) {
 		return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
 	});
 };
 
-export function legendHelper(cue) {
-	return _lkp.legendLookup[cue];
-}
-
-export function getDescription(val) {
-	return _lkp.descriptionLookup[val];
-}
-
-export function getDescriptionPR(val) {
-	return _lkp.descriptionLookupPR[val];
-}
-
-export function highlightFeature(e) {
-	var highlightLayer = e.target;
-	highlightLayer.openPopup();
-}
-
-export function onEachFeature(feature, layer) {
-  console.log(feature.properties);
-  if (feature.properties) {
-		layer.bindPopup(feature.properties.BLOCK);
-  }
-}
-
-export function initial_style() {
+let setInitialStyle = function(){
 	return {
 		opacity: 0.6,
 		color: 'rgb(0,0,0)',
@@ -41,34 +17,86 @@ export function initial_style() {
 		weight: 1.0,
 		fillOpacity: 0.6,
 		fillColor: '#333333'
-	};
+	}
 }
 
-function popupLocation(label) {
-	return '<p><b>LOCATION: </b>' + toTitleCase(label.substr(2, 20)) + '</p>';
+let setMetricStyle = function(feature, metric){
+	return {
+		color: 'rgb(0,0,0)',
+		dashArray: '',
+		lineCap: 'butt',
+		lineJoin: 'miter',
+		weight: 1.0,
+		opacity: myStrokeOpacity(feature, metric),
+		fillOpacity: myFillOpacity(feature, metric),
+		fillColor: myFillColor(feature, metric)
+	}
+} 
+// export function legendHelper(cue) {
+// 	return _lkp.legendLookup[cue];
+// }
+
+// export function getDescription(val) {
+// 	return _lkp.descriptionLookup[val];
+// }
+
+// export function getDescriptionPR(val) {
+// 	return _lkp.descriptionLookupPR[val];
+// }
+
+export function highlightFeature(e) {
+	var highlightLayer = e.target;
+	highlightLayer.openPopup();
+	//there was previous code to highlight on click
+	//or highlight on hover...
 }
 
-function popupLocationPR(label) {
-	return (
-		'<p><b>LOCALIZAÇÃO: </b>' + toTitleCase(label.substr(2, 20)) + '</p>'
-	);
+export function updateKey(){
+	return Math.random()
 }
 
-export function basic_popup(feature, layer) {
+export function set_style(feature, metric) {
+	let newStyle = {}
+	if (metric.label.length <= 1){
+		newStyle = setInitialStyle()
+	} else {
+		newStyle = setMetricStyle(feature, metric)
+	}
+	return newStyle
+}
+
+function getPopupContent(feature, metric) {
+	let _location = toTitleCase(feature.properties['LABEL'].substr(2, 20));
+	let _content = '<p><b>LOCATION: </b>' + _location + '</p>';
+	let _value = feature.properties[metric.label];
+	if (metric.label.length > 1){
+		_content += '<p><b>'+metric.alias_name +': </b>'+ _value +'</p>';
+	}
+	return  _content;
+}
+
+// function popupLocationPR(label) {
+// 	return (
+// 		'<p><b>LOCALIZAÇÃO: </b>' + toTitleCase(label.substr(2, 20)) + '</p>'
+// 	);
+// }
+
+export function basic_popup(feature, layer, metric ) {
 	layer.on({
 		click: highlightFeature
 	});
-	var popupContent = popupLocation(feature.properties['LABEL']);
+	// console.log(feature)
+	var popupContent = getPopupContent(feature, metric);
 	layer.bindPopup(popupContent);
 }
 
-export function basic_popupPR(feature, layer) {
-	layer.on({
-		click: highlightFeature
-	});
-	var popupContent = popupLocationPR(feature.properties['LABEL']);
-	layer.bindPopup(popupContent);
-}
+// export function basic_popupPR(feature, layer) {
+// 	layer.on({
+// 		click: highlightFeature
+// 	});
+// 	var popupContent = popupLocationPR(feature.properties['LABEL']);
+// 	layer.bindPopup(popupContent);
+// }
 
 
 export function myFillOpacity(x) {
@@ -88,29 +116,40 @@ export function myStrokeOpacity(x) {
 	}
 }
 
-export function myFillColor(sent_props) {
-	let { x, metricType, columnBreaks, chosenPallete,columnMax } = sent_props;
-	if (x == null) {
+let chosenPallete = ['#a6611a', '#dfc27d', '#f5f5f5', '#80cdc1', '#018571'];
+export function myFillColor(feature, sent_props) {
+	// console.log(sent_props);
+	// console.log(feature);
+	// debugger
+	let { breaks, max, legend, label } = sent_props;
+	let value = feature.properties[label];
+
+	//get values, break into an array of numbers and cleanup a touch
+	breaks = breaks.split(',').map(function(elem, index) {
+		return parseFloat(Math.round(elem * 100) / 100).toFixed(5);
+	});
+
+	if (value === null) {
 		return '#999999';
 	} else {
-		if (metricType === 'diver') {
-			return x >= columnMax
+		if (legend === 'diver') {
+			return value >= max
 				? chosenPallete[4]
-				: x >= columnBreaks[3]
+				: value >= breaks[3]
 					? chosenPallete[3]
-					: x >= columnBreaks[2]
+					: value >= breaks[2]
 						? chosenPallete[2]
-						: x >= columnBreaks[1]
+						: value >= breaks[1]
 							? chosenPallete[1]
 							: chosenPallete[0];
 		} else {
-			return x > columnBreaks[3]
+			return value > breaks[3]
 				? chosenPallete[4]
-				: x > columnBreaks[2]
+				: value > breaks[2]
 					? chosenPallete[3]
-					: x > columnBreaks[1]
+					: value > breaks[1]
 						? chosenPallete[2]
-						: x > columnBreaks[0] ? chosenPallete[1] : chosenPallete[0];
+						: value > breaks[0] ? chosenPallete[1] : chosenPallete[0];
 		}
 	}
 }

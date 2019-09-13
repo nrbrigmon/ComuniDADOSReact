@@ -17,10 +17,18 @@ export const fetchMapLayerById = (map_layer_id, geo_type) => async dispatch => {
 	dispatch({type: "GET_MAP_LAYER_BY_ID", payload: res.data, id: map_layer_id });
 };
 
-export const updateLayerStyles = (obj) => {
+export const updateLayerStyle = (metric) => {
 	const action = {
 		type: "UPDATE_LAYER_STYLE",
-		payload: obj
+		payload: metric
+  };
+  return action;
+}
+
+export const updateLayerType = (geoType) => {
+	const action = {
+		type: "UPDATE_LAYER_TYPE",
+		payload: geoType
   };
   return action;
 }

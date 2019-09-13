@@ -10,7 +10,8 @@ function updateMapLayer(state, payload, id){
 	// mapLayers: {
 	// 	helio: {},
 	// 	sao: {},
-	// 	type: "districts"
+	// 	type: "districts",
+	//	metrics: ''
 	// },
 
 export default function(state = {}, { type, payload, id }) {
@@ -18,6 +19,11 @@ export default function(state = {}, { type, payload, id }) {
   switch (type) {
     case "GET_MAP_LAYER":
 			return payload;
+		case "UPDATE_LAYER_TYPE":
+			let newState = updateMapLayer(state, payload, "type");
+			return updateMapLayer(newState, { label: "" }, "metric")
+		case "UPDATE_LAYER_STYLE":
+			return updateMapLayer(state, payload, "metric")
 		case "GET_MAP_LAYER_BY_ID":
 			// console.log(payload);
 			return updateMapLayer(state, payload, id);

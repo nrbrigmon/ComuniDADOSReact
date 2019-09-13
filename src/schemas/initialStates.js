@@ -6,7 +6,10 @@ export default {
 	mapLayers: {
 		helio: {},
 		sao: {},
-		type: "districts"
+		type: "districts",
+		metric: {
+			label: ''
+		}
 	},
 	metricSelection: null,
 	preferredLanguage: 'en'

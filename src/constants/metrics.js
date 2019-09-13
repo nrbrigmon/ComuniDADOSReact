@@ -1,8 +1,6 @@
 export const geography_options = [ 
-	{ value:'helio_blocks', label: 'Heliopolis - Blocks'},
-	{ value:'helio_districts', label: 'Heliopolis - Districts'},
-	{ value:'sao_blocks', label: 'Sao Francisco - Blocks'},
-	{ value:'sao_districts', label: 'Sao Francisco - Districts'},
+	{ value:'blocks', label: 'Blocks'},
+	{ value:'districts', label: 'Districts'},
 ];
 
 export const district_metrics = [
