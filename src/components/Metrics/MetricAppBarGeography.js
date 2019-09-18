@@ -26,10 +26,14 @@ class MetricAppBarGeography extends Component {
 			<FormControl className={classes.formControl}>
 					<Select
 						// displayEmpty
+						variant="filled"
 						value={this.props.mapLayers.type}
 						onChange={this._makeGeographySelection}
 					>
 
+						<MenuItem value="" disabled>		
+							Select Geography Type
+						</MenuItem>
 						{ geography_options.map( (elem, idx) => {
 								return (
 									<MenuItem key={idx} value={elem.value} > {elem.label }</MenuItem>

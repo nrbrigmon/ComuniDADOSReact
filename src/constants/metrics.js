@@ -56,7 +56,11 @@ export const district_metrics = [
 	{category:"Urban Livability", value:'sequ', max:'3.64', min:'0', breaks:'0,0.669,2.02,3.371', label:'POL_PRIOR_ENV', legend:'none', alias_name:'Critical Change - Environmental Stewardship'},
 	{category:"Urban Livability", value:'sequ', max:'4.167', min:'0', breaks:'0,0.774,2.303,3.832', label:'POL_PRIOR_HSG', legend:'none', alias_name:'Critical Change - Housing'},
 	{category:"Urban Livability", value:'sequ', max:'4', min:'0', breaks:'0,0.579,1.97,3.36', label:'POL_PRIOR_TTL', legend:'none', alias_name:'Critical Change - Title'}
-];
+].map( elem => ({
+	value: elem.label,
+	label: elem.alias_name,
+	other: elem.legend
+}));
 
 export const blocks_metrics = [
 		{category:"Social", value:'sequ', max:'75', min:'20', breaks:'20,36.387,44.594,52.801', label:'AGE', legend:'none', alias_name:'Age'},

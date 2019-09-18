@@ -4,7 +4,8 @@ import LeafletMap from "components/Map/LeafletMap";
 import LeafletMapLegend from "components/Map/LeafletMapLegend";
 import Grid from "@material-ui/core/Grid";
 import withStyles from "@material-ui/core/styles/withStyles";
-import mapStyle from "styles/MapStyle";
+import mapStyle from "components/Map/MapStyle";
+import * as _util from "utils/mapping_utils";
 import { HELIO_MAP, SAO_MAP} from "constants/mapping";
 import { connect } from "react-redux";
 import * as actions from "actions";
@@ -15,21 +16,31 @@ class MappingPage extends Component {
 		
 	}
   render() {
-		let {  classes } = this.props;
+		let { classes } = this.props;
+		let colorScheme = _util.getColorScheme(this.props.mapLayers["metric"]);
+		let { label } = this.props.mapLayers["metric"];
+		// console.log(label)
     return (
 			<div>
-        <MetricAppBar {...this.props} />
+        <MetricAppBar />
       	<Grid container spacing={0}>
 					{/* helio map */}
         	<Grid item xs={6} className={classes.mapContainer} >
-						<LeafletMap {...this.props} map_constants={HELIO_MAP} />
+						<LeafletMap 
+							{...this.props} 
+							map_constants={HELIO_MAP} 
+							colorScheme={colorScheme} />
 					</Grid>
 					{/* sao francisco map */}
 					<Grid item xs={6} className={classes.mapContainer}>
-						<LeafletMap {...this.props} map_constants={SAO_MAP} />
+						<LeafletMap 
+							{...this.props} 
+							map_constants={SAO_MAP} 
+							colorScheme={colorScheme} />
 					</Grid>
 				</Grid>
-        <LeafletMapLegend />
+				{ label !== "" ? 
+					<LeafletMapLegend {...this.props} colorScheme={colorScheme} /> : <div/> }
       </div>
     );
   }
@@ -37,8 +48,7 @@ class MappingPage extends Component {
 
 function mapStateToProps(state) {
   return {
-		mapLayers: state.mapLayers,
-		metricSelection: state.metricSelection
+		mapLayers: state.mapLayers
   };
 }
 

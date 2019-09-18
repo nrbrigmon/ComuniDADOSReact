@@ -3,17 +3,24 @@ import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 
-import { district_metrics } from "constants/metrics";
+import { district_metrics, blocks_metrics } from "constants/metrics";
 
 class MetricAppBarSelection extends Component {
 	
-	_makeMetricSelection = (e) => {
-		//if there is a map layer available, run functions
-		// if (this.props.mapLayers){
-			//grab object by key-value
-			let metricObj = district_metrics.filter( elem => {
-				return elem.label === e.target.value
-			})
+	_makeMetricSelection = (layer, e) => {
+			let { type } = layer;
+			let metricObj = {};
+			if (type === 'districts'){
+				//if we have the district shape, we use that data
+				metricObj = district_metrics.filter( elem => {
+					return elem.label === e.target.value
+				});
+			} else {
+				//else we use the block data
+				metricObj = blocks_metrics.filter( elem => {
+					return elem.label === e.target.value
+				});
+			}
 			// console.log(metricObj[0])
 			this.props.updateLayerStyle(metricObj[0]);
 		// }
@@ -23,12 +30,15 @@ class MetricAppBarSelection extends Component {
 		let { classes, mapLayers } = this.props;
 		// console.log(mapLayers.metric)
 		let metricSelection = (mapLayers.metric === "" ? "" : mapLayers.metric.label);
+    console.log(metricSelection)
+
     return (
 				<FormControl className={classes.formControl}>
 					<Select
 						displayEmpty
+						variant="filled"
 						value={metricSelection}
-						onChange={this._makeMetricSelection}
+						onChange={(e) => this._makeMetricSelection(mapLayers, e)}
 					>
 						<MenuItem value="" disabled>
 							Select a Metric

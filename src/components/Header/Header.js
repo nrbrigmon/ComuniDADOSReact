@@ -7,7 +7,7 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import Drawer from "@material-ui/core/Drawer";
 import withStyles from "@material-ui/core/styles/withStyles";
-import headerStyle from "styles/HeaderStyle";
+import headerStyle from "components/Header/HeaderStyle";
 import HeaderLinks from "./HeaderLinks";
 
 import { connect } from "react-redux";
@@ -15,11 +15,14 @@ import * as actions from "actions";
 
 class Header extends Component {
   _handleDrawerToggle = () => {
+		// console.log("hello?")
     this.props.toggleDrawer(!this.props.navDrawer)
   }
 
   render() {
-    const { classes } = this.props;
+		const { classes } = this.props;
+		// console.log(this.props);
+		
     return (
       <div className={classes.root}>
         <AppBar position="static" className={classes.root}>
@@ -56,7 +59,8 @@ class Header extends Component {
 function mapStateToProps(state) {
   return {
 		navLocation: state.navLocation,
-		navDrawer: state.navDrawer
+		navDrawer: state.navDrawer,
+		preferredLanguage: state.preferredLanguage
   };
 }
 
