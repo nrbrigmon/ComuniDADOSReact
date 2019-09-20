@@ -1,34 +1,44 @@
 import React, { Component } from "react";
-import MenuItem from "@material-ui/core/MenuItem";
-import FormControl from "@material-ui/core/FormControl";
-// import FormHelperText from '@material-ui/core/FormHelperText';
-import Select from "@material-ui/core/Select";
-
+import Select from 'react-select';
+import { components } from "./MetricFunctions";
 import { geography_options } from "constants/metrics";
-
 
 class MetricAppBarGeography extends Component {
 
 	_makeGeographySelection = (e) => {
 		//the first action will update the app bar display
-		this.props.updateLayerType(e.target.value);
-		if (this.props.mapLayers.type !== e.target.value){
+		this.props.updateLayerType(e.value);
+		if (this.props.mapLayers.type !== e.value){
 			//the second action will update the map layer
-			this.props.fetchMapLayerById("sao",e.target.value);
-			this.props.fetchMapLayerById("helio",e.target.value);
+			this.props.fetchMapLayerById("sao",e.value);
+			this.props.fetchMapLayerById("helio",e.value);
 		}
 	}
+
   render() {
-		const { classes } = this.props;
-		// console.log(geography_options)
-		// console.log(this.props)
+		const { classes, mapLayers } = this.props;
+		let placeHolder = ( mapLayers.type === "districts" ? "Districts" : "Blocks" );
     return ( 
-			<FormControl className={classes.formControl}>
+			<div className={classes.root}>
+				<div className={classes.root}>
+					<Select
+						className={classes.formControl}
+						classes={classes}
+						placeholder={placeHolder}
+						options={geography_options}
+						components={components}
+						value={this.props.mapLayers.type}
+						onChange={this._makeGeographySelection}
+						/>
+			</div>
+{/* 
 					<Select
 						// displayEmpty
+						className={classes.formControl}
 						variant="filled"
 						value={this.props.mapLayers.type}
 						onChange={this._makeGeographySelection}
+						
 					>
 
 						<MenuItem value="" disabled>		
@@ -40,9 +50,9 @@ class MetricAppBarGeography extends Component {
 								)
 							})
 						}
-						</Select>
+						</Select> */}
 						{/* <FormHelperText>Select Geography</FormHelperText> */}
-				</FormControl>
+				</div>
     );
   }
 }

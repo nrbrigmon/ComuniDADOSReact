@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import Grid from "@material-ui/core/Grid";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import MetricAppBarSelection from 'components/Metrics/MetricAppBarSelection';
 import MetricAppBarGeography from 'components/Metrics/MetricAppBarGeography';
 import MetricReactSelect from 'components/Metrics/MetricReactSelect';
 
@@ -26,9 +25,9 @@ class MetricAppBar extends Component {
 								<MetricAppBarGeography {...this.props} />
 
                 {/* Second item is for choosing a metric */}
-                <MetricAppBarSelection {...this.props} />
-
 								<MetricReactSelect {...this.props} />
+                {/* <MetricAppBarSelection {...this.props} /> */} 
+
               </Grid>
             </Grid>
           </Toolbar>

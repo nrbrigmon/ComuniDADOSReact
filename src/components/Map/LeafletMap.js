@@ -21,7 +21,7 @@ class LeafletMap extends Component {
 		let { classes, mapLayers, colorScheme } = this.props;
 		let object_check = Object.keys(mapLayers[prefix]).length
 		let leaflet_layer = <div />;
-		console.log(this.props)
+		// console.log(this.props)
     if (object_check > 0) {
       // use the mapped data prefix to get data key 
       leaflet_layer = (

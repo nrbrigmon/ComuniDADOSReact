@@ -1,8 +1,8 @@
 export default theme => ({
-  root: {
-    flexGrow: 1,
-    minWidth: 290,
-  },
+  // root: {
+  //   flexGrow: 1,
+	// 	minWidth: 290
+  // },
   formControl: {
 		minWidth: '120px',
 		width: '300px',
@@ -15,6 +15,10 @@ export default theme => ({
     display: 'flex',
     padding: 0,
     height: 'auto',
+		cursor: 'pointer',
+		textDecoration: 'none',
+    disableUnderline: "true"
+    
   },
   valueContainer: {
     display: 'flex',

@@ -13,12 +13,12 @@ class MetricAppBarSelection extends Component {
 			if (type === 'districts'){
 				//if we have the district shape, we use that data
 				metricObj = district_metrics.filter( elem => {
-					return elem.label === e.target.value
+					return elem.value === e.target.value
 				});
 			} else {
 				//else we use the block data
 				metricObj = blocks_metrics.filter( elem => {
-					return elem.label === e.target.value
+					return elem.value === e.target.value
 				});
 			}
 			// console.log(metricObj[0])
@@ -29,8 +29,8 @@ class MetricAppBarSelection extends Component {
   render() {
 		let { classes, mapLayers } = this.props;
 		// console.log(mapLayers.metric)
-		let metricSelection = (mapLayers.metric === "" ? "" : mapLayers.metric.label);
-    console.log(metricSelection)
+		let metricSelection = (mapLayers.metric === "" ? "" : mapLayers.metric.value);
+    // console.log(metricSelection)
 
     return (
 				<FormControl className={classes.formControl}>
@@ -45,7 +45,7 @@ class MetricAppBarSelection extends Component {
 						</MenuItem>
 						{ district_metrics.map( (elem, idx) => {
 								return (
-									<MenuItem key={idx} value={elem.label} data={elem}> {elem.alias_name }</MenuItem>
+									<MenuItem key={idx} value={elem.value} data={elem}> {elem.label }</MenuItem>
 								)
 							})
 						}

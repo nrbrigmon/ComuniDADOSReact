@@ -13,6 +13,8 @@ class HeaderLinks extends Component {
       <List>
         {
 					indexRoutes.map((elem, idx) => (
+					//continue if there is a path available...
+					( elem.path === false ? <div /> : 
 						<ListItem button 
 							key={idx} 
 							onClick={ (e)=>{
@@ -27,14 +29,17 @@ class HeaderLinks extends Component {
 										_utils.navigateTo(elem.path.substr(1), this.props); //navigate to path of given route - the "/"
 									}
 									this.props.toggleDrawer(!this.props.navDrawer); //clicking this will toggle the drawer state
-									} }>
+									} } >
 
 							
-							{ //choose correct menu item text based on preferred language
-								( preferredLanguage === 'en' ? 
-							<ListItemText primary={elem.enName}  /> : <ListItemText primary={elem.prName}  /> )
-							}
+							{ 
+								
+								//choose correct menu item text based on preferred language
+									( preferredLanguage === 'en' ? 
+										<ListItemText primary={elem.enName}  /> : <ListItemText primary={elem.prName}  /> )
+									}
 						</ListItem>
+						)
 					))
 				
 				}

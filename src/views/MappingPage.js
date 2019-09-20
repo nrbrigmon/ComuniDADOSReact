@@ -17,9 +17,10 @@ class MappingPage extends Component {
 	}
   render() {
 		let { classes } = this.props;
+		// console.log(this.props.mapLayers["metric"])
 		let colorScheme = _util.getColorScheme(this.props.mapLayers["metric"]);
-		let { label } = this.props.mapLayers["metric"];
-		// console.log(label)
+		let { value } = this.props.mapLayers["metric"];
+		// console.log(value)
     return (
 			<div>
         <MetricAppBar />
@@ -39,7 +40,7 @@ class MappingPage extends Component {
 							colorScheme={colorScheme} />
 					</Grid>
 				</Grid>
-				{ label !== "" ? 
+				{ value !== "" ? 
 					<LeafletMapLegend {...this.props} colorScheme={colorScheme} /> : <div/> }
       </div>
     );

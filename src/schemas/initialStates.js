@@ -8,7 +8,7 @@ export default {
 		sao: {},
 		type: "districts",
 		metric: {
-			label: ''
+			value: ''
 		}
 	},
 	metricSelection: null,

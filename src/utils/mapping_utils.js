@@ -39,11 +39,9 @@ let toPercent = function(num) {
 };
 
 let _valueConversion = function(label, value) {
-	// console.log(label, value);
-	let tempLabel = DESCRIPTION_LOOKUP[label];
+	let tempLabel = DESCRIPTION_LOOKUP[label] === undefined ? '' : DESCRIPTION_LOOKUP[label];
 	//get metric text
 	// if contains   , "poverty rate,", "", "% of Total", , projected change
-	// console.log(tempLabel)
 	if (
 		tempLabel.indexOf('Growth') !== -1 ||
 		tempLabel.indexOf('Poverty Rate') !== -1 ||
@@ -101,8 +99,9 @@ let setMetricStyle = function(feature, metric, palette){
 	}
 } 
 
-let myFillOpacity = function(x) {
-	// console.log(x)
+let myFillOpacity = function(feature, sent_props) {
+	let { value } = sent_props;
+	let x = feature.properties[value];
 	if (x == null) {
 		return 0.1;
 	} else {
@@ -110,7 +109,9 @@ let myFillOpacity = function(x) {
 	}
 }
 
-let myStrokeOpacity = function(x) {
+let myStrokeOpacity = function(feature, sent_props) {
+	let { value } = sent_props;
+	let x = feature.properties[value];
 	if (x == null) {
 		return 0.1;
 	} else {
@@ -131,8 +132,8 @@ let selectColorValue = function(_x, _br, _max, _pal){
 }
 let myFillColor = function(feature, sent_props, chosenPalette) {
 	// console.log(sent_props)
-	let { breaks, max, label } = sent_props;
-	let metric_value = feature.properties[label];
+	let { breaks, max, value } = sent_props;
+	let metric_value = feature.properties[value];
 	// let metric_type = sent_props.value;
 	//get values, break into an array of numbers and cleanup a touch
 	breaks = breaks.split(',').map(function(elem, index) {
@@ -148,11 +149,12 @@ let myFillColor = function(feature, sent_props, chosenPalette) {
 
 /* POPUP FUNCTIONS */
 let getPopupContent = function(feature, metric) {
+	// console.log(metric)
 	let _location = toTitleCase(feature.properties['LABEL'].substr(2, 20));
 	let _content = '<p><b>LOCATION: </b>' + _location;
-	let _value = feature.properties[metric.label];
-	if (metric.label.length > 1){
-		_content += '<br/><b>'+metric.alias_name +': </b>'+ _valueConversion(metric.label, _value) +'</p>';
+	let _value = feature.properties[metric.value];
+	if (metric.value.length > 1){
+		_content += '<br/><b>'+(metric.label).toUpperCase() +': </b>'+ _valueConversion(metric.value, _value) +'</p>';
 	} else {
 		_content += '</p>';
 	}
@@ -174,7 +176,7 @@ export function updateKey(){
 
 export function set_style(feature, metric, palette) {
 	let newStyle = {}
-	if (metric.label.length <= 1){
+	if (metric.value.length <= 1){
 		newStyle = setInitialStyle()
 	} else {
 		newStyle = setMetricStyle(feature, metric, palette)
@@ -191,16 +193,17 @@ export function basic_popup(feature, layer, metric ) {
 	layer.bindPopup(popupContent);
 }
 
-export const getColorScheme = function(color_scheme) {
-	if (color_scheme.label === ""){
+export const getColorScheme = function(metric) {
+	// console.log(metric)
+	if (metric.value === ""){
 		return null
-	} else if (color_scheme.value === "sequ"){
+	} else if (metric.palette === "sequ"){
 		// get number of colorSchemes
 		let num_schemes = Object.keys(COLOR_SCHEMES.sequential).length
 		// use schemes to randomly select within the given objects
 		let rndm_select = Math.floor(Math.random() * num_schemes) + 1;
 		return COLOR_SCHEMES.sequential[rndm_select]
-	} else if (color_scheme.value === "diver"){
+	} else if (metric.palette === "diver"){
 		// get number of colorSchemes
 		let num_schemes = Object.keys(COLOR_SCHEMES.diverging).length
 		// use schemes to randomly select within the given objects
@@ -211,6 +214,7 @@ export const getColorScheme = function(color_scheme) {
 		let num_schemes = Object.keys(COLOR_SCHEMES.qualitativeSchemes).length
 		// use schemes to randomly select within the given objects
 		let rndm_select = Math.floor(Math.random() * num_schemes) + 1;
+		console.log(rndm_select)
 		return COLOR_SCHEMES.qualitativeSchemes[rndm_select]
 	}
 }
