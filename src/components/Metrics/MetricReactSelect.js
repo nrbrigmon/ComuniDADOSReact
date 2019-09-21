@@ -26,19 +26,39 @@ class MetricReactSelect extends Component {
 
 
 	render(){
-		
-		let { classes, mapLayers } = this.props;
+		let { classes, mapLayers, preferredLanguage } = this.props;
 		let metricSelection = (mapLayers.metric === "" ? "" : mapLayers.metric.label);
-		let placeHolder = (mapLayers.metric === "" ? "Select a Metric" : metricSelection);
-    // console.log(metricSelection)
+		// console.log(mapLayers)
+		let placeHolder = (mapLayers.metric.value === "" ? "Select a Metric" : metricSelection);
+		let district_metrics_pr;
 		
+		//section to make metric changes based on language update
+		if (preferredLanguage === 'pr'){
+			// console.log("PR!")
+			district_metrics_pr = district_metrics.map( elem => {
+				return {
+					label: (elem.labelPR === undefined ? "" : elem.labelPR),
+					value: elem.value,
+					category: elem.category,
+					palette: elem.palette,
+					max: elem.max,
+					min: elem.min,
+					breaks: elem.breaks,
+					legend: elem.legend
+				}
+			});
+			// console.log(temp_options)
+			placeHolder = (mapLayers.metric.value === "" ? "Selecione uma Métrica" : metricSelection);
+		}
+		// console.log(placeHolder)
+		// console.log(preferredLanguage)
 		return (
 			<div className={classes.root}>
 					<Select
 						className={classes.formControl}
 						classes={classes}
 						placeholder={placeHolder}
-						options={district_metrics}
+						options={preferredLanguage === 'en' ? district_metrics : district_metrics_pr}
 						components={components}
 						value={metricSelection}
 						onChange={(e) => this._makeMetricSelection(mapLayers, e)}

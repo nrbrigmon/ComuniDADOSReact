@@ -16,42 +16,34 @@ class MetricAppBarGeography extends Component {
 	}
 
   render() {
-		const { classes, mapLayers } = this.props;
+		let { classes, mapLayers, preferredLanguage } = this.props;
 		let placeHolder = ( mapLayers.type === "districts" ? "Districts" : "Blocks" );
+		let geography_options_pr;
+		//section to make label changes based on language update
+		if (preferredLanguage === 'pr'){
+			// console.log("PR!")
+			geography_options_pr = geography_options.map( elem => {
+				return {
+					label: elem.labelPR,
+					value: elem.value
+				}
+			});
+			// console.log(temp_options)
+			placeHolder = ( mapLayers.type === "districts" ? "Distritos" : "Blocos" );
+		}
+		
+
     return ( 
-			<div className={classes.root}>
 				<div className={classes.root}>
 					<Select
 						className={classes.formControl}
 						classes={classes}
 						placeholder={placeHolder}
-						options={geography_options}
+						options={preferredLanguage === 'en' ? geography_options : geography_options_pr}
 						components={components}
 						value={this.props.mapLayers.type}
 						onChange={this._makeGeographySelection}
 						/>
-			</div>
-{/* 
-					<Select
-						// displayEmpty
-						className={classes.formControl}
-						variant="filled"
-						value={this.props.mapLayers.type}
-						onChange={this._makeGeographySelection}
-						
-					>
-
-						<MenuItem value="" disabled>		
-							Select Geography Type
-						</MenuItem>
-						{ geography_options.map( (elem, idx) => {
-								return (
-									<MenuItem key={idx} value={elem.value} > {elem.label }</MenuItem>
-								)
-							})
-						}
-						</Select> */}
-						{/* <FormHelperText>Select Geography</FormHelperText> */}
 				</div>
     );
   }

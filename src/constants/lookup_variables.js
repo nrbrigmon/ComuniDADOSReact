@@ -36,6 +36,18 @@ export const LEGEND_LOOKUP = {
 	'superf':['Superficial (1)','Expansive (2)']
 }
 
+export const LEGEND_LOOKUP_PR = {
+	'none':['Min:','Max:'],
+	'gender':['Fêmea (1)','Masculino (2)'],
+	'affirm':['No (0)','Sim (1)'],
+	'edu':['Baixo (0)','Alto (4)'],
+	'commute':['Menos de 15 min.(1)','Mais de 60 min.(4)'],
+	'duration':['0 Meses (1)','12+ Meses (3)'],
+	'secureA':['Baixo (0)','Alto (1)'],
+	'secureB':['Baixo (0)','Alto (2)'],
+	'superf':['Superficial (1)','Expansive (2)']
+}
+
 export const DESCRIPTION_LOOKUP = {
 	ACS_LDR:
 		'Percent of people who feel they have access to a community leader who advocates on their behalf.',
