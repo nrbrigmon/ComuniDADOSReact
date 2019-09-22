@@ -13,6 +13,7 @@ function updateMapLayer(state, payload, id){
 	// 	helio: {},
 	// 	sao: {},
 	// 	type: "districts",
+	//	baseMapOpacity: 100,
 	//	metrics: ''
 	//  { category: "Social", value: "sequ", max: "5.469", min: "0", breaks: "0,0.1,1.281,2.61", label: "NUM_FAM_LOT", legend: "none", label: "Lot Occupation" }
 	// },
@@ -27,6 +28,8 @@ export default function(state = {}, { type, payload, id }) {
 			return updateMapLayer(newState, { value: "" }, "metric")
 		case "UPDATE_LAYER_STYLE":
 			return updateMapLayer(state, payload, "metric")
+		case "UPDATE_LAYER_OPACITY":
+			return updateMapLayer(state, payload, "baseMapOpacity")
 		case "GET_MAP_LAYER_BY_ID":
 			return updateMapLayer(state, payload, id);
     default:

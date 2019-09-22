@@ -146,7 +146,7 @@ export const DESCRIPTION_LOOKUP = {
 		'Percent of people who use a space in their home to generate income.'
 };
 
-export const descriptionLookupPR = {
+export const DESCRIPTION_LOOKUP_PR = {
 	ACS_LDR:
 		'Porcentagem de pessoas que sentem que têm acesso a um líder da comunidade que defende em seu nome.',
 	AGE: 'Idade média do entrevistado.',

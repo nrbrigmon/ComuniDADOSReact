@@ -1,4 +1,4 @@
-import { COLOR_SCHEMES, DESCRIPTION_LOOKUP, LEGEND_LOOKUP }from "constants/lookup_variables";
+import { COLOR_SCHEMES, DESCRIPTION_LOOKUP, DESCRIPTION_LOOKUP_PR, LEGEND_LOOKUP, LEGEND_LOOKUP_PR }from "constants/lookup_variables";
 
 /* UTILITY FUNCTIONS */
 let toTitleCase = function(str) {
@@ -219,12 +219,12 @@ export const getColorScheme = function(metric) {
 	}
 }
 
-export function getDescription(val) {
-	return DESCRIPTION_LOOKUP[val];
+export function getDescription(preferredLanguage, val) {
+	return (preferredLanguage === 'en' ? DESCRIPTION_LOOKUP[val] : DESCRIPTION_LOOKUP_PR[val]);
 }
 
-export function legendHelper(min, max, type) {
-	let lkp_val = LEGEND_LOOKUP[type];
+export function legendHelper(preferredLanguage, min, max, type) {
+	let lkp_val = (preferredLanguage === 'en' ? LEGEND_LOOKUP[type] : LEGEND_LOOKUP_PR[type]);
 	// console.log(lkp_val)
 	if (type === undefined){
 		return []
@@ -248,14 +248,6 @@ export function legendHelper(min, max, type) {
 // 	layer.bindPopup(popupContent);
 // }
 
-
-
-
-
-
-// export function getDescriptionPR(val) {
-// 	return _lkp.descriptionLookupPR[val];
-// }
 
 /*
 let nonPercentArray = 

@@ -21,13 +21,16 @@ class LeafletMap extends Component {
 		let { classes, mapLayers, colorScheme } = this.props;
 		let object_check = Object.keys(mapLayers[prefix]).length
 		let leaflet_layer = <div />;
+		
+		// L.control.remove()
+		
 		// console.log(this.props)
     if (object_check > 0) {
       // use the mapped data prefix to get data key 
       leaflet_layer = (
         <FeatureGroup >
 					<GeoJSON 
-						key={_util.updateKey()}
+						key={_util.updateKey()} //this function is needed to update the GeoJSON when new data is loaded
 						data={mapLayers[prefix]} 
 						onEachFeature={(feature, layer) => _util.basic_popup(feature, layer, this.props.mapLayers["metric"]) }  
 						style={ (feature) =>  _util.set_style(feature, this.props.mapLayers["metric"], colorScheme) 
@@ -39,11 +42,15 @@ class LeafletMap extends Component {
 		
 		return (
 			<Map 
-			className={classes.map} 
-			center={coordinates} zoom={15}>
+				className={classes.map} 
+				center={coordinates} 
+				zoom={15}>
+				
         {leaflet_layer}
 
-        {_constants.BASE_MAP_OPTIONS}
+				{_constants.BASE_MAP_OPTIONS(mapLayers["baseMapOpacity"], classes)}
+				
+				{/* { L.control.layers().remove()} */}
       </Map>
     );
   }

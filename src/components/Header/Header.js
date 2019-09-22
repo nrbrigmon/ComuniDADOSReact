@@ -24,9 +24,9 @@ class Header extends Component {
 		// console.log(this.props);
 		
     return (
-      <div className={classes.root}>
+      <div>
         <AppBar position="static" className={classes.root}>
-          <Toolbar>
+          <Toolbar className={classes.toolbar}>
             <Typography variant="h6" className={classes.title}>
               COMUNIDADOS
             </Typography>
@@ -43,10 +43,10 @@ class Header extends Component {
           </Toolbar>
 
           <Drawer
-            anchor="right"
+						anchor="right"
             open={this.props.navDrawer}
 						onClose={this._handleDrawerToggle}
-						className={classes.drawer}
+						
           >
             <HeaderLinks {...this.props} />
           </Drawer>

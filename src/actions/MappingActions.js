@@ -25,6 +25,14 @@ export const updateLayerStyle = (metric) => {
   return action;
 }
 
+export const updateLayerOpacity = (opacity) => {
+	const action = {
+		type: "UPDATE_LAYER_OPACITY",
+		payload: opacity
+	}
+	return action;
+}
+
 export const updateLayerType = (geoType) => {
 	const action = {
 		type: "UPDATE_LAYER_TYPE",

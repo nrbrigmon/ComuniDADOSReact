@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import MetricAppBar from "components/Metrics/MetricAppBar";
 import LeafletMap from "components/Map/LeafletMap";
 import LeafletMapLegend from "components/Map/LeafletMapLegend";
+import LeafletMapSlider from "components/Map/LeafletMapSlider";
+import LeafletMapToggle from "components/Map/LeafletMapToggle";
 import Grid from "@material-ui/core/Grid";
 import withStyles from "@material-ui/core/styles/withStyles";
 import mapStyle from "components/Map/MapStyle";
@@ -16,14 +18,17 @@ class MappingPage extends Component {
 		
 	}
   render() {
-		let { classes } = this.props;
+		let { classes, preferredLanguage } = this.props;
 		// console.log(this.props.mapLayers["metric"])
 		let colorScheme = _util.getColorScheme(this.props.mapLayers["metric"]);
 		let { value } = this.props.mapLayers["metric"];
-		// console.log(value)
+		let { baseMapOpacity } = this.props.mapLayers
+		// console.log(classes)
     return (
 			<div>
         <MetricAppBar />
+				<LeafletMapToggle preferredLanguage={preferredLanguage} />
+				<LeafletMapSlider preferredLanguage={preferredLanguage} action={this.props.updateLayerOpacity} baseMapOpacity={baseMapOpacity} />
       	<Grid container spacing={0}>
 					{/* helio map */}
         	<Grid item xs={6} className={classes.mapContainer} >
@@ -49,7 +54,8 @@ class MappingPage extends Component {
 
 function mapStateToProps(state) {
   return {
-		mapLayers: state.mapLayers
+		mapLayers: state.mapLayers,
+		preferredLanguage: state.preferredLanguage
   };
 }
 

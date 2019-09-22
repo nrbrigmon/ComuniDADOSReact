@@ -3,6 +3,9 @@ export default theme => ({
 		flexGrow: 1,
 		background: "white",
 		color: "black"
+	},
+	toolbar:{
+		boxShadow: "rgba(0, 0, 0, 0.2) 0 0 4px 2px"
   },
   menuButton: {
     marginRight: theme.spacing(0)

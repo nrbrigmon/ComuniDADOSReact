@@ -50,6 +50,7 @@ function Control(props) {
 }
 
 function Option(props) {
+	// console.log(props)
   return (
     <MenuItem
       ref={props.innerRef}

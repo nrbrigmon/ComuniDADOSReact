@@ -3,62 +3,40 @@ import Select from 'react-select';
 import { components } from "./MetricFunctions";
 import { district_metrics, blocks_metrics } from "constants/metrics";
 
+import * as _util from "utils/metric_utils";
+
 class MetricReactSelect extends Component {
 
 	_makeMetricSelection = (layer, e) => {
-		let { type } = layer;
-		let metricObj = {};
-		if (type === 'districts'){
-			//if we have the district shape, we use that data
-			metricObj = district_metrics.filter( elem => {
-				return elem.value === e.value
-			});
-		} else {
-			//else we use the block data
-			metricObj = blocks_metrics.filter( elem => {
-				return elem.value === e.value
-			});
-		}
-		
-		// console.log(metricObj[0])
-		this.props.updateLayerStyle(metricObj[0]);
-}
+		this.props.updateLayerStyle(e);
+	}
 
+	//need a method for translating existing content on page...
 
 	render(){
 		let { classes, mapLayers, preferredLanguage } = this.props;
 		let metricSelection = (mapLayers.metric === "" ? "" : mapLayers.metric.label);
-		// console.log(mapLayers)
-		let placeHolder = (mapLayers.metric.value === "" ? "Select a Metric" : metricSelection);
-		let district_metrics_pr;
-		
+		let placeHolder, metrics_in_english, metrics_in_portuguese;
+		// console.log(this.props)
 		//section to make metric changes based on language update
 		if (preferredLanguage === 'pr'){
 			// console.log("PR!")
-			district_metrics_pr = district_metrics.map( elem => {
-				return {
-					label: (elem.labelPR === undefined ? "" : elem.labelPR),
-					value: elem.value,
-					category: elem.category,
-					palette: elem.palette,
-					max: elem.max,
-					min: elem.min,
-					breaks: elem.breaks,
-					legend: elem.legend
-				}
-			});
+			metrics_in_portuguese = (mapLayers.type === 'districts' ? _util.adjustLabelsForPR(district_metrics) : _util.adjustLabelsForPR(blocks_metrics) );
 			// console.log(temp_options)
-			placeHolder = (mapLayers.metric.value === "" ? "Selecione uma Métrica" : metricSelection);
+			placeHolder = (mapLayers.metric.label === "" ? "Selecione uma Métrica" : metricSelection);
+
+		} else {
+			placeHolder = (mapLayers.metric.label === "" ? "Select a Metric" : metricSelection);
+			metrics_in_english = (mapLayers.type === 'districts' ? district_metrics : blocks_metrics)
 		}
-		// console.log(placeHolder)
-		// console.log(preferredLanguage)
+		
 		return (
 			<div className={classes.root}>
 					<Select
 						className={classes.formControl}
 						classes={classes}
 						placeholder={placeHolder}
-						options={preferredLanguage === 'en' ? district_metrics : district_metrics_pr}
+						options={preferredLanguage === 'en' ? metrics_in_english : metrics_in_portuguese}
 						components={components}
 						value={metricSelection}
 						onChange={(e) => this._makeMetricSelection(mapLayers, e)}

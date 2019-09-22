@@ -4,11 +4,11 @@ import Paper from '@material-ui/core/Paper';
 
 class LeafletMapLegend extends Component {
   render() {
-		let { classes, colorScheme } = this.props;
+		let { classes, colorScheme, preferredLanguage } = this.props;
 		let { label, min, max, value, legend } = this.props.mapLayers["metric"];
 		// console.log(this.props.mapLayers["metric"])
-		let about_text = _util.getDescription(value)
-		let _min_max = _util.legendHelper(min, max, legend);
+		let about_text = _util.getDescription(preferredLanguage, value)
+		let _min_max = _util.legendHelper(preferredLanguage, min, max, legend);
 		return ( <div>
 			{/* if there is nothing to display, we won't show component */}
 			<Paper className={classes.legendContainer}>

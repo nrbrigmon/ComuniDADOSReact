@@ -8,16 +8,23 @@ import indexRoutes from "routes/indexRoutes";
 
 class HeaderLinks extends Component {
   render() {
-		let { preferredLanguage } = this.props
+		let { preferredLanguage, classes } = this.props; //the language selected
+		let { pathname } = this.props.navLocation.location; //the current page
+		// console.log(this.props)
     return (
-      <List>
+      <List className={classes.drawer}>
         {
 					indexRoutes.map((elem, idx) => (
 					//continue if there is a path available...
 						( elem.path === false ? <div key={idx} /> : 
-							<ListItem button 
+							<ListItem 
+								button 
 								key={idx} 
+								// divider={true}
+								disabled={pathname === elem.path}
+								selected={pathname === elem.path}
 								onClick={ (e)=>{
+									
 										let { textContent } = e.target //content of list item
 										if (textContent === "ENGLISH" || textContent === "PORTUGUÊS"){
 											// if the toggle language button was clicked, we want to stay on the same page

@@ -21,18 +21,22 @@ export const SAO_MAP = {
 export const MAP_CENTER_COORDS = [-23.6321, -46.453];
 
 //Map Base Map PROVIDERS HERE: https://leaflet-extras.github.io/leaflet-providers/preview/
-export const BASE_MAP_OPTIONS = (
-  <LayersControl position="topright">
+export const BASE_MAP_OPTIONS = function(_opacity) {
+	//section for toggling base map
+	return(
+	<LayersControl position="topright">
     <LayersControl.BaseLayer name="OSM B&W" checked={true}>
       <TileLayer
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         url="https://tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png"
+				opacity={_opacity}
       />
     </LayersControl.BaseLayer>
     <LayersControl.BaseLayer name="OSM">
       <TileLayer
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+				opacity={_opacity}
       />
     </LayersControl.BaseLayer>
     <LayersControl.BaseLayer name="Aerial Hybrid">
@@ -40,21 +44,25 @@ export const BASE_MAP_OPTIONS = (
 				<TileLayer
 					attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 					url="http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
+					opacity={_opacity}
 				/>
 				<TileLayer
 					attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 					url="http://stamen-tiles-{s}.a.ssl.fastly.net/toner-lines/{z}/{x}/{y}.{ext}"
 					ext="png"
+					opacity={_opacity}
 				/>
 				<TileLayer
 					attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 					url="http://stamen-tiles-{s}.a.ssl.fastly.net/toner-labels/{z}/{x}/{y}.{ext}"
 					ext="png"
+					opacity={_opacity}
 				/>
 			</LayerGroup>
     </LayersControl.BaseLayer>
   </LayersControl>
-);
+)
+};
 
 /*
 export const BW_Map = L.tileLayer(

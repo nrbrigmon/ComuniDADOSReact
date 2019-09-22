@@ -1,0 +1,18 @@
+.leaflet-control-measure.leaflet-control,
+.leaflet-touch .leaflet-control-layers,
+.leaflet-touch .leaflet-bar {
+	-moz-box-shadow: rgba(0, 0, 0, 0.2) 0 0 5px 1px;
+	box-shadow: rgba(0, 0, 0, 0.2) 0 0 5px 1px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	-ms-border-radius: 4px;
+	-o-border-radius: 4px;
+	border-radius: 4px;
+	border: 1px solid #999;
+	background: #fff;
+	z-index: 105;
+}
+
+div.leaflet-control-container div.leaflet-top.leaflet-right div.leaflet-control-layers.leaflet-control{
+	display: none
+}

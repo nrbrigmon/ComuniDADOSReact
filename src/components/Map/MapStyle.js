@@ -1,4 +1,10 @@
 export default theme => ({
+  root: {
+    flexGrow: 1
+    // height: "35px",
+    // background: "black"
+    // background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)"
+  },
   map: {
 		position: "fixed"
     ,height: "100vh"
@@ -10,12 +16,6 @@ export default theme => ({
 		,width: "100%"
 		,position:"relative"
 	},
-  root: {
-    flexGrow: 1
-    // height: "35px",
-    // background: "black"
-    // background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)"
-  },
 	legendContainer: {
 		left: '10px',
 		bottom: '10px',
@@ -25,6 +25,7 @@ export default theme => ({
 		position: 'absolute',
 		backgroundColor: 'white',
 		transition: 'display 0.25s ease-in-out',
+		boxShadow: 'rgba(0, 0, 0, 0.2) 0 0 5px 1px',
 		padding: '12px',
 		margin: '4px'
 	},

@@ -9,7 +9,8 @@ export default theme => ({
 		background: "white",
 		padding: '2px 15px',
 		margin: '0px 25px',
-		borderRadius: '4px'
+		borderRadius: '4px',
+		whiteSpace: "normal"
 	},
   input: {
     display: 'flex',
@@ -17,7 +18,7 @@ export default theme => ({
     height: 'auto',
 		cursor: 'pointer',
 		textDecoration: 'none',
-    disableUnderline: "true"
+    disableUnderline: "true",
     
   },
   valueContainer: {
@@ -37,7 +38,12 @@ export default theme => ({
     position: 'absolute',
     left: 2,
     bottom: 6,
-    fontSize: 16,
+		fontSize: 16,
+		maxWidth: '80%',
+		textOverflow: "ellipsis",
+		display: "initial",
+		whiteSpace: "nowrap",
+		overflow: "hidden",
   },
   paper: {
     position: 'absolute',

@@ -7,8 +7,11 @@ export default {
 		helio: {},
 		sao: {},
 		type: "districts",
+		baseMapOpacity: 1,
 		metric: {
-			value: ''
+			value: '',
+			label: '',
+			labelPR: ''
 		}
 	},
 	metricSelection: null,
