@@ -20,7 +20,7 @@ export default theme => ({
 		textDecoration: 'none',
     disableUnderline: "true",
     
-  },
+	}, 
   valueContainer: {
     display: 'flex',
     flexWrap: 'wrap',

@@ -24,24 +24,24 @@ class HeaderLinks extends Component {
 								disabled={pathname === elem.path}
 								selected={pathname === elem.path}
 								onClick={ (e)=>{
-									
-										let { textContent } = e.target //content of list item
-										if (textContent === "ENGLISH" || textContent === "PORTUGUÊS"){
-											// if the toggle language button was clicked, we want to stay on the same page
-											// if the current language is english, switch to portuguese and visaversa
-											let newLanguage = (preferredLanguage === 'en' ? 'pr' : 'en')
-											this.props.setLanguage(newLanguage);
-										} else {
-											// if it was anything else continue routing function
-											_utils.navigateTo(elem.path.substr(1), this.props); //navigate to path of given route - the "/"
-										}
-										this.props.toggleDrawer(!this.props.navDrawer); //clicking this will toggle the drawer state
+												let { textContent } = e.target //content of list item
+												if (textContent === "ENGLISH" || textContent === "PORTUGUÊS"){
+													// if the toggle language button was clicked, we want to stay on the same page
+													// if the current language is english, switch to portuguese and visaversa
+													let newLanguage = (preferredLanguage === 'en' ? 'pr' : 'en')
+													this.props.setLanguage(newLanguage);
+													this.props.translateMetric(newLanguage);
+												} else {
+													// if it was anything else continue routing function
+													_utils.navigateTo(elem.path.substr(1), this.props); //navigate to path of given route - the "/"
+												}
+												this.props.toggleDrawer(!this.props.navDrawer); //clicking this will toggle the drawer state
 										} } >
 
 										{	
 											//choose correct menu item text based on preferred language
-											( preferredLanguage === 'en' ? 
-												<ListItemText primary={elem.enName}  /> : <ListItemText primary={elem.prName}  /> )
+											
+											<ListItemText primary={( preferredLanguage === 'en' ? elem.enName : elem.prName )} /> 
 										}
 							</ListItem>
 							)

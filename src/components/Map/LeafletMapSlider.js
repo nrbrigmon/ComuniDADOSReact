@@ -7,16 +7,16 @@ import SliderStyle from "components/Map/SliderStyle";
 
 const containerCSS = { 
 	position: "absolute"
-	,top: "172px"
+	,top: "175px"
 	,right: "20px"
 	,zIndex: "500"
 	,width: "110px"
+	,height: "30px"
 };
 
 class LeafletMapSlider extends Component {
 
 	_onSliderUpdate(obj, evt, updateOpacity){
-		
 		let adjusted_variable = ( Number(evt) / 100 ).toFixed(1)
 		updateOpacity(adjusted_variable)
 	}
@@ -38,42 +38,6 @@ class LeafletMapSlider extends Component {
 				onChange={(obj, evt) => this._onSliderUpdate(obj, evt, action)}
       />
 
-			{/* 
-			  const classes = useStyles();
-				const [anchorEl, setAnchorEl] = React.useState(null);
-
-				function handlePopoverOpen(event) {
-					setAnchorEl(event.currentTarget);
-				}
-
-				function handlePopoverClose() {
-					setAnchorEl(null);
-				}
-
-				const open = Boolean(anchorEl);
-			
-			<Popover
-        id="mouse-over-popover"
-        className={classes.popover}
-        classes={{
-          paper: classes.paper,
-        }}
-        open={open}
-        anchorEl={anchorEl}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'left',
-        }}
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'left',
-        }}
-        onClose={handlePopoverClose}
-        disableRestoreFocus
-      >
-				( preferredLanguage === 'en' ? <Typography>Adjust Map Opacity</Typography> :
-					<Typography>Ajustar a Opacidade do Mapa</Typography> )
-      </Popover> */}
 		</div>)
 	}
 }

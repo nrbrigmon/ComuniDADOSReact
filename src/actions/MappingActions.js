@@ -33,6 +33,16 @@ export const updateLayerOpacity = (opacity) => {
 	return action;
 }
 
+
+export const updateBaseLayer = (selection) => {
+	const action = {
+		type: "UPDATE_BASE_LAYER",
+		payload: selection
+	}
+	return action;
+}
+
+
 export const updateLayerType = (geoType) => {
 	const action = {
 		type: "UPDATE_LAYER_TYPE",

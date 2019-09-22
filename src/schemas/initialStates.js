@@ -8,6 +8,7 @@ export default {
 		sao: {},
 		type: "districts",
 		baseMapOpacity: 1,
+		baseMapSelection: 1,
 		metric: {
 			value: '',
 			label: '',

@@ -15,7 +15,8 @@ class MetricReactSelect extends Component {
 
 	render(){
 		let { classes, mapLayers, preferredLanguage } = this.props;
-		let metricSelection = (mapLayers.metric === "" ? "" : mapLayers.metric.label);
+		
+		let metricSelection = mapLayers.metric.label;
 		let placeHolder, metrics_in_english, metrics_in_portuguese;
 		// console.log(this.props)
 		//section to make metric changes based on language update
@@ -24,7 +25,6 @@ class MetricReactSelect extends Component {
 			metrics_in_portuguese = (mapLayers.type === 'districts' ? _util.adjustLabelsForPR(district_metrics) : _util.adjustLabelsForPR(blocks_metrics) );
 			// console.log(temp_options)
 			placeHolder = (mapLayers.metric.label === "" ? "Selecione uma Métrica" : metricSelection);
-
 		} else {
 			placeHolder = (mapLayers.metric.label === "" ? "Select a Metric" : metricSelection);
 			metrics_in_english = (mapLayers.type === 'districts' ? district_metrics : blocks_metrics)

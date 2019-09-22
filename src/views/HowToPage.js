@@ -14,6 +14,7 @@ class HowToPage extends Component {
 	}
 
   render() {
+		let { preferredLanguage } = this.props;
     return (
 		<Container maxWidth="md">
 			<Paper style={{margin:'40px',padding:'40px'}}>
@@ -22,12 +23,13 @@ class HowToPage extends Component {
 				</Typography>
 				<Typography variant="h5" color="textSecondary" paragraph>
 
-				<div >
 					<iframe src="https://drive.google.com/file/d/1BRxfzB0arMBTpdw7xxRZDJniEJPHrxUb/preview" 
 					title="how-to-comunidados"
-					width="100%" height="480" frameborder="0" gesture="media" allow="encrypted-media"></iframe>
-          <p>Watch the above video for a quick, one minute introduction.</p>
-        </div>
+					width="100%" height="480" frameBorder="0" gesture="media" allow="encrypted-media"></iframe>
+
+								{ (
+					preferredLanguage === 'en' ? 'Watch the above video for a quick, one minute introduction.' : 'Assista ao vídeo acima para uma rápida introdução de um minuto.')}
+    
 
 	</Typography>
 	
@@ -36,8 +38,14 @@ class HowToPage extends Component {
   }
 }
 
+function mapStateToProps(state) {
+  return {
+		preferredLanguage: state.preferredLanguage
+  };
+}
+
 export default connect(
-  null,
+  mapStateToProps,
   actions
 )(HowToPage);
 

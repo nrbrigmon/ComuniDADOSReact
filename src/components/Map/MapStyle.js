@@ -8,7 +8,8 @@ export default theme => ({
   map: {
 		position: "fixed"
     ,height: "100vh"
-    ,width: "50%"
+		,width: "50%"
+		,background: "white"
 	},
 	mapContainer:{
 		margin: 0

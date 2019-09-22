@@ -50,14 +50,15 @@ function Control(props) {
 }
 
 function Option(props) {
-	// console.log(props)
+	let currentlySelected = props.selectProps.placeholder;
+	let currentItem = props.children;
   return (
     <MenuItem
       ref={props.innerRef}
       selected={props.isFocused}
       component="div"
       style={{
-				fontWeight: props.isSelected ? 700 : 100,
+				fontWeight: currentItem ===  currentlySelected ? 700 : 100,
 				minHeight: '38px',
 				padding: '0px 18px'
       }}

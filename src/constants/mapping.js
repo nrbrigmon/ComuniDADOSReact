@@ -21,42 +21,44 @@ export const SAO_MAP = {
 export const MAP_CENTER_COORDS = [-23.6321, -46.453];
 
 //Map Base Map PROVIDERS HERE: https://leaflet-extras.github.io/leaflet-providers/preview/
-export const BASE_MAP_OPTIONS = function(_opacity) {
+export const BASE_MAP_OPTIONS = function(_mapLayers) {
+	let { baseMapOpacity, baseMapSelection } = _mapLayers
+	
 	//section for toggling base map
 	return(
 	<LayersControl position="topright">
-    <LayersControl.BaseLayer name="OSM B&W" checked={true}>
+    <LayersControl.BaseLayer name="OSM B&W" checked={0 === baseMapSelection}>
       <TileLayer
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         url="https://tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png"
-				opacity={_opacity}
+				opacity={baseMapOpacity}
       />
     </LayersControl.BaseLayer>
-    <LayersControl.BaseLayer name="OSM">
+    <LayersControl.BaseLayer name="OSM"  checked={1 === baseMapSelection}>
       <TileLayer
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-				opacity={_opacity}
+				opacity={baseMapOpacity}
       />
     </LayersControl.BaseLayer>
-    <LayersControl.BaseLayer name="Aerial Hybrid">
+    <LayersControl.BaseLayer name="Aerial Hybrid"  checked={2 === baseMapSelection}>
 			<LayerGroup>
 				<TileLayer
 					attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 					url="http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
-					opacity={_opacity}
+					opacity={baseMapOpacity}
 				/>
 				<TileLayer
 					attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 					url="http://stamen-tiles-{s}.a.ssl.fastly.net/toner-lines/{z}/{x}/{y}.{ext}"
 					ext="png"
-					opacity={_opacity}
+					opacity={baseMapOpacity}
 				/>
 				<TileLayer
 					attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 					url="http://stamen-tiles-{s}.a.ssl.fastly.net/toner-labels/{z}/{x}/{y}.{ext}"
 					ext="png"
-					opacity={_opacity}
+					opacity={baseMapOpacity}
 				/>
 			</LayerGroup>
     </LayersControl.BaseLayer>

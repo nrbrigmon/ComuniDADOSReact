@@ -148,10 +148,11 @@ let myFillColor = function(feature, sent_props, chosenPalette) {
 }
 
 /* POPUP FUNCTIONS */
-let getPopupContent = function(feature, metric) {
+let getPopupContent = function(feature, metric, preferredLanguage) {
 	// console.log(metric)
 	let _location = toTitleCase(feature.properties['LABEL'].substr(2, 20));
-	let _content = '<p><b>LOCATION: </b>' + _location;
+	let _location_label = (preferredLanguage === 'en' ? 'LOCATION' : 'LOCALIZAÇÃO');
+	let _content = '<p><b>' + _location_label +': </b>' + _location;
 	let _value = feature.properties[metric.value];
 	if (metric.value.length > 1){
 		_content += '<br/><b>'+(metric.label).toUpperCase() +': </b>'+ _valueConversion(metric.value, _value) +'</p>';
@@ -184,12 +185,12 @@ export function set_style(feature, metric, palette) {
 	return newStyle
 }
 
-export function basic_popup(feature, layer, metric ) {
+export function basic_popup(feature, layer, metric, preferredLanguage ) {
 	layer.on({
 		click: highlightFeature
 	});
 	// console.log(feature)
-	let popupContent = getPopupContent(feature, metric);
+	let popupContent = getPopupContent(feature, metric, preferredLanguage);
 	layer.bindPopup(popupContent);
 }
 

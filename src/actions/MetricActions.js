@@ -16,3 +16,12 @@ export const selectMetricAttribute = (metricId) => {
 		};
 		return action;
 };
+
+
+export const translateMetric = (language) => {
+	const action = {
+		type: "TRANSLATE_METRIC",
+		payload: language
+	}
+	return action
+}

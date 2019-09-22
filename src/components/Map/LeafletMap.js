@@ -18,7 +18,7 @@ class LeafletMap extends Component {
 
   render() {
     let { coordinates, prefix } = this.props.map_constants;
-		let { classes, mapLayers, colorScheme } = this.props;
+		let { classes, mapLayers, colorScheme, preferredLanguage } = this.props;
 		let object_check = Object.keys(mapLayers[prefix]).length
 		let leaflet_layer = <div />;
 		
@@ -32,7 +32,7 @@ class LeafletMap extends Component {
 					<GeoJSON 
 						key={_util.updateKey()} //this function is needed to update the GeoJSON when new data is loaded
 						data={mapLayers[prefix]} 
-						onEachFeature={(feature, layer) => _util.basic_popup(feature, layer, this.props.mapLayers["metric"]) }  
+						onEachFeature={(feature, layer) => _util.basic_popup(feature, layer, this.props.mapLayers["metric"], preferredLanguage) }  
 						style={ (feature) =>  _util.set_style(feature, this.props.mapLayers["metric"], colorScheme) 
 						} 
 						/>
@@ -48,9 +48,8 @@ class LeafletMap extends Component {
 				
         {leaflet_layer}
 
-				{_constants.BASE_MAP_OPTIONS(mapLayers["baseMapOpacity"], classes)}
+				{_constants.BASE_MAP_OPTIONS(mapLayers, classes)}
 				
-				{/* { L.control.layers().remove()} */}
       </Map>
     );
   }

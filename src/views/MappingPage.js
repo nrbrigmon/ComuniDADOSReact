@@ -22,12 +22,12 @@ class MappingPage extends Component {
 		// console.log(this.props.mapLayers["metric"])
 		let colorScheme = _util.getColorScheme(this.props.mapLayers["metric"]);
 		let { value } = this.props.mapLayers["metric"];
-		let { baseMapOpacity } = this.props.mapLayers
+		let { baseMapOpacity, baseMapSelection } = this.props.mapLayers
 		// console.log(classes)
     return (
 			<div>
         <MetricAppBar />
-				<LeafletMapToggle preferredLanguage={preferredLanguage} />
+				<LeafletMapToggle preferredLanguage={preferredLanguage} action={this.props.updateBaseLayer} baseMapSelection={baseMapSelection}/>
 				<LeafletMapSlider preferredLanguage={preferredLanguage} action={this.props.updateLayerOpacity} baseMapOpacity={baseMapOpacity} />
       	<Grid container spacing={0}>
 					{/* helio map */}
