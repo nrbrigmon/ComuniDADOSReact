@@ -8,6 +8,7 @@ export default {
 		sao: {},
 		type: "districts",
 		baseMapOpacity: 1,
+		colorPalette: [],
 		baseMapSelection: 1,
 		metric: {
 			value: '',
@@ -15,6 +16,5 @@ export default {
 			labelPR: ''
 		}
 	},
-	metricSelection: null,
 	preferredLanguage: 'en'
 };

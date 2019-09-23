@@ -1,6 +1,7 @@
 import getSchemas from "schemas/initialStates";
 
-import { translatePlaceholder }from "utils/metric_utils";
+import { translatePlaceholder, getColorPalette }from "utils/mapping_utils";
+
 
 function updateMapLayer(state, payload, id){
 	let newState = {
@@ -17,9 +18,13 @@ function updateMapLayer(state, payload, id){
 	// 	type: "districts",
 	//	baseMapOpacity: 100,
 	//  baseMapSelection: 1,
+	// colorPalette: []
 	//	metrics: ''
-	//  { category: "Social", value: "sequ", max: "5.469", min: "0", breaks: "0,0.1,1.281,2.61", label: "NUM_FAM_LOT", legend: "none", label: "Lot Occupation" }
+	//  	{category:"Social", palette:'sequ', max:'75', min:'20', breaks:'20,39.483,44.511,49.54', value:'AGE', legend:'none', label:'Age', labelPR:'Idade'},
 	// },
+
+
+let newState, colorPalette;
 
 export default function(state = {}, { type, payload, id }) {
   // console.log(state);
@@ -27,12 +32,28 @@ export default function(state = {}, { type, payload, id }) {
     case "GET_MAP_LAYER":
 			return payload;
 		case "UPDATE_LAYER_TYPE":
-			//update the type attribute
-			let newState = updateMapLayer(state, payload, "type");
+			//update the type attribute (either district or blocks)
+			newState = updateMapLayer(state, payload, "type");
+			//restore the inital state for the palette
+			newState = updateMapLayer(newState, getSchemas.mapLayers.colorPalette, "colorPalette")
 			//restore the inital state for the metric field
 			return updateMapLayer(newState, getSchemas.mapLayers.metric, "metric")
-		case "UPDATE_LAYER_STYLE":
-			return updateMapLayer(state, payload, "metric")
+		case "UPDATE_LAYER_METRIC":
+			//update the metric
+			//first we add the new metric to the
+			newState = updateMapLayer(state, payload, "metric");
+			//second we get a color palette
+			colorPalette = getColorPalette(newState.metric.palette);
+			// console.log(colorPalette)
+			return updateMapLayer(newState, colorPalette, "colorPalette")
+		case "UPDATE_COLOR_PALETTE":
+			// console.log(state)
+
+			//this section takes the palette type (quant, sequ, diverging) and returns a palette
+			// colorPalette = getColorPalette(state.metric.palette);
+			// newState = updateMapLayer(state, colorPalette, "colorPalette")
+			
+			return updateMapLayer(state, payload, "colorPalette")
 		case "UPDATE_LAYER_OPACITY":
 			return updateMapLayer(state, payload, "baseMapOpacity")
 		case "UPDATE_BASE_LAYER":

@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import * as _util from "utils/mapping_utils";
 import Paper from '@material-ui/core/Paper';
+import ColorPaletteSelector from "./ColorPaletteSelector";
 
 class LeafletMapLegend extends Component {
   render() {
-		let { classes, colorScheme, preferredLanguage } = this.props;
+		let { classes, mapLayers, preferredLanguage } = this.props;
 		let { label, min, max, value, legend } = this.props.mapLayers["metric"];
 		// console.log(this.props.mapLayers["metric"])
 		let about_text = _util.getDescription(preferredLanguage, value)
@@ -19,8 +20,8 @@ class LeafletMapLegend extends Component {
 							<li className={classes.max}>{_min_max[1]}</li>
 							<li className={classes.graph}>
 								<div className={classes.colors}>
-								{ colorScheme === null ? <div/> :
-								 colorScheme.map( (elem, idx) => {
+								{ mapLayers.colorPalette === null ? <div/> :
+								 mapLayers.colorPalette.map( (elem, idx) => {
 										return(<div  key={idx}
 													 className={classes.quartile} 
 													 style={{ backgroundColor:elem }} ></div>)
@@ -30,6 +31,7 @@ class LeafletMapLegend extends Component {
 							</li>
 						</ul>
 						<div className={classes.aboutText}>{about_text}</div>
+						<ColorPaletteSelector action={this.props.updateColorPalette} />
 					</div>
 				</Paper>
 		</div>)

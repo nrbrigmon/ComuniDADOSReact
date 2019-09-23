@@ -19,7 +19,7 @@ export const fetchMapLayerById = (map_layer_id, geo_type) => async dispatch => {
 
 export const updateLayerStyle = (metric) => {
 	const action = {
-		type: "UPDATE_LAYER_STYLE",
+		type: "UPDATE_LAYER_METRIC",
 		payload: metric
   };
   return action;
@@ -49,4 +49,22 @@ export const updateLayerType = (geoType) => {
 		payload: geoType
   };
   return action;
+}
+
+
+export const translateMetric = (language) => {
+	const action = {
+		type: "TRANSLATE_METRIC",
+		payload: language
+	}
+	return action
+}
+
+export const updateColorPalette = (palette) => {
+	// console.log(palette)
+	const action = {
+		type: "UPDATE_COLOR_PALETTE",
+		payload: palette
+	}
+	return action
 }

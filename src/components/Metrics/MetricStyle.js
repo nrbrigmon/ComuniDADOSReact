@@ -1,8 +1,7 @@
 export default theme => ({
-  // root: {
-  //   flexGrow: 1,
-	// 	minWidth: 290
-  // },
+  root: {
+    background: "black"
+  },
   formControl: {
 		minWidth: '120px',
 		width: '300px',

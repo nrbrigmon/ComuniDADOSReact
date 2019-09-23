@@ -17,7 +17,7 @@ class MetricAppBar extends Component {
 		// console.log(this.props)
     return (
       <div>
-        <AppBar position="static" color="secondary" className={classes.root}>
+        <AppBar position="static" className={classes.root}>
           <Toolbar variant="dense">
             <Grid item xs={12}>
               <Grid container justify="center">

@@ -3,7 +3,7 @@ import Select from 'react-select';
 import { components } from "./MetricFunctions";
 import { district_metrics, blocks_metrics } from "constants/metrics";
 
-import * as _util from "utils/metric_utils";
+import * as _util from "utils/mapping_utils";
 
 class MetricReactSelect extends Component {
 

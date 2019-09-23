@@ -1,4 +1,5 @@
 import { COLOR_SCHEMES, DESCRIPTION_LOOKUP, DESCRIPTION_LOOKUP_PR, LEGEND_LOOKUP, LEGEND_LOOKUP_PR }from "constants/lookup_variables";
+import { district_metrics } from "constants/metrics";
 
 /* UTILITY FUNCTIONS */
 let toTitleCase = function(str) {
@@ -131,7 +132,7 @@ let selectColorValue = function(_x, _br, _max, _pal){
 							: _pal[0];
 }
 let myFillColor = function(feature, sent_props, chosenPalette) {
-	// console.log(sent_props)
+	// console.log(chosenPalette)
 	let { breaks, max, value } = sent_props;
 	let metric_value = feature.properties[value];
 	// let metric_type = sent_props.value;
@@ -194,31 +195,31 @@ export function basic_popup(feature, layer, metric, preferredLanguage ) {
 	layer.bindPopup(popupContent);
 }
 
-export const getColorScheme = function(metric) {
+export const getColorPalette = function(palette_type) {
 	// console.log(metric)
-	if (metric.value === ""){
-		return null
-	} else if (metric.palette === "sequ"){
+	if (palette_type === "sequ"){
 		// get number of colorSchemes
 		let num_schemes = Object.keys(COLOR_SCHEMES.sequential).length
 		// use schemes to randomly select within the given objects
 		let rndm_select = Math.floor(Math.random() * num_schemes) + 1;
 		return COLOR_SCHEMES.sequential[rndm_select]
-	} else if (metric.palette === "diver"){
+	} else if (palette_type === "diver"){
 		// get number of colorSchemes
 		let num_schemes = Object.keys(COLOR_SCHEMES.diverging).length
 		// use schemes to randomly select within the given objects
 		let rndm_select = Math.floor(Math.random() * num_schemes) + 1;
 		return COLOR_SCHEMES.diverging[rndm_select]
-	} else {
+	} else if (palette_type === "quant"){
 		// get number of colorSchemes
 		let num_schemes = Object.keys(COLOR_SCHEMES.qualitativeSchemes).length
 		// use schemes to randomly select within the given objects
 		let rndm_select = Math.floor(Math.random() * num_schemes) + 1;
 		console.log(rndm_select)
 		return COLOR_SCHEMES.qualitativeSchemes[rndm_select]
+	} else {
+		return []
 	}
-}
+} 
 
 export function getDescription(preferredLanguage, val) {
 	return (preferredLanguage === 'en' ? DESCRIPTION_LOOKUP[val] : DESCRIPTION_LOOKUP_PR[val]);
@@ -235,6 +236,44 @@ export function legendHelper(preferredLanguage, min, max, type) {
 		return [ lkp_val[0], lkp_val[1] ] 
 	}
 }
+
+
+
+export const adjustLabelsForPR = function(metrics) {
+	return metrics.map( elem => {
+		return {
+			label: elem.labelPR,
+			value: elem.value,
+			category: elem.category,
+			palette: elem.palette,
+			max: elem.max,
+			min: elem.min,
+			breaks: elem.breaks,
+			legend: elem.legend
+		}
+	});
+}
+
+export const translatePlaceholder = function(new_lang, lkp_value) {
+	//if there is nothing to translate, get out of the function
+	if (lkp_value === ''){
+		return ''
+	}
+
+	// takes the new chosen language, and the attribute's label and returns the translated value
+	let translatedMetric = '';
+	//loop through metrics and return the Object that has the same LABEL
+	let foundMetric = district_metrics.filter( item => {
+		return lkp_value === item.value
+	})[0]
+	if (new_lang === 'en'){
+		translatedMetric = foundMetric.label;
+	} else {
+		translatedMetric = foundMetric.labelPR;
+	}
+	return translatedMetric
+}
+
 
 // function popupLocationPR(label) {
 // 	return (

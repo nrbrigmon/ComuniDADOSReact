@@ -18,10 +18,11 @@ class LeafletMap extends Component {
 
   render() {
     let { coordinates, prefix } = this.props.map_constants;
-		let { classes, mapLayers, colorScheme, preferredLanguage } = this.props;
+		let { classes, mapLayers, preferredLanguage } = this.props;
+		// console.log(this.props)
 		let object_check = Object.keys(mapLayers[prefix]).length
 		let leaflet_layer = <div />;
-		
+		// console.log(mapLayers.colorPalette)
 		// L.control.remove()
 		
 		// console.log(this.props)
@@ -33,7 +34,7 @@ class LeafletMap extends Component {
 						key={_util.updateKey()} //this function is needed to update the GeoJSON when new data is loaded
 						data={mapLayers[prefix]} 
 						onEachFeature={(feature, layer) => _util.basic_popup(feature, layer, this.props.mapLayers["metric"], preferredLanguage) }  
-						style={ (feature) =>  _util.set_style(feature, this.props.mapLayers["metric"], colorScheme) 
+						style={ (feature) =>  _util.set_style(feature, this.props.mapLayers["metric"], this.props.mapLayers.colorPalette) 
 						} 
 						/>
         </FeatureGroup>
