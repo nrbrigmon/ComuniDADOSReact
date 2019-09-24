@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.js": "/ComuniDADOSReact/static/js/main.f13fc9d4.chunk.js",
+    "main.js.map": "/ComuniDADOSReact/static/js/main.f13fc9d4.chunk.js.map",
+    "runtime~main.js": "/ComuniDADOSReact/static/js/runtime~main.1fc259eb.js",
+    "runtime~main.js.map": "/ComuniDADOSReact/static/js/runtime~main.1fc259eb.js.map",
+    "static/js/2.e402f50a.chunk.js": "/ComuniDADOSReact/static/js/2.e402f50a.chunk.js",
+    "static/js/2.e402f50a.chunk.js.map": "/ComuniDADOSReact/static/js/2.e402f50a.chunk.js.map",
+    "index.html": "/ComuniDADOSReact/index.html",
+    "precache-manifest.de09fc373c4403c9cb47e1bbd91c15a3.js": "/ComuniDADOSReact/precache-manifest.de09fc373c4403c9cb47e1bbd91c15a3.js",
+    "service-worker.js": "/ComuniDADOSReact/service-worker.js"
+  }
+}

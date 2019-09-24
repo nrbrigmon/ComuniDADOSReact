@@ -47,11 +47,6 @@ export default function(state = {}, { type, payload, id }) {
 			// console.log(colorPalette)
 			return updateMapLayer(newState, colorPalette, "colorPalette")
 		case "UPDATE_COLOR_PALETTE":
-			// console.log(state)
-
-			//this section takes the palette type (quant, sequ, diverging) and returns a palette
-			// colorPalette = getColorPalette(state.metric.palette);
-			// newState = updateMapLayer(state, colorPalette, "colorPalette")
 			
 			return updateMapLayer(state, payload, "colorPalette")
 		case "UPDATE_LAYER_OPACITY":

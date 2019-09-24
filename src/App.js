@@ -20,7 +20,7 @@ class App extends Component {
         {/* inside app, w router */}
         <CssBaseline />
         <Header />
-        <BrowserRouter>
+        <BrowserRouter basename="/ComuniDADOSReact">
           {/* <Router history={hist}> */}
           <Switch>
             {indexRoutes.map((elem, key) => {
