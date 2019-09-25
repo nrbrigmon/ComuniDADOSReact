@@ -26,7 +26,7 @@ export const COLOR_SCHEMES = {
 
 export const LEGEND_LOOKUP = {
 	'none':['Min:','Max:'],
-	'gender':['Female (1)','Male (2)'],
+	'gender':['Male (0)','Female (1)'],
 	'affirm':['No (0)','Yes (1)'],
 	'edu':['Low (0)','High (4)'],
 	'commute':['Less than 15 min.(1)','More than 60 min.(4)'],
@@ -38,7 +38,7 @@ export const LEGEND_LOOKUP = {
 
 export const LEGEND_LOOKUP_PR = {
 	'none':['Min:','Max:'],
-	'gender':['Fêmea (1)','Masculino (2)'],
+	'gender':['Masculino (0)','Fêmea (1)'],
 	'affirm':['No (0)','Sim (1)'],
 	'edu':['Baixo (0)','Alto (4)'],
 	'commute':['Menos de 15 min.(1)','Mais de 60 min.(4)'],
@@ -106,8 +106,8 @@ export const DESCRIPTION_LOOKUP = {
 	EMPL_Y: 'Percent of people currently employed.',
 	FUNK_IMM_VIC:
 		'Total complaints about funk street parties as an everyday challenge, as calculated by the number of times this word was mentioned within the context of the question “is there anything in your neighborhood that bothers you on a constant basis?”',
-	GEN_F: 'The percent of female respondents.',
-	GEN_M: 'Mauris rutrum mi sodales risus placerat molestie.',
+	GEN_F: 'The ratio of male to female respondents.',
+	// GEN_M: 'Mauris rutrum mi sodales risus placerat molestie.',
 	INCOME: 'Average household income.',
 	LIXO_IMM_VIC:
 		'Total complaints about trash as an everyday challenge, as calculated by the number of times this word was mentioned within the context of the question “is there anything in your neighborhood that bothers you on a constant basis?” ',

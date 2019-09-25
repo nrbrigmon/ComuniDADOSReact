@@ -9,17 +9,14 @@ import SliderStyle from "./SliderStyle";
 class SliderTransparency extends Component {
 
 	_onSliderUpdate(obj, evt, updateOpacity){
-		console.log(evt)
 		let adjusted_variable = ( Number(evt) / 100 ).toFixed(1)
-		console.log(adjusted_variable)
-
 		updateOpacity(adjusted_variable)
 	}
 
 	render(){
 		let { classes, action, baseMapOpacity } = this.props
 		let adjusted_opacity = ( Number(baseMapOpacity) * 100 )
-		console.log(adjusted_opacity)
+		// console.log(adjusted_opacity)
 		return (
 		<div >
       <Slider

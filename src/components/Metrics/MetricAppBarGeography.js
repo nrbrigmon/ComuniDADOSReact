@@ -6,12 +6,14 @@ import { geography_options } from "constants/metrics";
 class MetricAppBarGeography extends Component {
 
 	_makeGeographySelection = (e) => {
+		// console.log(this.props)
+		// console.log(e)
 		//the first action will update the app bar display
 		this.props.updateLayerType(e.value);
 		if (this.props.mapLayers.type !== e.value){
 			//the second action will update the map layer
-			this.props.fetchMapLayerById("sao",e.value);
-			this.props.fetchMapLayerById("helio",e.value);
+			this.props.fetchMapLayerById("sao", e.value);
+			this.props.fetchMapLayerById("helio", e.value);
 		}
 	}
 

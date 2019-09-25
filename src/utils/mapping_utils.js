@@ -39,35 +39,57 @@ let toPercent = function(num) {
 	return a + '%';
 };
 
+let runArrayTest = function(arr, value){
+	//loop through test array and if anything shows up, return true
+	//this function filters through the given word array
+	//if any word in the label description matches, then it is added to the result array
+	let result = arr.filter( wrd => value.toUpperCase().indexOf(wrd) > -1 )
+	// finally if the length of the array is greater than 0 we return true, else false
+	return (result.length > 0 ? true : false)
+}
+
+let testForPercent = function(value){
+	let percentArray = ['GROWTH','POVERTY RATE', 'PERCENT', '%', 'RATIO'];
+	return runArrayTest(percentArray, value);
+} 
+
+let testForCurrency = function(value){
+	let currencyArray = ['WAGE','EARNING','HOUSEHOLD INCOME'];
+	return runArrayTest(currencyArray, value);
+}
+
+let testForAverages = function(value){
+	let averageArray = ['AVERAGE NUMBER', 'RATIO OF'];
+	return runArrayTest(averageArray, value);
+}
+
+
 let _valueConversion = function(label, value) {
-	let tempLabel = DESCRIPTION_LOOKUP[label] === undefined ? '' : DESCRIPTION_LOOKUP[label];
 	//get metric text
-	// if contains   , "poverty rate,", "", "% of Total", , projected change
-	if (
-		tempLabel.indexOf('Growth') !== -1 ||
-		tempLabel.indexOf('Poverty Rate') !== -1 ||
-		tempLabel.indexOf('Percent') !== -1 ||
-		tempLabel.indexOf('%') !== -1
-	) {
-		//convert number depending on type
-		if (value === 0 || value === null || value === '') {
-			return 'Insuff. Data';
-		} else {
-			return toPercent(value);
-		}
-	} else if (
-		tempLabel.indexOf('Wage') !== -1 ||
-		tempLabel.indexOf('Earning') !== -1 ||
-		tempLabel.indexOf('Household Income') !== -1
-	) {
-		if (value === 0 || value === null || value === '') {
-			return 'Insuff. Data';
-		} else {
-			return toCurrency(value);
-		}
+	let label_desc = DESCRIPTION_LOOKUP[label] === undefined ? '' : DESCRIPTION_LOOKUP[label];
+	//test for empty value
+	if (value === undefined || value === null || value === '') {
+		return 'Insuff. Data';
+	}
+
+	// console.log(label, value)
+	if ( testForPercent(label_desc) ){
+		//convert number to a percent
+		return toPercent(value);
+
+	} else if ( testForCurrency(label_desc) ) {
+		//convert number to a percent
+		return toCurrency(value);
+
+	} else if ( testForAverages(label_desc) ) {
+		//convert number to a fixed decimal
+		return value = Number(value).toFixed(1);
+				
 	} else {
-		value = Math.floor(value);
+		//return number that might have commas and round down
+		value = Math.floor(value)
 		value = value.toString().replace(/(.)(?=(\d{3})+$)/g, '$1,');
+		// console.log(value)
 		return value;
 	}
 };
