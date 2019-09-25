@@ -247,13 +247,13 @@ export function getDescription(preferredLanguage, val) {
 	return (preferredLanguage === 'en' ? DESCRIPTION_LOOKUP[val] : DESCRIPTION_LOOKUP_PR[val]);
 }
 
-export function legendHelper(preferredLanguage, min, max, type) {
+export function legendHelper(preferredLanguage, min, max, type, label) {
 	let lkp_val = (preferredLanguage === 'en' ? LEGEND_LOOKUP[type] : LEGEND_LOOKUP_PR[type]);
 	// console.log(lkp_val)
 	if (type === undefined){
 		return []
 	} else if (type === "none"){
-		return [ lkp_val[0] + " " + min, lkp_val[1] + " " + max ]
+		return [ lkp_val[0] + " " + _valueConversion(label, min), lkp_val[1] + " " + _valueConversion(label, max) ]
 	} else {	
 		return [ lkp_val[0], lkp_val[1] ] 
 	}
@@ -295,61 +295,3 @@ export const translatePlaceholder = function(new_lang, lkp_value) {
 	}
 	return translatedMetric
 }
-
-
-// function popupLocationPR(label) {
-// 	return (
-// 		'<p><b>LOCALIZAÇÃO: </b>' + toTitleCase(label.substr(2, 20)) + '</p>'
-// 	);
-// }
-// export function basic_popupPR(feature, layer) {
-// 	layer.on({
-// 		click: highlightFeature
-// 	});
-// 	let popupContent = popupLocationPR(feature.properties['LABEL']);
-// 	layer.bindPopup(popupContent);
-// }
-
-
-/*
-let nonPercentArray = 
-[
-	'AGE',
-	'ASSAULTO_IMM_VIC', 
-	'BARULHO_IMM_VIC', 
-	'BLDG_QLTY', 
-	'DROGA_IMM_VIC',
-	'FUNK_IMM_VIC',
-	'LIXO_IMM_VIC',
-	'NADA_IMM_VIC',
-	'NUM_FAM_LOT',
-	'NUM_FLR',
-	'NUM_PPL_HSHD',
-	'NUM_SCH_AG',
-	'NUM_YR_HSE',
-	'NUM_YR_SP'
-];
-/*
-let getTextDisplay = function(columnLookup, layerAttributes){
-	if (columnLookup === 'INCOME') {
-		return toCurrency(
-			layerAttributes
-		);
-	} else if ($.inArray(columnLookup, nonPercentArray) >= 0) {
-		if (layerAttributes) {
-			return parseFloat(
-				layerAttributes
-			).toFixed(1);
-		} else {
-			return layerAttributes;
-		}
-	} else {
-		if (layerAttributes) {
-			return toPercent(
-				layerAttributes
-			);
-		} else {
-			return layerAttributes;
-		}
-	}
-}*/

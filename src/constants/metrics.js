@@ -7,12 +7,12 @@ export const district_metrics = [
 	{category:"Social", palette:'sequ', max:'75', min:'20', breaks:'20,39.483,44.511,49.54', value:'AGE', legend:'none', label:'Age', labelPR:'Idade'},
 	{category:"Social", palette:'sequ', max:'1', min:'0', breaks:'0,0.465,0.704,0.942', value:'GEN_F', legend:'gender', label:'Gender', labelPR:'Genero'},
 	{category:"Social", palette:'sequ', max:'55', min:'0', breaks:'0,0.1,17.123,34.389', value:'NUM_YR_SP', legend:'none', label:'Years in São Paulo', labelPR:'Duração de tempo em Sao Paulo'},
-	{category:"Social", palette:'sequ', max:'19.858', min:'0', breaks:'0,4.242,10.082,15.922', value:'NUM_YR_HSE', legend:'none', label:'Years in Current Dwelling', labelPR:'Duração de tempo na casa atual'},
+	{category:"Social", palette:'sequ', max:'20', min:'0', breaks:'0,4.242,10.082,15.922', value:'NUM_YR_HSE', legend:'none', label:'Years in Current Dwelling', labelPR:'Duração de tempo na casa atual'},
 	{category:"Social", palette:'sequ', max:'1', min:'0', breaks:'0,0.16,0.344,0.528', value:'BRTH_SP', legend:'secureA', label:'Native Paulista', labelPR:'Paulistano/a'},
 	{category:"Social", palette:'sequ', max:'1', min:'0', breaks:'0,0.498,0.79,0.81', value:'BRTH_REG_NE', legend:'secureA', label:'Non Native Paulista - North-East', labelPR:'NÃO Paulistano/a Paulista - Norte e Nordeste'},
 	{category:"Social", palette:'sequ', max:'1', min:'0', breaks:'0,0.05,0.112,0.258', value:'BRTH_REG_S', legend:'secureA', label:'Non Native Paulista - South-Central', labelPR:'NÃO Paulistano/a -  Sul e Centro'},
 	{category:"Social", palette:'sequ', max:'1', min:'0', breaks:'0,0.05,0.292,0.586', value:'DISP_Y', legend:'secureA', label:'Displacement', labelPR:'Remoção'},
-	{category:"Social", palette:'sequ', max:'5.469', min:'0', breaks:'0,0.1,1.281,2.61', value:'NUM_FAM_LOT', legend:'none', label:'Lot Occupation', labelPR:'Ocupação'},
+	{category:"Social", palette:'sequ', max:'5.5', min:'0', breaks:'0,0.1,1.281,2.61', value:'NUM_FAM_LOT', legend:'none', label:'Lot Occupation', labelPR:'Ocupação'},
 	{category:"Social", palette:'sequ', max:'5', min:'0', breaks:'0,2.23,3.431,4.633', value:'NUM_PPL_HSHD', legend:'none', label:'Household Inhabitants', labelPR:'Habitantes domésticos'},
 	{category:"Social", palette:'sequ', max:'1', min:'0', breaks:'0,0.1,0.107,0.231', value:'ED_LVL_0', legend:'secureA', label:'Respondent Education - None', labelPR:'Nível educacional do entrevistado - Nada'},
 	{category:"Social", palette:'sequ', max:'1', min:'0', breaks:'0,0.213,0.43,0.648', value:'ED_LVL_1', legend:'secureA', label:'Respondent Education - Elementary', labelPR:'Nível educacional do entrevistado - primária'},
@@ -29,9 +29,9 @@ export const district_metrics = [
 	{category:"Social", palette:'sequ', max:'1', min:'0', breaks:'0,0.01,0.017,0.061', value:'ED_LVL_FAT_3', legend:'secureA', label: "Respondent Father's Education - Undergraduate Deg.", labelPR:'Nível educacional do pai de entrevistado - Graduação'},
 	{category:"Social", palette:'sequ', max:'1', min:'0', breaks:'0,0,0.003,0.004', value:'ED_LVL_FAT_4', legend:'secureA', label: "Respondent Father's Education - Graduate Deg.", labelPR:'Nível educacional do pai de entrevistado - Graduate Deg.'},
 	{category:"Social", palette:'sequ', max:'1', min:'0', breaks:'0,0.09,0.19,0.405', value:'ED_LVL_FAT_5', legend:'secureA', label: "Respondent Father's Education - No Information", labelPR:'Nível educacional do pai de entrevistado - sem informação'},
-	{category:"Social", palette:'sequ', max:'2.125', min:'0', breaks:'0,0.048,0.889,1.73', value:'NUM_SCH_AGE_CHD', legend:'none', label:'School Age Children', labelPR:'Idade Escolar'},
+	{category:"Social", palette:'sequ', max:'2.1', min:'0', breaks:'0,0.048,0.889,1.73', value:'NUM_SCH_AGE_CHD', legend:'none', label:'School Age Children', labelPR:'Idade Escolar'},
 	{category:"Social", palette:'sequ', max:'1', min:'0', breaks:'0,0.224,0.445,0.666', value:'EMPL_Y', legend:'secureA', label:'Employment', labelPR:'Emprego'},
-	{category:"Social", palette:'sequ', max:'2655.269', min:'0', breaks:'0,812.878,1525.882,2238.887', value:'INCOME', legend:'none', label:'Income', labelPR:'Renda'},
+	{category:"Social", palette:'sequ', max:'2655', min:'0', breaks:'0,812.878,1525.882,2238.887', value:'INCOME', legend:'none', label:'Income', labelPR:'Renda'},
 	{category:"Social", palette:'sequ', max:'1', min:'0', breaks:'0,0.046,0.211,0.376', value:'USE_HM_INCM', legend:'secureA', label:'Home Income Generation', labelPR:'Necessidades especiais'},
 	{category:"Social", palette:'sequ', max:'1', min:'0', breaks:'0,0.001,0.089,0.189', value:'SPCL_NEEDS', legend:'secureA', label:'Special Needs', labelPR:'Geração de renda doméstica'},
 	
@@ -52,9 +52,9 @@ export const district_metrics = [
 	{category:"Urban Livability", palette:'sequ', max:'0.8', min:'0', breaks:'0,0.208,0.457,0.705', value:'CUR_INTENT', legend:'none', label:'Intention', labelPR:'Planos de futuro'},
 	{category:"Urban Livability", palette:'sequ', max:'1', min:'0', breaks:'0,0.1,0.086,0.207', value:'POL_AFL', legend:'secureA', label:'Political Affiliation', labelPR:'Afiliação política'},
 	{category:"Urban Livability", palette:'sequ', max:'4', min:'0', breaks:'0,0.755,2.142,3.529', value:'POL_PRIOR_INFRA', legend:'none', label:'Critical Change - Infrastructure and Sanitation', labelPR:'Mudança importante - Infraestrutura e saneamento'},
-	{category:"Urban Livability", palette:'sequ', max:'4.333', min:'0', breaks:'0,0.882,2.401,3.92', value:'POL_PRIOR_WST_MGT', legend:'none', label:'Critical Change - Waste Management', labelPR:'Mudança importante – Coleção de lixo'},
-	{category:"Urban Livability", palette:'sequ', max:'3.64', min:'0', breaks:'0,0.669,2.02,3.371', value:'POL_PRIOR_ENV', legend:'none', label:'Critical Change - Environmental Stewardship', labelPR:'Mudança importante – Meio ambient'},
-	{category:"Urban Livability", palette:'sequ', max:'4.167', min:'0', breaks:'0,0.774,2.303,3.832', value:'POL_PRIOR_HSG', legend:'none', label:'Critical Change - Housing', labelPR:'Mudança importante – Habitação'},
+	{category:"Urban Livability", palette:'sequ', max:'4.3', min:'0', breaks:'0,0.882,2.401,3.92', value:'POL_PRIOR_WST_MGT', legend:'none', label:'Critical Change - Waste Management', labelPR:'Mudança importante – Coleção de lixo'},
+	{category:"Urban Livability", palette:'sequ', max:'3.6', min:'0', breaks:'0,0.669,2.02,3.371', value:'POL_PRIOR_ENV', legend:'none', label:'Critical Change - Environmental Stewardship', labelPR:'Mudança importante – Meio ambient'},
+	{category:"Urban Livability", palette:'sequ', max:'4.1', min:'0', breaks:'0,0.774,2.303,3.832', value:'POL_PRIOR_HSG', legend:'none', label:'Critical Change - Housing', labelPR:'Mudança importante – Habitação'},
 	{category:"Urban Livability", palette:'sequ', max:'4', min:'0', breaks:'0,0.579,1.97,3.36', value:'POL_PRIOR_TTL', legend:'none', label:'Critical Change - Title', labelPR:'Mudança importante – Regularização'}
 ];
 
@@ -68,7 +68,7 @@ export const blocks_metrics = [
 		{category:"Social", palette:'sequ', max:'1', min:'0', breaks:'0,0.1,0.139,0.344', value:'BRTH_REG_S', legend:'secureA', label:'Non Native Paulista - South-Central', labelPR:'NÃO Paulistano/a -  Sul e Centro'},
 
 		{category:"Social", palette:'sequ', max:'1', min:'0', breaks:'0,0.1,0.234,0.545', value:'DISP_Y', legend:'secureA', label:'Displacement', labelPR:'Remoção'},
-		{category:"Social", palette:'sequ', max:'14.625', min:'0', breaks:'0,0.1,1.421,2.981', value:'NUM_FAM_LOT', legend:'none', label:'Lot Occupation', labelPR:'Ocupação'},
+		{category:"Social", palette:'sequ', max:'14.6', min:'0', breaks:'0,0.1,1.421,2.981', value:'NUM_FAM_LOT', legend:'none', label:'Lot Occupation', labelPR:'Ocupação'},
 		{category:"Social", palette:'sequ', max:'7.5', min:'0', breaks:'0,2.344,3.557,4.77', value:'NUM_PPL_HSHD', legend:'none', label:'Household Inhabitants', labelPR:'Habitantes domésticos'},
 		{category:"Social", palette:'sequ', max:'1', min:'0', breaks:'0,0.01,0.1,0.287', value:'ED_LVL_0', legend:'secureA', label:'Respondent Education - None', labelPR:'Nível educacional do entrevistado - Nada'},
 		{category:"Social", palette:'sequ', max:'1', min:'0', breaks:'0,0.151,0.427,0.703', value:'ED_LVL_1', legend:'secureA', label: "Respondent Education - Elementary", labelPR:'Nível educacional do entrevistado - primária'},

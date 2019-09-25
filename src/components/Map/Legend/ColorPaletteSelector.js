@@ -6,7 +6,7 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import withStyles from "@material-ui/core/styles/withStyles";
-import PaletteStyle from "./PaletteStyle";
+import ColorPaletteStyle from "./ColorPaletteStyle";
 import { Typography, DialogContent } from "@material-ui/core";
 
 import IconButton from '@material-ui/core/IconButton';
@@ -95,4 +95,4 @@ class ColorPaletteSelector extends Component {
   }
 }
 
-export default withStyles(PaletteStyle)(ColorPaletteSelector);
+export default withStyles(ColorPaletteStyle)(ColorPaletteSelector);

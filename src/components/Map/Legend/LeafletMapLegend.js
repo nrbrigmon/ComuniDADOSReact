@@ -9,7 +9,7 @@ class LeafletMapLegend extends Component {
 		let { label, min, max, value, legend } = this.props.mapLayers["metric"];
 		// console.log(this.props.mapLayers["metric"])
 		let about_text = _util.getDescription(preferredLanguage, value)
-		let _min_max = _util.legendHelper(preferredLanguage, min, max, legend);
+		let _min_max = _util.legendHelper(preferredLanguage, min, max, legend, value);
 		return ( <div>
 			{/* if there is nothing to display, we won't show component */}
 			<Paper className={classes.legendContainer}>
