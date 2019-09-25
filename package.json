@@ -2,9 +2,9 @@
   "name": "ComuniDADOSReact",
   "version": "1.0.0",
   "description": "This is the comunidados front-end application for viewing shapes and survey data. Built with React.",
-  "keywords": [],
+  "keywords": ["react","leaflet","material-ui"],
   "main": "src/index.js",
-  "homepage": "https://nrbrigmon.github.io/ComuniDADOSReact/",
+  "homepage": "https://comunidados-react.s3.amazonaws.com/",
   "dependencies": {
     "@material-ui/core": "4.4.0",
     "@material-ui/icons": "4.2.1",
@@ -27,16 +27,13 @@
     "shortid": "2.2.14"
   },
   "devDependencies": {
-    "gh-pages": "^2.1.1",
     "typescript": "3.3.3"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "eject": "react-scripts eject"
   },
   "browserslist": [
     ">0.2%",

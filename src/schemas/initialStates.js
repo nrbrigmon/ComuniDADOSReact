@@ -7,9 +7,9 @@ export default {
 		helio: {},
 		sao: {},
 		type: "districts",
-		baseMapOpacity: 1,
+		baseMapOpacity: 0.5,
 		colorPalette: [],
-		baseMapSelection: 1,
+		baseMapSelection: 0,
 		metric: {
 			value: '',
 			label: '',

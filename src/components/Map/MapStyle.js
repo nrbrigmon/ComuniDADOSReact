@@ -10,6 +10,8 @@ export default theme => ({
     ,height: "100vh"
 		,width: "50%"
 		,background: "white"
+		,borderRight: "inset white"
+		,borderLeft: "inset white"
 	},
 	mapContainer:{
 		margin: 0

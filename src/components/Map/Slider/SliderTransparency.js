@@ -3,30 +3,25 @@ import Slider from '@material-ui/core/Slider';
 
 // import Popover from '@material-ui/core/Popover';
 import withStyles from "@material-ui/core/styles/withStyles";
-import SliderStyle from "components/Map/SliderStyle";
+import SliderStyle from "./SliderStyle";
 
-const containerCSS = { 
-	position: "absolute"
-	,top: "175px"
-	,right: "20px"
-	,zIndex: "500"
-	,width: "110px"
-	,height: "30px"
-};
 
-class LeafletMapSlider extends Component {
+class SliderTransparency extends Component {
 
 	_onSliderUpdate(obj, evt, updateOpacity){
+		console.log(evt)
 		let adjusted_variable = ( Number(evt) / 100 ).toFixed(1)
+		console.log(adjusted_variable)
+
 		updateOpacity(adjusted_variable)
 	}
 
 	render(){
 		let { classes, action, baseMapOpacity } = this.props
 		let adjusted_opacity = ( Number(baseMapOpacity) * 100 )
-		// console.log(adjusted_opacity)
+		console.log(adjusted_opacity)
 		return (
-		<div style={containerCSS}>
+		<div >
       <Slider
 				classes={classes}
         defaultValue={adjusted_opacity}
@@ -42,4 +37,4 @@ class LeafletMapSlider extends Component {
 	}
 }
 
-export default withStyles(SliderStyle)(LeafletMapSlider);
+export default withStyles(SliderStyle)(SliderTransparency);

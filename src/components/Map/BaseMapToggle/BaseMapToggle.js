@@ -4,11 +4,11 @@ import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 
 import withStyles from "@material-ui/core/styles/withStyles";
-import ToggleStyle from "components/Map/ToggleStyle";
-import MapIcon from '@material-ui/icons/Map';
+import ToggleStyle from "components/Map/BaseMapToggle/ToggleStyle";
+import LayersIcon from '@material-ui/icons/Layers';
 
 
-class LeafeletMapToggle extends Component {
+class BaseMapToggle extends Component {
 		state = {
 			open: false,
 			anchorEl: null
@@ -47,7 +47,7 @@ class LeafeletMapToggle extends Component {
 								<Typography
 										className={classes.interior} 
 										>
-										<MapIcon/>
+										<LayersIcon  fontSize="large"/>
 								</Typography>
 								<Popover
 										id="mouse-over-popover"
@@ -74,4 +74,4 @@ class LeafeletMapToggle extends Component {
 				);
 		}
 }
-export default withStyles(ToggleStyle)(LeafeletMapToggle);
+export default withStyles(ToggleStyle)(BaseMapToggle);
