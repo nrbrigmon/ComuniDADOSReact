@@ -36,7 +36,7 @@
     "test": "react-scripts test --env=jsdom",
 		"eject": "react-scripts eject",
 		"git_update": "python ./config/git_update.py",
-		"do_it_all": "npm run build && npm run deploy && git add . && git commit -m \"tiny labelling updates\" && git push origin master"
+		"do_it_all": "npm run build && npm run deploy && npm run git_update"
   },
   "browserslist": [
     ">0.2%",

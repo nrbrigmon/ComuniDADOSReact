@@ -3,12 +3,22 @@ export default theme => ({
     background: "black"
   },
   formControl: {
-		minWidth: '120px',
-		width: '300px',
+		minWidth: '175px',
+		[theme.breakpoints.down('sm')]: {
+			width: '175px',
+			margin: '0px 10px',
+    },
+		[theme.breakpoints.up('md')]: {
+			width: '250px',
+			margin: '0px 15px',
+    },
+    [theme.breakpoints.up('lg')]: {
+			width: '300px',
+			margin: '0px 25px',
+    },
+		borderRadius: '4px',
 		background: "white",
 		padding: '2px 15px',
-		margin: '0px 25px',
-		borderRadius: '4px',
 		whiteSpace: "normal"
 	},
   input: {
