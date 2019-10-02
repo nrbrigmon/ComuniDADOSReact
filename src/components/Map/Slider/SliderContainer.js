@@ -4,7 +4,7 @@ import Typography from '@material-ui/core/Typography';
 
 import withStyles from "@material-ui/core/styles/withStyles";
 import SliderTransparency from "./SliderTransparency"
-import SliderPopoverStyle from "./SliderPopoverStyle";
+import SliderContainerStyle from "./SliderContainerStyle";
 
 
 class SliderContainer extends Component {
@@ -70,4 +70,4 @@ class SliderContainer extends Component {
 				);
 		}
 }
-export default withStyles(SliderPopoverStyle)(SliderContainer);
+export default withStyles(SliderContainerStyle)(SliderContainer);

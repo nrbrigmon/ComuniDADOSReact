@@ -16,7 +16,7 @@ var indexRoutes = [
   { path: "/", enName: "MAP", prName: 'MAPA', component: MappingPage, exact: true, icon: <MapIcon /> },
 	{ path: "/about", enName: "ABOUT", prName: 'SOBRE', component: LandingPage, exact: true, icon: <InfoIcon /> },
   { path: "/how-to", enName: "HOW TO USE", prName: 'COMO USAR', component: HowToPage, exact: true, icon: <HelpIcon /> },
-  { path: "/create-survey", enName: "CREATE SURVEY", prName: 'CRIAR PESQUISA', component: CreateSurveyPage, exact: true, icon: <ListAltIcon /> },
+  { path: "/survey", enName: "SURVEY", prName: 'PESQUISA', component: CreateSurveyPage, exact: true, icon: <ListAltIcon /> },
   { path: "/portugues", enName: "PORTUGUÊS", prName: 'ENGLISH', component: LandingPage, exact: true, icon: <LanguageIcon /> },
   { path: false, component: NotFound404 }
 ];

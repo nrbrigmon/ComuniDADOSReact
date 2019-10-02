@@ -6,6 +6,7 @@ export default {
 	mapLayers: {
 		helio: {},
 		sao: {},
+		survey: {},
 		type: "districts",
 		baseMapOpacity: 0.5,
 		colorPalette: [],

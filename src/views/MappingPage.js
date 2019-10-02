@@ -6,11 +6,14 @@ import BaseMapToggle from "components/Map/BaseMapToggle/BaseMapToggle";
 import Grid from "@material-ui/core/Grid";
 import SliderContainer from "components/Map/Slider/SliderContainer";
 import withStyles from "@material-ui/core/styles/withStyles";
-import mapStyle from "components/Map/MapStyle";
+import MapStyle from "components/Map/MapStyle";
 
 import { HELIO_MAP, SAO_MAP} from "constants/mapping";
 import { connect } from "react-redux";
 import * as actions from "actions";
+
+import MetricAppBarGeography from 'components/Metrics/MetricAppBarGeography';
+import MetricReactSelect from 'components/Metrics/MetricReactSelect';
 
 class MappingPage extends Component {
 	componentDidMount(){
@@ -18,12 +21,23 @@ class MappingPage extends Component {
 		
 	}
   render() {
-		let { classes, preferredLanguage, mapLayers } = this.props;
+		let { preferredLanguage, mapLayers } = this.props;
+		let { classes, ...rest } = this.props;
 		let { baseMapSelection, baseMapOpacity, metric } = mapLayers;
 		// console.log(baseMapOpacity)
     return (
 			<div>
-        <MetricAppBar />
+        <MetricAppBar >
+						<Grid container justify="center">
+							{/* First item is for choosing geography */}
+							<MetricAppBarGeography {...rest} />
+
+							{/* Second item is for choosing a metric */}
+							<MetricReactSelect {...rest} />
+							{/* <MetricAppBarSelection {...this.props} /> */} 
+
+						</Grid>
+				</MetricAppBar>
 
 				<BaseMapToggle preferredLanguage={preferredLanguage} action={this.props.updateBaseLayer} baseMapSelection={baseMapSelection}/>
 
@@ -56,4 +70,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default withStyles(mapStyle)(connect(mapStateToProps, actions)(MappingPage));
+export default withStyles(MapStyle)(connect(mapStateToProps, actions)(MappingPage));

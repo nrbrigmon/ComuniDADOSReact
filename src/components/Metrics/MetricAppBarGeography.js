@@ -3,6 +3,9 @@ import Select from 'react-select';
 import { components } from "./MetricFunctions";
 import { geography_options } from "constants/metrics";
 
+import MetricStyle from "components/Metrics/MetricStyle";
+import withStyles from "@material-ui/core/styles/withStyles";
+
 class MetricAppBarGeography extends Component {
 
 	_makeGeographySelection = (e) => {
@@ -36,7 +39,7 @@ class MetricAppBarGeography extends Component {
 		
 
     return ( 
-				<div className={classes.root}>
+				<div>
 					<Select
 						className={classes.formControl}
 						classes={classes}
@@ -51,4 +54,4 @@ class MetricAppBarGeography extends Component {
   }
 }
 
-export default MetricAppBarGeography;
+export default withStyles(MetricStyle)(MetricAppBarGeography);

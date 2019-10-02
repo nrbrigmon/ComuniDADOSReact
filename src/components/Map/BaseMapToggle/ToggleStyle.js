@@ -2,11 +2,13 @@ export default theme => ({
 	container: {
 		position: "absolute"
 		,padding: "6px 10px"
-		,top: "125px"
+		,top: "113px"
 		,right: "20px"
 		,zIndex: "500"
 		,boxShadow: 'rgba(0, 0, 0, 0.2) 0 0 5px 1px'
 		,cursor: "pointer"
+		,border: '1px solid #999'
+		,borderRadius: '2px'
 	},  
 	popover: {
 		pointerEvents: 'none',

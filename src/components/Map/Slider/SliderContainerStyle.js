@@ -1,8 +1,8 @@
 export default theme => ({
 		container: {
 			position: "absolute"
-			,top: "190px"
-			,right: "25px"
+			,top: "180px"
+			,right: "23px"
 			,zIndex: "500"
 			,width: "110px"
 			,height: "30px"

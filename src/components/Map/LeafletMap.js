@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Map, GeoJSON, FeatureGroup } from "react-leaflet";
 
 import withStyles from "@material-ui/core/styles/withStyles";
-import MapStyle from "components/Map/MapStyle";
 import * as _constants from "constants/mapping";
 import * as _util from "utils/mapping_utils";
 
@@ -56,4 +55,4 @@ class LeafletMap extends Component {
   }
 }
 
-export default withStyles(MapStyle)(LeafletMap);
+export default LeafletMap;
