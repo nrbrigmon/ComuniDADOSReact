@@ -3,14 +3,17 @@ import Grid from "@material-ui/core/Grid";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 
+import MetricStyle from "components/Metrics/MetricStyle";
+import withStyles from "@material-ui/core/styles/withStyles";
+
 class MetricAppBar extends Component {
   render() {
-		const { children } = this.props;
+		const { children, classes } = this.props;
 		// console.log(this.props)
     return (
       <div>
-        <AppBar position="static" style={{background:"black"}}>
-          <Toolbar variant="dense">
+        <AppBar position="static" className={classes.container}>
+          <Toolbar variant="dense" className={classes.container2}>
             <Grid item xs={12}>
               {children}
             </Grid>
@@ -22,4 +25,4 @@ class MetricAppBar extends Component {
 }
 
 
-export default MetricAppBar;
+export default withStyles(MetricStyle)(MetricAppBar);

@@ -37,7 +37,7 @@ class MetricSurveySelect extends Component {
 
   render() {
 		let { classes,  preferredLanguage } = this.props;
-		let placeHolder = 'Select a Metric'
+		let placeHolder = 'View Events'
 
     return ( 
 				<div>

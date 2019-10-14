@@ -1,4 +1,17 @@
 export default theme => ({
+  container: {
+		background: 'black'
+	},
+	container2:{
+		[theme.breakpoints.down('xs')]: {
+			margin: '0px',
+			padding: '0px'
+    },
+		[theme.breakpoints.up('sm')]: {
+			margin: '0px 10px 0px 10px',
+			padding: '0px 10px 0px 10px',
+		},
+	},
   formControl: {
 		minWidth: '125px',
 		[theme.breakpoints.down('xs')]: {

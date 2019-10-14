@@ -1,7 +1,4 @@
 export default {
-  authUser: {
-    id: 0
-  },
 	randomId: "32432",
 	mapLayers: {
 		helio: {},
@@ -17,5 +14,32 @@ export default {
 			labelPR: ''
 		}
 	},
-	preferredLanguage: 'en'
+	preferredLanguage: 'en',
+	userInfo: {
+		user_id: '',
+		username: '',
+		password: '',
+		email: '',
+		token: '',
+		err: false,
+		errMsg: ''
+	},
+	userLocation: {
+		show: false,
+		lat: null,
+		long: null,
+		accurMeters: 0,
+		err: false,
+		errMsg: ''
+	},
+	chapaEvent: {
+		eventId: '',
+		eventName: '',
+		eventCategory: '',
+		eventDescription: '',
+		eventLatitude: '',
+		eventLongitude: '',
+		createdBy: '',
+		createdDate: ''
+	}
 };

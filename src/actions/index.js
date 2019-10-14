@@ -5,3 +5,4 @@ export * from "./UtilityActions";
 // export * from "./MetricActions";
 export * from "./NavigationActions";
 export * from "./LanguageActions";
+export * from "./EventActions";

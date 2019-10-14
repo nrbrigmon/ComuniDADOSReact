@@ -1,4 +1,5 @@
-// import axios from 'axios';
+import axios from 'axios';
+import { getUserCoordinates } from "utils/user_utils"
 
 /* USER ACTIONS */
 export const defaultUser = () => {
@@ -7,15 +8,54 @@ export const defaultUser = () => {
   };
   return action;
 };
-// export const fetchUser = () => async dispatch => {
-// 	// console.log("fething user?")
-// 	const res = await axios.get('/api/user/info');
-// 	dispatch({ type: 'FETCH_USER', payload: res.data });
-// };
 
-// export const signUpNewUser = (creds) => async dispatch => {
-//     console.log(creds);
-// 	const res = await axios.post('/auth/local', creds);
+export const handleUserUpdate = (_id, _val) => {
+	// console.log(_id)
+	// console.log(_val)
+	const action = {
+		type: "UPDATE_USER_INFO"
+		,payload: {
+			_id,
+			_val
+		}
+	};
+	return action
+}
 
-//     dispatch({ type: 'SEND_TOAST', payload: { data: res, msg:"huzzed ", open: true } });
-// }
+export const userLogin = (user) => async dispatch => {
+	
+	const res = await axios.post('/api/existing_user/', user);	
+	// console.log(res)
+
+	dispatch({ type: 'EXISTNG_USER_LOGIN', payload: res.data });
+}
+
+export const userRegister = (user) => async dispatch => {
+	// console.log(user)
+	const res = await axios.post('/api/new_user/', user);	
+	console.log(res)
+
+	dispatch({ type: 'NEW_USER_REGISTER', payload: res.data });
+}
+
+export const userPasswordsNoMatch = (lang) => {
+	const action = {
+		type: "PASSWORD_MATCH_FAIL"
+		,payload: lang
+	};
+	return action
+}
+
+export const addUserLocation = (show) => async dispatch => {
+	const res = await getUserCoordinates();
+	// console.log(res)
+	dispatch({ type: "ADD_USER_LOCATION",	payload: res });
+}
+
+export const userSignOut =  () => {
+	const action = {
+		type: "SIGN_OUT_USER"
+	};
+	return action
+
+}

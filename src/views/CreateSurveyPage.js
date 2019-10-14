@@ -6,9 +6,13 @@ import MetricAppBar from "components/Metrics/MetricAppBar"
 import MetricSurveySelect from "components/Metrics/MetricSurveySelect"
 import { Typography } from "@material-ui/core";
 import EventFormContainer from "components/Forms/EventFormContainer";
-import InputBase from '@material-ui/core/InputBase';
-import SearchIcon from '@material-ui/icons/Search';
+// import InputBase from '@material-ui/core/InputBase';
+// import SearchIcon from '@material-ui/icons/Search';
 import SurveyMap from "components/Map/SurveyMap";
+import { HELIO_MAP } from "constants/mapping";
+import { Paper } from "@material-ui/core";
+import FindMeButton from "components/Map/FindMe/FindMeButton";
+import BaseMapToggle from "components/Map/BaseMapToggle/BaseMapToggle";
 
 /** TO DO
  * on load, prompt to get user location if not already cached in the state
@@ -17,27 +21,31 @@ import SurveyMap from "components/Map/SurveyMap";
  */
 
 const genStyle = {
-	border:'1px solid blue', 
-	padding: '20px', 
-	margin: '20px', 
-	position: 'absolute'
-}
-
-//currently need two seperate variables to feed the two map panes...
-const MAP_OPTIONS = {
-	coordinates: [-23.6135, -46.59]
-	,prefix: "survey"
+	border:'1px solid #999', 
+	padding: '10px 20px', 
+	margin: '10px 10px', 
+	position: 'absolute',
+	bottom: '20px',
+	width: '33%'
 }
 
 class CreateSurveyPage extends Component {
 	
 	componentDidMount(){
 		this.props.setLocation(this.props.history)
+		this.props.fetchRandomId()
 		
 	}
 
   render() {
-		let { preferredLanguage } = this.props
+		let { preferredLanguage, userLocation, mapLayers } = this.props;		
+		let { baseMapSelection } = mapLayers;
+		// console.log(userLocation) 
+		if (userLocation.show){
+			HELIO_MAP.coordinates = [userLocation.lat, userLocation.long]
+			HELIO_MAP.mapZoom = 17
+
+		}
     return (
 			<div>
 			<MetricAppBar >
@@ -47,39 +55,31 @@ class CreateSurveyPage extends Component {
 					</Grid>
 			</MetricAppBar>
 			
+			<FindMeButton preferredLanguage={preferredLanguage} action={this.props.addUserLocation} />
+
+			<BaseMapToggle preferredLanguage={preferredLanguage} action={this.props.updateBaseLayer} baseMapSelection={baseMapSelection} />
+
 			<Grid container spacing={0}>
 					{/* helio map */}
         	<Grid item xs={12} >
 						<SurveyMap 
 							{...this.props} 
-							map_constants={MAP_OPTIONS}   
+							map_constants={HELIO_MAP}   
 						 />
 					</Grid>
 				</Grid>
+				<Grid container spacing={0}>
 
-			<Grid item xs={3} style={genStyle}>
-				<h2>ABOUT</h2>
-				<h6>this map shows blah blah blah</h6>
-				<h6>this map shows blah blah blah</h6>
-				<h6>this map shows blah blah blah</h6>
-				<h6>this map shows blah blah blah</h6>
-				<EventFormContainer />
-				<br/>OR<br/>
-            <div>
-              <SearchIcon />
-            </div>
-								<InputBase 
-									fullWidth={true} 
-									placeholder="Search for an address" />
-			
-				
-				<Typography component="h6" variant="h6" align="center" color="textPrimary" gutterBottom>
-							{ ( preferredLanguage === 'en' ? 'Coming Soon' : 'Em Breve' ) } <br/><br/>
-							This is the map section with base map toggle, legend, and more
-						</Typography>
-			</Grid>
+					<Grid item xs={3}>
+						<Paper style={genStyle}>
+      				<Typography variant="h6" >ABOUT</Typography>
+							<p>This map will display survey results as collected by the user. To see survey results or upload your own data, please login or create an account.</p>
 
+								<EventFormContainer {...this.props} />
+						</Paper>
+					</Grid>
 
+				</Grid>
 			</div>
 		)
   }
@@ -90,6 +90,9 @@ function mapStateToProps(state) {
   return {
 		preferredLanguage: state.preferredLanguage
 		,mapLayers: state.mapLayers
+		,userInfo: state.userInfo
+		,userLocation: state.userLocation
+		,randomId: state.randomId
   };
 }
 

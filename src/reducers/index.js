@@ -3,18 +3,21 @@ import { combineReducers } from "redux";
 import UserReducer from "./UserReducer";
 import UtilityReducer from "./UtilityReducer";
 import MappingReducer from "./MappingReducer";
-// import MetricReducer from "./MetricReducer";
 import NavigationReducer from "./NavigationReducer";
 import LanguageReducer from "./LanguageReducer";
 import DrawerReducer from "./DrawerReducer";
+import UserLocationReducer from "./UserLocationReducer";
+import EventReducer from "./EventReducer";
 
 
 
 export default combineReducers({
-  randomId: UtilityReducer,
-  authUser: UserReducer,
+	chapaEvent: EventReducer,
 	mapLayers: MappingReducer,
 	navLocation: NavigationReducer,
 	navDrawer: DrawerReducer,
-	preferredLanguage: LanguageReducer
+	preferredLanguage: LanguageReducer,
+  randomId: UtilityReducer,
+  userInfo: UserReducer,
+	userLocation: UserLocationReducer
 });

@@ -60,7 +60,8 @@ function mapStateToProps(state) {
   return {
 		navLocation: state.navLocation,
 		navDrawer: state.navDrawer,
-		preferredLanguage: state.preferredLanguage
+		preferredLanguage: state.preferredLanguage,
+		userInfo: state.userInfo
   };
 }
 

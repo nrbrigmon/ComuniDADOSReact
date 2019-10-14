@@ -14,6 +14,8 @@ import * as actions from "actions";
 
 import MetricAppBarGeography from 'components/Metrics/MetricAppBarGeography';
 import MetricReactSelect from 'components/Metrics/MetricReactSelect';
+import FindMeButton from "components/Map/FindMe/FindMeButton";
+
 
 class MappingPage extends Component {
 	componentDidMount(){
@@ -21,10 +23,18 @@ class MappingPage extends Component {
 		
 	}
   render() {
-		let { preferredLanguage, mapLayers } = this.props;
+		let { preferredLanguage, mapLayers, userLocation } = this.props;
 		let { classes, ...rest } = this.props;
 		let { baseMapSelection, baseMapOpacity, metric } = mapLayers;
-		// console.log(baseMapOpacity)
+		// console.log(userLocation) 
+		if (userLocation.show){
+			HELIO_MAP.coordinates = [userLocation.lat, userLocation.long]
+			HELIO_MAP.mapZoom = 17
+
+			SAO_MAP.coordinates = [userLocation.lat, userLocation.long]	
+			SAO_MAP.mapZoom = 17
+		}
+		
     return (
 			<div>
         <MetricAppBar >
@@ -38,6 +48,8 @@ class MappingPage extends Component {
 
 						</Grid>
 				</MetricAppBar>
+
+				<FindMeButton preferredLanguage={preferredLanguage} action={this.props.addUserLocation} />
 
 				<BaseMapToggle preferredLanguage={preferredLanguage} action={this.props.updateBaseLayer} baseMapSelection={baseMapSelection}/>
 
@@ -66,6 +78,7 @@ class MappingPage extends Component {
 function mapStateToProps(state) {
   return {
 		mapLayers: state.mapLayers,
+		userLocation: state.userLocation,
 		preferredLanguage: state.preferredLanguage
   };
 }
