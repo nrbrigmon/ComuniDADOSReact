@@ -1,6 +1,6 @@
 import getSchemas from "schemas/initialStates";
 
-function updateUserLocation(payload){
+function addUserLocation(payload){
 	//should we find the user?
 	if (payload.show === true){
 		return payload
@@ -10,6 +10,14 @@ function updateUserLocation(payload){
 	}
 }
 
+function updateUserLocation(state, payload){
+	// console.log(payload)
+	return {
+		...state,
+		lat: payload.lat,
+		long: payload.lng
+	}
+}
 /**
 	show: false,
 	lat: null,
@@ -23,7 +31,9 @@ export default function(state = getSchemas.userLocation, { type, payload }) {
     case "NO_LOCATION":
       return getSchemas.userLocation;
 		case "ADD_USER_LOCATION":
-			return updateUserLocation(payload)
+			return addUserLocation(payload)
+		case "UPDATE_USER_LOCATION":
+			return updateUserLocation(state, payload)
     default:
       return state;
   }

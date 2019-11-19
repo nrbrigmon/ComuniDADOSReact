@@ -30,11 +30,16 @@ export default theme => ({
 		position: 'absolute',
 		top: '10px'
 	},
-	actionButton: {
-		marginLeft: '10px',
-		marginRight: '10px'
+	section: {
+		marginTop: '30px',
+		marginBottom: '20px'
 	},
 	postEvent: {
 		margin: '10px 0px 10px 0px'
+	},
+	resetText: {
+		margin: '50px 0px 0px 0px',
+		color: 'grey'
+		// padding: '30px 20px',
 	}
 });

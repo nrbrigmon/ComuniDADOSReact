@@ -5,7 +5,7 @@ import * as actions from "actions";
 
 import Container from '@material-ui/core/Container';
 import { Paper } from "@material-ui/core";
-import LoginFormContainer from "components/Forms/LoginFormContainer"
+import LoginFormContainer from "components/LoginForm/LoginFormContainer"
 
 class LoginPage extends Component {
 	
@@ -20,9 +20,9 @@ class LoginPage extends Component {
 			
 				<LoginFormContainer {...this.props} />
 
-	
-	</Paper>
-</Container>)
+		
+		</Paper>
+	</Container>)
   }
 }
 
@@ -30,7 +30,8 @@ function mapStateToProps(state) {
   return {
 		preferredLanguage: state.preferredLanguage
 		,userInfo: state.userInfo
-		,navLocation: state.navLocation,
+		,navLocation: state.navLocation
+		,randomId: state.randomId
   };
 }
 

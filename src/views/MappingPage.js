@@ -14,7 +14,7 @@ import * as actions from "actions";
 
 import MetricAppBarGeography from 'components/Metrics/MetricAppBarGeography';
 import MetricReactSelect from 'components/Metrics/MetricReactSelect';
-import FindMeButton from "components/Map/FindMe/FindMeButton";
+import FindMeButton from "components/FindMeButton/FindMeButton";
 
 
 class MappingPage extends Component {
@@ -23,9 +23,9 @@ class MappingPage extends Component {
 		
 	}
   render() {
-		let { preferredLanguage, mapLayers, userLocation } = this.props;
 		let { classes, ...rest } = this.props;
-		let { baseMapSelection, baseMapOpacity, metric } = mapLayers;
+		let { mapLayers, userLocation } = this.props;
+		let { metric } = mapLayers;
 		// console.log(userLocation) 
 		if (userLocation.show){
 			HELIO_MAP.coordinates = [userLocation.lat, userLocation.long]
@@ -49,11 +49,11 @@ class MappingPage extends Component {
 						</Grid>
 				</MetricAppBar>
 
-				<FindMeButton preferredLanguage={preferredLanguage} action={this.props.addUserLocation} />
+				<FindMeButton />
 
-				<BaseMapToggle preferredLanguage={preferredLanguage} action={this.props.updateBaseLayer} baseMapSelection={baseMapSelection}/>
+				<BaseMapToggle  />
 
-				<SliderContainer preferredLanguage={preferredLanguage} action={this.props.updateLayerOpacity} baseMapOpacity={baseMapOpacity}/>
+				<SliderContainer />
 
       	<Grid container spacing={0}>
 					{/* helio map */}
@@ -77,9 +77,9 @@ class MappingPage extends Component {
 
 function mapStateToProps(state) {
   return {
-		mapLayers: state.mapLayers,
-		userLocation: state.userLocation,
-		preferredLanguage: state.preferredLanguage
+		mapLayers: state.mapLayers
+		,userLocation: state.userLocation
+		,preferredLanguage: state.preferredLanguage
   };
 }
 

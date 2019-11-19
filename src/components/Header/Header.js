@@ -10,17 +10,23 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import headerStyle from "components/Header/HeaderStyle";
 import HeaderLinks from "./HeaderLinks";
 
+import Avatar from '@material-ui/core/Avatar';
 import { connect } from "react-redux";
 import * as actions from "actions";
 
 class Header extends Component {
+
+	_getInitials = (name) => {
+		return name.toUpperCase().split('')[0]
+	}
+
   _handleDrawerToggle = () => {
 		// console.log("hello?")
     this.props.toggleDrawer(!this.props.navDrawer)
   }
 
   render() {
-		const { classes } = this.props;
+		const { classes, userInfo } = this.props;
 		// console.log(this.props);
 		
     return (
@@ -30,8 +36,12 @@ class Header extends Component {
             <Typography variant="h6" className={classes.title}>
               COMUNIDADOS
             </Typography>
-            {/* <Button color="inherit">Login</Button> */}
-            <IconButton
+      			{ (
+							userInfo.username.length > 1 ? 
+							<Avatar className={classes.avatar}>{this._getInitials(userInfo.username)}</Avatar>
+							: <div /> 
+						)}
+						<IconButton
               edge="end"
               color="inherit"
               aria-label="menu"

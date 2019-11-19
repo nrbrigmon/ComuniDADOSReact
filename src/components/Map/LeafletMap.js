@@ -1,22 +1,11 @@
 import React, { Component } from "react";
-import { Map, Marker, Popup, GeoJSON, FeatureGroup } from "react-leaflet";
-import Typography from "@material-ui/core/Typography"
+import { Map, GeoJSON, FeatureGroup } from "react-leaflet";
 import * as _constants from "constants/mapping";
 import * as _util from "utils/mapping_utils";
+import FindMeIcon from "components/FindMeButton/FindMeIcon";
 
 class LeafletMap extends Component {
 
-	displayPopUpText(lang, userLocation){
-		
-		let text_pt1 = (lang === 'en' ? 'This is your current location!' : 'Esta é a sua localização atual!')
-		let text_pt2 = (lang === 'en' ? `Accuracy: ~${userLocation.accurMeters} meters` : `Precisão: ~${userLocation.accurMeters} metros`)
-
-		return(<div>
-						<Typography variant="subtitle2" gutterBottom>{text_pt1}</Typography>
-						<Typography variant="caption" gutterBottom>{text_pt2}</Typography>
-					</div> 
-		)
-	}
 	componentDidMount(){
 		// console.log(this.props)
 		let { prefix } = this.props.map_constants;
@@ -31,11 +20,8 @@ class LeafletMap extends Component {
 		// console.log(this.props)
 		let object_check = Object.keys(mapLayers[prefix]).length
 		let leaflet_layer = <div />;
-		// console.log(mapLayers.colorPalette)
-		let popupLocationText = (preferredLanguage === 'en' ? this.displayPopUpText('en', userLocation) : this.displayPopUpText('pr', userLocation) )
 
-		// console.log(this.props)
-    if (object_check > 0) {
+		if (object_check > 0) {
       // use the mapped data prefix to get data key 
       leaflet_layer = (
         <FeatureGroup >
@@ -58,11 +44,8 @@ class LeafletMap extends Component {
 				zoomAnimation={true}
 				>
 				
-				
 				{ userLocation.show ? 
-					<Marker position={[userLocation.lat, userLocation.long]}>
-						<Popup>{popupLocationText}</Popup>
-					</Marker> : <div></div> }
+					<FindMeIcon location={userLocation} language={preferredLanguage} /> : <div></div> }
 
         {leaflet_layer}
 

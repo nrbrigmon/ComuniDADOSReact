@@ -32,7 +32,6 @@ class MetricReactSelect extends Component {
 			placeHolder = (mapLayers.metric.label === "" ? "Select a Metric" : metricSelection);
 			metrics_in_english = (mapLayers.type === 'districts' ? district_metrics : blocks_metrics)
 		}
-		
 		return (
 			<div>
 					<Select

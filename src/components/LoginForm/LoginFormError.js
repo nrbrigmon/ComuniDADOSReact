@@ -8,7 +8,7 @@ class LoginFormError extends Component {
   render() {
 		let { classes, userInfo } = this.props;
 		
-		
+		// console.log(this.props)
     return (<div>
 			{ ( 
 				userInfo.err === false ? <div></div> : 

@@ -4,15 +4,13 @@ import { connect } from "react-redux";
 import * as actions from "actions";
 import MetricAppBar from "components/Metrics/MetricAppBar"
 import MetricSurveySelect from "components/Metrics/MetricSurveySelect"
-import { Typography } from "@material-ui/core";
-import EventFormContainer from "components/Forms/EventFormContainer";
 // import InputBase from '@material-ui/core/InputBase';
-// import SearchIcon from '@material-ui/icons/Search';
-import SurveyMap from "components/Map/SurveyMap";
+import EventFormLegend from "components/EventForm/EventFormLegend";
+import LeafletMapSurvey from "components/Map/LeafletMapSurvey";
 import { HELIO_MAP } from "constants/mapping";
-import { Paper } from "@material-ui/core";
-import FindMeButton from "components/Map/FindMe/FindMeButton";
+import FindMeButton from "components/FindMeButton/FindMeButton";
 import BaseMapToggle from "components/Map/BaseMapToggle/BaseMapToggle";
+import { getCache } from "utils/cache_utils";
 
 /** TO DO
  * on load, prompt to get user location if not already cached in the state
@@ -20,21 +18,18 @@ import BaseMapToggle from "components/Map/BaseMapToggle/BaseMapToggle";
  * we also need a metho to get users to either LOGIN or be anonymous without the ability to uplaod points
  */
 
-const genStyle = {
-	border:'1px solid #999', 
-	padding: '10px 20px', 
-	margin: '10px 10px', 
-	position: 'absolute',
-	bottom: '20px',
-	width: '33%'
-}
-
-class CreateSurveyPage extends Component {
+class SurveyPage extends Component {
 	
 	componentDidMount(){
 		this.props.setLocation(this.props.history)
-		this.props.fetchRandomId()
-		
+		this.props.addUserLocation()
+		// console.log(getCache("chapaEvents"))
+
+		// this needs to be removed when uploaded to the server or else it wont recognize new posts
+		// need to implement a timing event, if user hasn't logged in 1 hour, refresh cache...
+		// if ( getCache("chapaEvents") === null){
+			this.props.fetchAllEvents()
+		// }
 	}
 
   render() {
@@ -44,8 +39,8 @@ class CreateSurveyPage extends Component {
 		if (userLocation.show){
 			HELIO_MAP.coordinates = [userLocation.lat, userLocation.long]
 			HELIO_MAP.mapZoom = 17
-
 		}
+		console.log(this.props.chapaEvents)
     return (
 			<div>
 			<MetricAppBar >
@@ -55,31 +50,22 @@ class CreateSurveyPage extends Component {
 					</Grid>
 			</MetricAppBar>
 			
-			<FindMeButton preferredLanguage={preferredLanguage} action={this.props.addUserLocation} />
+			<FindMeButton />
 
 			<BaseMapToggle preferredLanguage={preferredLanguage} action={this.props.updateBaseLayer} baseMapSelection={baseMapSelection} />
 
 			<Grid container spacing={0}>
-					{/* helio map */}
-        	<Grid item xs={12} >
-						<SurveyMap 
-							{...this.props} 
-							map_constants={HELIO_MAP}   
-						 />
-					</Grid>
+				{/* helio map */}
+				<Grid item xs={12} >
+					<LeafletMapSurvey 
+						{...this.props} 
+						map_constants={HELIO_MAP}   
+						/>
 				</Grid>
-				<Grid container spacing={0}>
+			</Grid>
 
-					<Grid item xs={3}>
-						<Paper style={genStyle}>
-      				<Typography variant="h6" >ABOUT</Typography>
-							<p>This map will display survey results as collected by the user. To see survey results or upload your own data, please login or create an account.</p>
+			<EventFormLegend />
 
-								<EventFormContainer {...this.props} />
-						</Paper>
-					</Grid>
-
-				</Grid>
 			</div>
 		)
   }
@@ -88,15 +74,18 @@ class CreateSurveyPage extends Component {
 
 function mapStateToProps(state) {
   return {
-		preferredLanguage: state.preferredLanguage
+		chapaEvents: state.chapaEvents
 		,mapLayers: state.mapLayers
-		,userInfo: state.userInfo
-		,userLocation: state.userLocation
+		,metricSelection: state.metricSelection
+		,preferredLanguage: state.preferredLanguage
 		,randomId: state.randomId
+		,userInfo: state.userInfo
+		,popover: state.popover
+		,userLocation: state.userLocation
   };
 }
 
 export default connect(
   mapStateToProps,
   actions
-)(CreateSurveyPage);
+)(SurveyPage);

@@ -15,6 +15,12 @@ export default {
 		}
 	},
 	preferredLanguage: 'en',
+	metricSelection: {	
+		id: ""
+		,row: -1
+		,value:""
+		,label:""
+	},
 	userInfo: {
 		user_id: '',
 		username: '',
@@ -32,14 +38,18 @@ export default {
 		err: false,
 		errMsg: ''
 	},
-	chapaEvent: {
-		eventId: '',
-		eventName: '',
-		eventCategory: '',
-		eventDescription: '',
-		eventLatitude: '',
-		eventLongitude: '',
-		createdBy: '',
-		createdDate: ''
+	// chapaEvents: {
+	// 	eventId: '',
+	// 	eventName: '',
+	// 	eventCategory: '',
+	// 	eventDescription: '',
+	// 	eventLatitude: '',
+	// 	eventLongitude: '',
+	// 	createdBy: '',
+	// 	createdDate: ''
+	// },
+	popover: {
+		open: false,
+		anchor: null
 	}
 };

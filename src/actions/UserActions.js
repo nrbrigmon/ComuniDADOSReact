@@ -23,7 +23,6 @@ export const handleUserUpdate = (_id, _val) => {
 }
 
 export const userLogin = (user) => async dispatch => {
-	
 	const res = await axios.post('/api/existing_user/', user);	
 	// console.log(res)
 
@@ -31,9 +30,8 @@ export const userLogin = (user) => async dispatch => {
 }
 
 export const userRegister = (user) => async dispatch => {
-	// console.log(user)
 	const res = await axios.post('/api/new_user/', user);	
-	console.log(res)
+	// console.log(res)
 
 	dispatch({ type: 'NEW_USER_REGISTER', payload: res.data });
 }
@@ -46,10 +44,32 @@ export const userPasswordsNoMatch = (lang) => {
 	return action
 }
 
+export const userRegisterFail = (msg) => {
+	const action = {
+		type: "USER_REGISTER_FAIL"
+		,payload: msg
+	};
+	return action
+}
+
 export const addUserLocation = (show) => async dispatch => {
-	const res = await getUserCoordinates();
-	// console.log(res)
-	dispatch({ type: "ADD_USER_LOCATION",	payload: res });
+	//if we decide to show, get usercoordinates
+	if (show){
+		const res = await getUserCoordinates();
+		// console.log(res)
+		dispatch({ type: "ADD_USER_LOCATION",	payload: res });
+	} else {
+		//if we decide not to show, we remove location
+		dispatch({ type: "NO_LOCATION",	payload: show });
+	}
+}
+
+export const updateUserLocation = (coords) => {
+	const action = {
+		type: "UPDATE_USER_LOCATION",
+		payload: coords
+	}
+	return action;
 }
 
 export const userSignOut =  () => {

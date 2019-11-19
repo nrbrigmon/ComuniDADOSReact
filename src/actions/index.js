@@ -2,7 +2,7 @@
 export * from './MappingActions';
 export * from "./UserActions";
 export * from "./UtilityActions";
-// export * from "./MetricActions";
+export * from "./PopOverActions";
 export * from "./NavigationActions";
 export * from "./LanguageActions";
 export * from "./EventActions";

@@ -6,43 +6,31 @@ import Paper from '@material-ui/core/Paper';
 import withStyles from "@material-ui/core/styles/withStyles";
 import ToggleStyle from "components/Map/BaseMapToggle/ToggleStyle";
 import LayersIcon from '@material-ui/icons/Layers';
+import { POPOVER_TEXT } from "constants/forms";
 
+import { connect } from "react-redux";
+import * as actions from "actions";
 
 class BaseMapToggle extends Component {
-		state = {
-			open: false,
-			anchorEl: null
-		}
 
-		_handleMouseClick = (action, baseMapSelection) => {
+		_handleMouseClick = (baseMapSelection) => {
 			//we only have 3 base maps so the toggle will select numbers 0, 1, 2
 			baseMapSelection = (baseMapSelection+1) % 3;
 			// console.log(baseMapSelection)
-			action(baseMapSelection)
-		}
-
-		_handlePopoverOpen = (event) => {
-				this.setState({ 
-					anchorEl: event.currentTarget, 
-					open: true 
-				});
-		}
-
-		_handlePopoverClose = () => {
-				this.setState({ 
-					anchorEl: null, 
-					open: false  
-				});
+			this.props.updateBaseLayer(baseMapSelection)
 		}
 
 		render() {
-				let { classes, preferredLanguage, action, baseMapSelection } = this.props;
-				let popUpText = ( preferredLanguage === 'en' ? "Toggle Base Map" : "Alterar Mapa Base" )
+				let { classes, preferredLanguage, mapLayers, popover } = this.props;
+				let { baseMapSelection } = mapLayers;
+				let popUpText = POPOVER_TEXT[preferredLanguage]['baseMap'];let popOverId = 'slider-basemap';
+				let openLogic = (popover.open && popover.anchor.id === popOverId)
 				return (
 						<Paper className={classes.container}
-						onMouseEnter={this._handlePopoverOpen}
-						onMouseLeave={this._handlePopoverClose}
-						onClick={() => this._handleMouseClick(action, baseMapSelection)}
+						onMouseEnter={this.props.updatePopOver}
+						onMouseLeave={this.props.updatePopOver}
+						id={popOverId}
+						onClick={() => this._handleMouseClick(baseMapSelection)}
 						>
 								<Typography
 										className={classes.interior} 
@@ -52,11 +40,9 @@ class BaseMapToggle extends Component {
 								<Popover
 										id="mouse-over-popover"
 										className={classes.popover}
-										classes={{
-											paper: classes.paper,
-										}}
-										open={this.state.open}
-										anchorEl={this.state.anchorEl}
+										classes={{ paper: classes.paper }}
+										open={openLogic}
+										anchorEl={popover.anchor}
 										anchorOrigin={{
 											vertical: 6,
 											horizontal: 'center'
@@ -65,7 +51,7 @@ class BaseMapToggle extends Component {
 											vertical: 'top',
 											horizontal: 'center',
 										}}
-										onClose={this._handlePopoverClose}
+										onClose={this.props.updatePopOver}
 										disableRestoreFocus>
 										<Typography className={classes.text}> { popUpText } </Typography>
 										
@@ -74,4 +60,14 @@ class BaseMapToggle extends Component {
 				);
 		}
 }
-export default withStyles(ToggleStyle)(BaseMapToggle);
+
+function mapStateToProps(state) {
+  return {
+		mapLayers: state.mapLayers
+		,userLocation: state.userLocation
+		,popover: state.popover
+		,preferredLanguage: state.preferredLanguage
+  };
+}
+
+export default withStyles(ToggleStyle)(connect(mapStateToProps, actions)(BaseMapToggle));

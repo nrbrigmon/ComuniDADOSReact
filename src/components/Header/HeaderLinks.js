@@ -9,9 +9,10 @@ import indexRoutes from "routes/indexRoutes";
 
 class HeaderLinks extends Component {
 	listItemAction = (e, elem) => {
-		let { textContent } = e.target //content of list item
+		let { enName, prName } = elem //content of list item
 		let { preferredLanguage } = this.props; //the language selected
-		if (textContent === "ENGLISH" || textContent === "PORTUGUÊS"){
+		
+		if (enName === "PORTUGUÊS" || prName === "ENGLISH"){
 			// if the toggle language button was clicked, we want to stay on the same page
 			// if the current language is english, switch to portuguese and visaversa
 			let newLanguage = (preferredLanguage === 'en' ? 'pr' : 'en')
@@ -23,26 +24,28 @@ class HeaderLinks extends Component {
 		}
 		this.props.toggleDrawer(!this.props.navDrawer); //clicking this will toggle the drawer state
 	}
+
   render() {
 		let { preferredLanguage, userInfo, classes } = this.props; //the language selected
 		let { pathname } = this.props.navLocation.location; //the current page
-		let selectedColor = { color:'#303f9f' };
+		let selectedColor = { color: "#3f51b5" };
 		let selectedBg = { backgroundColor: 'rgba(0, 0, 0, 0.05)'};
 		let defaultStyle = { backgroundColor: 'inherit', color:'inherit' };
+		let loggedIn = ( userInfo.token.length >= 3 ? true : false);
     return (
       <List className={classes.drawer}>
 				
         {
 					indexRoutes.map((elem, idx) => {
 						let skip = false;
-						if (userInfo.token.length >= 3 && elem.path === '/login'){
+						if ( loggedIn && elem.path === '/login'){
 							//then user is logged in do not show /login path/component
 							skip = true; 
-						} else if (userInfo.token.length < 3 && elem.path === '/home'){
+						} else if ( !loggedIn && elem.path === '/home'){
 							//then user is not logged in do not show /home path/component
 							skip = true; 
 						}
-					//continue if there is a path available...
+					//if there is no path available or the logic says skip...
 						return ( elem.path === false || skip === true ? <div key={idx} /> : 
 							<ListItem 
 								button 

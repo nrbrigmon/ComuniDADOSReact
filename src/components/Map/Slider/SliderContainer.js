@@ -1,53 +1,37 @@
 import React, { Component} from 'react';
 import Popover from '@material-ui/core/Popover';
 import Typography from '@material-ui/core/Typography';
+import { POPOVER_TEXT } from "constants/forms";
 
 import withStyles from "@material-ui/core/styles/withStyles";
 import SliderTransparency from "./SliderTransparency"
 import SliderContainerStyle from "./SliderContainerStyle";
 
+import { connect } from "react-redux";
+import * as actions from "actions";
 
 class SliderContainer extends Component {
-		state = {
-			open: false,
-			anchorEl: null
-		}
-
-		_handlePopoverOpen = (event) => {
-			// console.log("in")
-				this.setState({ 
-					anchorEl: event.currentTarget, 
-					open: true 
-				});
-				// setTimeout(function(){ debugger}, 2000);
-		}
-
-		_handlePopoverClose = () => {
-			// console.log("out")
-				this.setState({ 
-					anchorEl: null, 
-					open: false  
-				});
-		}
 
 		render() {
-				let { classes, preferredLanguage, baseMapOpacity, action } = this.props;
-				let popUpText = ( preferredLanguage === 'en' ? "Base Map Transparency" : "Transparência do Mapa Base" )
+				let { classes, preferredLanguage, popover, ...rest } = this.props;
+				let popUpText = POPOVER_TEXT[preferredLanguage]['slider'];
+				let popOverId = 'slider-popover'
+				let openLogic = (popover.open && popover.anchor.id === popOverId)
+				// console.log(openLogic)
 				// console.log(this.props.mapLayers["metric"])
 				// console.log(classes)
 				return (
 						<div className={classes.container}
-							onMouseEnter={this._handlePopoverOpen}
-							onMouseLeave={this._handlePopoverClose}
+							onMouseEnter={this.props.updatePopOver}
+							onMouseLeave={this.props.updatePopOver}
+							id={popOverId}
 							>
 								<Popover
 										id="mouse-over-popover"
 										className={classes.popover}
-										classes={{
-											paper: classes.paper,
-										}}
-										open={this.state.open}
-										anchorEl={this.state.anchorEl}
+										classes={{ paper: classes.paper }}
+										open={openLogic}
+										anchorEl={popover.anchor}
 										anchorOrigin={{
 											vertical: 6,
 											horizontal: 'center'
@@ -56,18 +40,25 @@ class SliderContainer extends Component {
 											vertical: 'top',
 											horizontal: 'center',
 										}}
-										onClose={this._handlePopoverClose}
+										onClose={this.props.updatePopOver}
 										disableRestoreFocus>
 										<Typography className={classes.text}> { popUpText } </Typography>
 								</Popover>
 								
-						<SliderTransparency 
-								preferredLanguage={preferredLanguage} 
-								action={action} 
-								baseMapOpacity={baseMapOpacity} />
+								<SliderTransparency {...rest } />
 
 						</div>
 				);
 		}
 }
-export default withStyles(SliderContainerStyle)(SliderContainer);
+
+function mapStateToProps(state) {
+  return {
+		mapLayers: state.mapLayers
+		,userLocation: state.userLocation
+		,preferredLanguage: state.preferredLanguage
+		,popover: state.popover
+  };
+}
+
+export default withStyles(SliderContainerStyle)(connect(mapStateToProps, actions)(SliderContainer));

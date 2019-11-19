@@ -22,6 +22,7 @@ function passwordMatchFail(state, payload){
 
 function registerUserResults(state, payload){
 	let registeredUser;
+	// console.log(payload)
 	//this error means that something doesnt match our password requirements
 	if (payload.err === true){
 		registeredUser = {
@@ -49,6 +50,7 @@ export default function(state = getSchemas.userInfo, { type, payload }) {
 	// console.log(state)
 	if ( getCache("userInfo") ){
 		state = getCache("userInfo")
+		// debugger
 	}
   switch (type) {
     case "DEFAULT_USER":
@@ -59,6 +61,8 @@ export default function(state = getSchemas.userInfo, { type, payload }) {
 			return registerUserResults(state, payload);
 		case "PASSWORD_MATCH_FAIL":
 			return passwordMatchFail(state, payload);
+		case "USER_REGISTER_FAIL":
+			return registerUserResults(state, { err: true, errMsg: payload} )
 		case "UPDATE_USER_INFO":
 			return updateUserInfo(state, payload)
 		case "SIGN_OUT_USER":

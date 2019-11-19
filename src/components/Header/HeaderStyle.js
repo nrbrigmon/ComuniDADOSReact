@@ -18,5 +18,8 @@ export default theme => ({
 	},
 	drawer: {
 		width: "250px"
+	},
+	avatar: {
+		marginRight: "20px"
 	}
 });

@@ -8,14 +8,17 @@ import LanguageReducer from "./LanguageReducer";
 import DrawerReducer from "./DrawerReducer";
 import UserLocationReducer from "./UserLocationReducer";
 import EventReducer from "./EventReducer";
-
+import MetricReducer from "./MetricReducer";
+import PopOverReducer from "./PopOverReducer";
 
 
 export default combineReducers({
-	chapaEvent: EventReducer,
+	chapaEvents: EventReducer,
 	mapLayers: MappingReducer,
+	metricSelection: MetricReducer,
 	navLocation: NavigationReducer,
 	navDrawer: DrawerReducer,
+	popover: PopOverReducer,
 	preferredLanguage: LanguageReducer,
   randomId: UtilityReducer,
   userInfo: UserReducer,

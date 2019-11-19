@@ -10,5 +10,6 @@ export const setCache = (name, object) => {
 }
 
 export const getCache = (name) => {
+
 	return JSON.parse(localStorage.getItem(name));
 }
