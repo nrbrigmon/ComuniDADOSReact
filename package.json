@@ -2,7 +2,11 @@
   "name": "ComuniDADOSReact",
   "version": "2.0.1",
   "description": "This is the comunidados front-end application for viewing shapes and survey data. Built with React.",
-  "keywords": [  "react", "leaflet",  "material-ui"  ],
+  "keywords": [
+    "react",
+    "leaflet",
+    "material-ui"
+  ],
   "main": "src/index.js",
   "homepage": "https://comunidados-react.s3.amazonaws.com/",
   "dependencies": {
@@ -29,17 +33,19 @@
     "shortid": "2.2.14"
   },
   "devDependencies": {
+    "bestzip": "^2.1.5",
     "typescript": "3.3.3"
   },
-	"scripts": {
-		"dev": "react-scripts start",
+  "scripts": {
+    "dev": "react-scripts start",
     "test": "react-scripts build",
     "build": "react-scripts build",
     "eject": "react-scripts eject",
-		"deploy": "aws s3 sync build/ s3://comunidados-react-v3",
+		"zip": "bestzip bundle.zip build/*",
+		"deploy": "aws s3 cp ./bundle.zip s3://comunidados-react-v3/bundle.zip",
 		"git_update": "python ./config/git_update.py",
 		"git_test": "python ./config/git_test.py",
-    "do_it_all": "npm run build && npm run deploy && npm run git_update"
+    "doitall": "npm run build && npm run zip && npm run deploy && npm run git_update"
   },
   "browserslist": [
     ">0.2%",

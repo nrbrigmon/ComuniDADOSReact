@@ -12,11 +12,6 @@ import getSchemas from "schemas/initialStates";
 const initialState = getSchemas;
 const store = createStore(reducers, initialState, applyMiddleware(reduxThunk));
 
-console.log(`
-small change
-`)
-
-
 ReactDOM.render(
   <Provider store={store}>
     <App height={"100vh"} />
