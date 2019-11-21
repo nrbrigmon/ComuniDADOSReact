@@ -136,7 +136,7 @@ class LoginFormContent extends Component {
 							onClick={()=> this.setState({'view':'Login'} ) }
 							>{LoginText}</Button>
 						<Button
-							disabled //this will be removed after beta period
+							// disabled //this will be removed after beta period
 							color={ ( this.state.view === 'Register' ? "primary" : "default" ) }	
 							variant={ ( this.state.view === 'Register' ? "contained" : "outlined" ) }
 							onClick={()=> this.setState({'view':'Register'} ) }

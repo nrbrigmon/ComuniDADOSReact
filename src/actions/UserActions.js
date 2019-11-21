@@ -23,15 +23,22 @@ export const handleUserUpdate = (_id, _val) => {
 }
 
 export const userLogin = (user) => async dispatch => {
-	const res = await axios.post('/api/existing_user/', user);	
+	console.log('user logging in...')
+	console.log(process.env.REACT_APP_API_URL+'api/existing_user/',)
+	const res = await axios.post(process.env.REACT_APP_API_URL+'api/existing_user/', user);	
+	console.log(res)
+	console.log('received login response...')
 	// console.log(res)
 
 	dispatch({ type: 'EXISTNG_USER_LOGIN', payload: res.data });
 }
 
 export const userRegister = (user) => async dispatch => {
+	console.log('registering new user...')
+	console.log(user)
 	const res = await axios.post('/api/new_user/', user);	
-	// console.log(res)
+	console.log('received registered response...')
+	console.log(res)
 
 	dispatch({ type: 'NEW_USER_REGISTER', payload: res.data });
 }
