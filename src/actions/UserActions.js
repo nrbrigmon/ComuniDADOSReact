@@ -22,10 +22,24 @@ export const handleUserUpdate = (_id, _val) => {
 	return action
 }
 
+const PROXY_PORT = process.env.REACT_APP_API_URL.substring( process.env.REACT_APP_API_URL.length - 5, process.env.REACT_APP_API_URL.length-1)
+const PROXY_URL =  process.env.REACT_APP_API_URL.substring( 7, process.env.REACT_APP_API_URL.length-6)
+
+const API_CONFIG = {
+	headers: {
+		'Content-Type': 'application/json'
+	},
+	proxy: {
+		host: PROXY_URL,
+		port: PROXY_PORT,
+	}
+}
+
 export const userLogin = (user) => async dispatch => {
-	// console.log('user logging in...')
-	// console.log(process.env.REACT_APP_API_URL+'api/existing_user/',)
-	const res = await axios.post(process.env.REACT_APP_API_URL+'api/existing_user/', user);	
+	console.log('user logging in...')
+	console.log(process.env.REACT_APP_API_URL+'api/existing_user/')
+	API_CONFIG.data = user;
+	const res = await axios.post(process.env.REACT_APP_API_URL+'api/existing_user/', API_CONFIG);	
 	console.log(res)
 	console.log('received login response...')
 	// console.log(res)

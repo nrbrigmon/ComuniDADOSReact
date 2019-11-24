@@ -15,6 +15,7 @@
     "@material-ui/icons": "4.2.1",
     "Leaflet.vector-markers": "0.0.6",
     "axios": "0.19.0",
+    "env-cmd": "^10.0.1",
     "leaflet": "1.5.1",
     "lodash": "4.17.15",
     "nice-color-palettes": "^3.0.0",
@@ -38,13 +39,13 @@
   },
   "scripts": {
     "dev": "react-scripts start",
-    "test": "react-scripts build",
+    "build:staging": "env-cmd -f .env.staging react-scripts build",
     "build": "react-scripts build",
     "eject": "react-scripts eject",
-		"zip": "bestzip bundle.zip build/*",
-		"deploy": "aws s3 cp ./bundle.zip s3://comunidados-react-v3/bundle.zip --acl public-read",
-		"git_update": "python ./config/git_update.py",
-		"git_test": "python ./config/git_test.py",
+    "zip": "bestzip bundle.zip build/*",
+    "deploy": "aws s3 cp ./bundle.zip s3://comunidados-react-v3/bundle.zip --acl public-read",
+    "git_update": "python ./config/git_update.py",
+    "git_test": "python ./config/git_test.py",
     "doitall": "npm run build && npm run zip && npm run deploy && npm run git_update"
   },
   "browserslist": [

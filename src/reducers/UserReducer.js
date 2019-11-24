@@ -36,20 +36,20 @@ function registerUserResults(state, payload){
 			"err": false,
 			"errMsg": ""
 		}
-		setCache("userInfo", registeredUser)
+		// setCache("userInfo", registeredUser)
 	}
 	return registeredUser
 }
 
 function removeUserState(){
-	setCache("userInfo", null)
+	// setCache("userInfo", null)
 	return getSchemas.userInfo
 }
 
 export default function(state = getSchemas.userInfo, { type, payload }) {
 	// console.log(state)
 	if ( getCache("userInfo") ){
-		state = getCache("userInfo")
+		// state = getCache("userInfo")
 		// debugger
 	}
   switch (type) {

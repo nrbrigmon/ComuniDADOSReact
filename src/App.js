@@ -10,6 +10,7 @@ import Header from "components/Header/Header";
 class App extends Component {
   componentDidMount() {
     // console.log("baseline mounted")
+		console.log(process.env.REACT_APP_API_URL)
   }
 
   render() {
