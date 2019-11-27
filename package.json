@@ -7,6 +7,17 @@
     "leaflet",
     "material-ui"
   ],
+	"proxy": {
+		"/api/*": {
+			"target": "http://172.31.54.66:5000"
+		},
+		"/api-dev/*": {
+			"target": "http://localhost:5000"
+		},
+		"/api-test/*": {
+			"target": "http://3.233.186.17:5000"
+		}
+	},
   "main": "src/index.js",
   "homepage": "https://comunidados-react.s3.amazonaws.com/",
   "dependencies": {

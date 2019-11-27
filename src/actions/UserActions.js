@@ -22,25 +22,27 @@ export const handleUserUpdate = (_id, _val) => {
 	return action
 }
 
-const PROXY_PORT = process.env.REACT_APP_API_URL.substring( process.env.REACT_APP_API_URL.length - 5, process.env.REACT_APP_API_URL.length-1)
-const PROXY_URL =  process.env.REACT_APP_API_URL.substring( 7, process.env.REACT_APP_API_URL.length-6)
+// const PROXY_PORT = process.env.REACT_APP_API_URL.substring( process.env.REACT_APP_API_URL.length - 5, process.env.REACT_APP_API_URL.length-1)
+// const PROXY_URL =  process.env.REACT_APP_API_URL.substring( 7, process.env.REACT_APP_API_URL.length-6)
 
 const API_CONFIG = {
 	headers: {
 		'Content-Type':'application/json'
-	},
-	proxy: {
-		host: PROXY_URL,
-		port: PROXY_PORT,
 	}
 }
+// 	proxy: {
+// 		host: PROXY_URL,
+// 		port: PROXY_PORT,
+// 	}
+// }
 
 export const userLogin = (user) => async dispatch => {
-	console.log('user logging in...')
-	console.log(process.env.REACT_APP_API_URL+'api/existing_user/')
-	console.log(API_CONFIG)
+	console.log('user logging in with proxy...')
+	// console.log(process.env.REACT_APP_API_URL+'api/existing_user/')
+	// console.log(API_CONFIG)
 	API_CONFIG.data = user;
-	const res = await axios.post(process.env.REACT_APP_API_URL+'api/existing_user/', API_CONFIG);	
+	// const res = await axios.post(process.env.REACT_APP_API_URL+'api/existing_user/', API_CONFIG);		
+	const res = await axios.post('/api/existing_user/', API_CONFIG);	
 	console.log(res)
 	console.log('received login response...')
 	// console.log(res)
@@ -51,7 +53,8 @@ export const userLogin = (user) => async dispatch => {
 export const userRegister = (user) => async dispatch => {
 	console.log('registering new user...')
 	console.log(user)
-	const res = await axios.post(process.env.REACT_APP_API_URL+'api/new_user/', user);	
+	// const res = await axios.post(process.env.REACT_APP_API_URL+'api/new_user/', user);		
+	const res = await axios.post('/api/new_user/', user);	
 	console.log('received registered response...')
 	console.log(res)
 
