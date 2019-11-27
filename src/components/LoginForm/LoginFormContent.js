@@ -23,7 +23,11 @@ class LoginFormContent extends Component {
 		view: 'Login',
 		reset: false
 	}
-
+	componentDidMount(){
+		this.props.fetchAllEventsA();
+		this.props.fetchAllEventsB();
+	}
+	
 	handleChange = (e) =>{
 		
 		this.setState({
