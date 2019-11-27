@@ -11,6 +11,7 @@ class LoginFormContainer extends Component {
 		let { userInfo } = this.props;
 		//the only way you get a token is from the database... so this means you are logged in...
 		let { token } = userInfo;
+		console.log("Welcome 8:40am")
 
     return (<div>
 						{ token.length >= 3  ?

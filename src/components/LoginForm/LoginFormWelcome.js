@@ -15,7 +15,6 @@ class LoginFormWelcome extends Component {
 	
   render() {
 		let { classes, userInfo, preferredLanguage } = this.props;
-		console.log("Welcome 8:20am")
     return (<div>
 			<Grid 
 				className={classes.buttonGroup}

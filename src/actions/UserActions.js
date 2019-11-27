@@ -41,8 +41,8 @@ export const userLogin = (user) => async dispatch => {
 	// console.log(process.env.REACT_APP_API_URL+'api/existing_user/')
 	// console.log(API_CONFIG)
 	API_CONFIG.data = user;
-	// const res = await axios.post(process.env.REACT_APP_API_URL+'api/existing_user/', API_CONFIG);		
-	const res = await axios.post('/api/existing_user/', API_CONFIG);	
+	const res = await axios.post(process.env.REACT_APP_API_URL+'api/existing_user/', API_CONFIG);		
+	// const res = await axios.post('/api/existing_user/', API_CONFIG);	
 	console.log(res)
 	console.log('received login response...')
 	// console.log(res)
@@ -53,8 +53,8 @@ export const userLogin = (user) => async dispatch => {
 export const userRegister = (user) => async dispatch => {
 	console.log('registering new user...')
 	console.log(user)
-	// const res = await axios.post(process.env.REACT_APP_API_URL+'api/new_user/', user);		
-	const res = await axios.post('/api/new_user/', user);	
+	const res = await axios.post(process.env.REACT_APP_API_URL+'api/new_user/', user);		
+	// const res = await axios.post('/api/new_user/', user);	
 	console.log('received registered response...')
 	console.log(res)
 
