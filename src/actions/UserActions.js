@@ -27,7 +27,7 @@ const PROXY_URL =  process.env.REACT_APP_API_URL.substring( 7, process.env.REACT
 
 const API_CONFIG = {
 	headers: {
-		'Content-Type': 'text/plain;charset=utf-8'	
+		'content-type': 'application/x-www-form-urlencoded'
 	},
 	proxy: {
 		host: PROXY_URL,
@@ -38,6 +38,7 @@ const API_CONFIG = {
 export const userLogin = (user) => async dispatch => {
 	console.log('user logging in...')
 	console.log(process.env.REACT_APP_API_URL+'api/existing_user/')
+	console.log(API_CONFIG)
 	API_CONFIG.data = user;
 	const res = await axios.post(process.env.REACT_APP_API_URL+'api/existing_user/', API_CONFIG);	
 	console.log(res)
