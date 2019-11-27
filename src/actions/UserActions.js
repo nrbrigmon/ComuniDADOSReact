@@ -27,7 +27,7 @@ const PROXY_URL =  process.env.REACT_APP_API_URL.substring( 7, process.env.REACT
 
 const API_CONFIG = {
 	headers: {
-		'Content-Type': 'application/json'
+		'Content-Type': 'text/plain;charset=utf-8'	
 	},
 	proxy: {
 		host: PROXY_URL,
