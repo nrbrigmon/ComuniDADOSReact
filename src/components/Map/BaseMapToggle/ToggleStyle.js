@@ -2,19 +2,11 @@ export default theme => ({
 	container: {
 		position: "absolute"
 		,padding: "6px 10px"
+		,top: "125px"
 		,right: "20px"
 		,zIndex: "500"
 		,boxShadow: 'rgba(0, 0, 0, 0.2) 0 0 5px 1px'
 		,cursor: "pointer"
-		,border: '1px solid #999'
-		,borderRadius: '2px'
-	
-		,[theme.breakpoints.down('xs')]: {
-			top: '116px'
-		},
-		[theme.breakpoints.up('sm')]: {
-			top: '121px'
-		},
 	},  
 	popover: {
 		pointerEvents: 'none',

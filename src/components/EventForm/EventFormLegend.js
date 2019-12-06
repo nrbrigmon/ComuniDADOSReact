@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
 import EventFormDialog from "components/EventForm/EventFormDialog";
 import Paper from "@material-ui/core/Paper";
 import withStyles from "@material-ui/core/styles/withStyles";
@@ -11,15 +10,18 @@ import { connect } from "react-redux";
 import * as actions from "actions";
 
 class EventFormLegend extends Component {
-	
+	/**
+	 * next steps:
+	 * 1. when user clicks add point, fire an action to drop marker and feaux location
+	 */
   render() {
 		let { classes, preferredLanguage } = this.props;		
     return (
 			<Grid container spacing={0}>
 					<Grid item xs={3}>
 						<Paper className={classes.legendContainer}>
-      				<Typography variant="h6" >{ SURVEY_LEGEND[preferredLanguage]['title'] }</Typography>
-							<p> { SURVEY_LEGEND[preferredLanguage]['desc'] } </p>
+      				<div className={classes.headline}>{ SURVEY_LEGEND[preferredLanguage]['title'] }</div>
+							<div className={classes.basicText}> { SURVEY_LEGEND[preferredLanguage]['desc'] } </div>
 
 							<EventFormDialog {...this.props} />
 						</Paper>
@@ -36,6 +38,7 @@ class EventFormLegend extends Component {
 			,userInfo: state.userInfo
 			,popover: state.popover
 			,userLocation: state.userLocation
+			,surveyMap: state.surveyMap
 		};
 	}
 	

@@ -8,14 +8,13 @@ import LoginFormContent from "components/LoginForm/LoginFormContent";
 class LoginFormContainer extends Component {
 	
   render() {
-		let { userInfo } = this.props;
+		let { classes, ...rest } = this.props;
 		//the only way you get a token is from the database... so this means you are logged in...
-		let { token } = userInfo;
-		console.log("Welcome 8:40am")
+		let { token } = rest.userInfo;
 
     return (<div>
 						{ token.length >= 3  ?
-							<LoginFormWelcome {...this.props} /> :
+							<LoginFormWelcome {...rest} /> :
 							<LoginFormContent {...this.props} />
 						}
 			</div>

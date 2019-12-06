@@ -3,9 +3,6 @@ import Select from 'react-select';
 import { components } from "./MetricFunctions";
 import { district_metrics, blocks_metrics } from "constants/metrics";
 
-import MetricStyle from "components/Metrics/MetricStyle";
-import withStyles from "@material-ui/core/styles/withStyles";
-
 import * as _util from "utils/mapping_utils";
 
 class MetricReactSelect extends Component {
@@ -32,8 +29,9 @@ class MetricReactSelect extends Component {
 			placeHolder = (mapLayers.metric.label === "" ? "Select a Metric" : metricSelection);
 			metrics_in_english = (mapLayers.type === 'districts' ? district_metrics : blocks_metrics)
 		}
+		
 		return (
-			<div>
+			<div className={classes.root}>
 					<Select
 						className={classes.formControl}
 						classes={classes}
@@ -48,4 +46,4 @@ class MetricReactSelect extends Component {
 	}
 }
 
-export default withStyles(MetricStyle)(MetricReactSelect);
+export default MetricReactSelect;

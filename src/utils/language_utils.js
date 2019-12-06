@@ -1,4 +1,4 @@
-export const getWelcomeMessage = (lang, user) => {
+export const getWelcomeHeadline = (lang, user) => {
 	let msg = '';
 	if (lang === 'en'){
 		msg =	`Welcome to the App, ${user}!`
@@ -6,6 +6,26 @@ export const getWelcomeMessage = (lang, user) => {
 		msg = `Bem-vindo ao aplicativo, ${user}!`
 	}
 	return msg;
+}
+
+export const getWelcomeInstructions = (lang) => {
+	let instr = '';
+	if (lang === 'en'){
+		instr =	`You now have the ability to report points in the Survey section of the app. More features will be coming as we get to them!`
+	} else {
+		instr = `Agora você tem a capacidade de relatar pontos na seção Pesquisa do aplicativo. Mais recursos virão à medida que chegarmos a eles!`
+	}
+	return instr;
+}
+
+export const getVideoInstructions = (lang) => {
+	let instr = '';
+	if (lang === 'en'){
+		instr =	`Watch the video below for a quick, one minute introduction.`
+	} else {
+		instr = `Assista ao vídeo abaixo para uma rápida introdução de um minuto`
+	}
+	return instr;
 }
 
 export const getLandingPageText = (lang) => {
@@ -28,3 +48,17 @@ export const getLandingPageText = (lang) => {
 	}
 	return pageText;
 }
+
+export const getMarkerEventText = (lang) => {
+
+	return (lang === 'en' ? "Location of the Event": "Local do Evento")
+} 
+
+export const getMarkerDirectionsText = ({preferredLanguage, userLocation}) => {
+	//if there is no user location (no geolocation enabled), return instructions on how to add a basic point
+	return (userLocation.lat === null && preferredLanguage === 'en' ? 'If your location is not enabled, use the map to navigate and click "Add Point" to place a marker' : 
+				  userLocation.lat === null && preferredLanguage === 'pr' ? 'Se a sua localização não estiver activada, utilize o mapa para navegar e clique em "Adicionar Ponto" para colocar um marcador.' :
+			preferredLanguage === 'en' ? "The marker is moveable! Try and place it in the location of the reported event.": "O marcador é móvel! Tente colocá-lo no local do evento relatado.")
+} 
+
+

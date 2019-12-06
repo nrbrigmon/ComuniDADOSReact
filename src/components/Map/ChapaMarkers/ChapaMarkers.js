@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Marker, Popup } from "react-leaflet";
 import * as B from 'Leaflet.vector-markers';
-import { getRandomColor } from "utils/color_utils";
+// import { getRandomColor } from "utils/color_utils";
 
 class ChapaMarkers extends Component {
 

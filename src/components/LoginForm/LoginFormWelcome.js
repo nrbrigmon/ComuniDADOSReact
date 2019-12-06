@@ -2,9 +2,10 @@ import React, { Component } from "react";
 import Button from "@material-ui/core/Button";
 import Grid from '@material-ui/core/Grid';
 import { navigateTo } from "utils/nav_utils";
-import { getWelcomeMessage } from "utils/language_utils";
+import { getWelcomeHeadline, getWelcomeInstructions } from "utils/language_utils";
 import { BUTTON_ACTIONS } from "constants/forms";
-
+import withStyles from "@material-ui/core/styles/withStyles";
+import GlobalStyle from "constants/global_style";
 
 class LoginFormWelcome extends Component {
 	
@@ -17,12 +18,18 @@ class LoginFormWelcome extends Component {
 		let { classes, userInfo, preferredLanguage } = this.props;
     return (<div>
 			<Grid 
-				className={classes.buttonGroup}
-				container spacing={1} 
-				direction="column" alignItems="center">
+				className={classes.centralAlign}
+				container 
+				spacing={1} 
+				direction="column" 
+				alignItems="center">
 				<Grid item >
-					{ getWelcomeMessage(preferredLanguage, userInfo.username) }
-
+					<div className={classes.headline}>
+						{ getWelcomeHeadline(preferredLanguage, userInfo.username) }
+					</div>
+					<div className={classes.basicText}>
+						{ getWelcomeInstructions(preferredLanguage)}
+					</div>
 
 				</Grid>
 				<Grid item ></Grid>
@@ -43,4 +50,4 @@ class LoginFormWelcome extends Component {
   }
 }
 
-export default LoginFormWelcome;
+export default withStyles(GlobalStyle)(LoginFormWelcome);

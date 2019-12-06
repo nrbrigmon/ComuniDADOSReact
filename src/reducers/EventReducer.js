@@ -17,7 +17,7 @@ function addNewEvent( state, newEvent ){
 	return [...state, newEvent ]
 }
 
-let newState;
+// let newState;
 export default function (state = [], {type, payload}) {
 		// console.log('action called', action);
 		// if ( getCache("chapaEvents") ){

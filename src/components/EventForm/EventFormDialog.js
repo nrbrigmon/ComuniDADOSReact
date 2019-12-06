@@ -20,9 +20,10 @@ class EventFormDialog extends Component {
 	};
 	
   _handleClickOpen = () => {
+		// console.log(this.props)
 		//get user location if not already available
 		if (this.props.userLocation.show === false){
-			this.props.addUserLocation()
+			// this.props.addUserLocation()
 		}
 		//open window
     this.setState({ open: true});
@@ -80,8 +81,7 @@ class EventFormDialog extends Component {
 				<Dialog 
 					fullWidth={true}
 					onClose={this._handleClose} 
-					open={this.state.open} 
-					maxWidth={false} >
+					open={this.state.open}  >
           
 					<DialogTitle id="simple-dialog-title" className={classes.formTitle}>	
 						
@@ -90,6 +90,7 @@ class EventFormDialog extends Component {
 						<IconButton aria-label="close" onClick={this._handleClose} className={classes.iconExit}>
 							<CloseIcon />
 						</IconButton>
+						
 					</DialogTitle>
 					
 					<DialogContent dividers>

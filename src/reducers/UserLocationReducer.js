@@ -32,6 +32,8 @@ export default function(state = getSchemas.userLocation, { type, payload }) {
       return getSchemas.userLocation;
 		case "ADD_USER_LOCATION":
 			return addUserLocation(payload)
+		case "ADD_FEAUX_USER_LOCATION":
+			return payload;
 		case "UPDATE_USER_LOCATION":
 			return updateUserLocation(state, payload)
     default:

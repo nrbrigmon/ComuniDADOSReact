@@ -4,19 +4,19 @@ export const LOGIN_CONTENTS = {
 			resetInstr: 'Please enter your email address. We will send you an email to reset your password.',
 			rows: [{
 				id: 'username',
-				text: 'Username',
+				name: 'Username',
 				type: 'text'
 			},{
 				id: 'password',
-				text: 'Password',
+				name: 'Password',
 				type: 'password'
 			},{
 				id: 'passwordConfirm',
-				text: 'Confirm Password',
+				name: 'Confirm Password',
 				type: 'password'
 			},{
 				id: 'email',
-				text: 'Email',
+				name: 'Email',
 				type: 'text'
 			}]
 		}
@@ -26,19 +26,19 @@ export const LOGIN_CONTENTS = {
 			resetInstr: 'Por favor, indique o seu endereço de e-mail. Enviaremos um e-mail para redefinir sua senha.',
 			rows: [{
 				id: 'username',
-				text: 'Nome de Usuário',
+				name: 'Nome de Usuário',
 				type: 'text'
 			},{
 				id: 'password',
-				text: 'Senha',
+				name: 'Senha',
 				type: 'password'
 			},{
 				id: 'passwordConfirm',
-				text: 'Confirme Senha',
+				name: 'Confirme Senha',
 				type: 'password'
 			},{
 				id: 'email',
-				text: 'Email',
+				name: 'Email',
 				type: 'text'
 			}]
 		}
@@ -93,7 +93,8 @@ export const BUTTON_ACTIONS =
 				signUp: 'Register',
 				signOut: 'Sign Out',
 				sendEmail: 'Send Email',
-				type: 'text'
+				type: 'text',
+				addPoint: 'Add Point'
 			}
 		,
 		pr: {
@@ -104,7 +105,8 @@ export const BUTTON_ACTIONS =
 			signUp: 'Registro',
 			signOut: 'Sair',
 			sendEmail: 'Enviar Email',
-			type: 'text'
+			type: 'text',
+			addPoint: 'Adicionar Ponto'
 		}
 }
 

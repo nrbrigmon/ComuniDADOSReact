@@ -2,9 +2,11 @@ import React, { Component } from "react";
 
 import { connect } from "react-redux";
 import * as actions from "actions";
+import GlobalStyle from "constants/global_style";
+import withStyles from "@material-ui/core/styles/withStyles";
 
 import Container from '@material-ui/core/Container';
-import { Paper } from "@material-ui/core";
+import Paper from "@material-ui/core/Paper";
 import LoginFormContainer from "components/LoginForm/LoginFormContainer"
 
 class LoginPage extends Component {
@@ -14,12 +16,12 @@ class LoginPage extends Component {
 	}
 
   render() {
+		let { classes, ...rest} = this.props;
     return (
 		<Container maxWidth="md">
-			<Paper style={{margin:'40px',padding:'40px'}}>
+			<Paper className={classes.paperContainer}>
 			
-				<LoginFormContainer {...this.props} />
-
+				<LoginFormContainer {...rest} />
 		
 		</Paper>
 	</Container>)
@@ -35,8 +37,8 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(
+export default withStyles(GlobalStyle)(connect(
   mapStateToProps,
   actions
-)(LoginPage);
+)(LoginPage));
 

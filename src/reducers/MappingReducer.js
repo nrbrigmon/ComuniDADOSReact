@@ -1,6 +1,6 @@
 import getSchemas from "schemas/initialStates";
 
-import { translatePlaceholder, getColorPalette } from "utils/mapping_utils";
+import { translatePlaceholder, getColorPalette }from "utils/mapping_utils";
 
 
 function updateMapLayer(state, payload, id){

@@ -84,17 +84,14 @@ export default theme => ({
 		zIndex: 999,
 		position: 'absolute',
 		top: '0px',
-		background: 'rgba(52, 152, 219,0.6)',
+		background: 'rgba(52, 152, 219,0.4)',
 		textAlign: 'center',
 		width:'100%'
 	},
 	directionsText: {
 		margin: '0 auto',
 		padding: '0px 20px',
-		width: '80%',
-		fontWeight: 700,
-		color: 'white',
-		textShadow: '1px 1px 3px #c51162'
+		width: '80%'
 	},
 	inputField:{
 		width: '100%'

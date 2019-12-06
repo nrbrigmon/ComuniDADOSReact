@@ -3,7 +3,6 @@ import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
-import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Grid from '@material-ui/core/Grid';
 import ButtonGroup from "@material-ui/core/ButtonGroup";
@@ -13,6 +12,7 @@ import LoginFormResetPassword from "./LoginFormResetPassword";
 import LoginFormError from "components/LoginForm/LoginFormError";
 import { LOGIN_CONTENTS, BUTTON_ACTIONS } from "constants/forms";
 import { LOGIN_SCHEMA } from "schemas/loginSchema";
+import ChapaInputField from "components/Chapa/ChapaInputField";
 
 class LoginFormContent extends Component {
 	state = {
@@ -23,13 +23,10 @@ class LoginFormContent extends Component {
 		view: 'Login',
 		reset: false
 	}
-	componentDidMount(){
-		this.props.fetchAllEventsA();
-		this.props.fetchAllEventsB();
-	}
+
 	
 	handleChange = (e) =>{
-		
+		// console.log(e)
 		this.setState({
 				[e.target.id]: e.target.value
 			})
@@ -90,23 +87,19 @@ class LoginFormContent extends Component {
 			let skipLogic = (this.state.view === 'Login' && (elem.id === 'passwordConfirm' || elem.id === 'email')) 
 			// console.log(skipLogic)
 				return (
-					skipLogic ? 
-					<TableRow key={idx} />
+					skipLogic ? <TableRow key={idx} />
 					: 
 					<TableRow key={idx}>
-						<TableCell className={classes.tableCell} size="small">{elem.text}</TableCell>
 						<TableCell className={classes.tableCell} size="small"> 
-							<TextField
-									error={this.props.userInfo.err === true}
-									id={elem.id}
-									value={this.state[elem.id]}
-									onChange={ e => this.handleChange(e)}
-									type={elem.type}
-									onKeyPress={ e => this.handleKeyPress(e) }
-									className={classes.tableText}
-									// margin="dense"
-									// padding="dense"
-									/>
+						
+							<ChapaInputField 
+								handleChange={ e => this.handleChange(e)}
+								handleKeyPress={ e => this.handleKeyPress(e)}
+								elem={elem}
+								state={this.state}
+								props={this.props}
+								error={this.props.userInfo.err}
+							/>
 						</TableCell>
 					</TableRow>
 				)
@@ -125,9 +118,11 @@ class LoginFormContent extends Component {
 			{(
 				this.state.reset === false ?
 				<Grid 
-					className={classes.buttonGroup}
-					container spacing={1} 
-					direction="column" alignItems="center">
+					className={classes.centralAlign}
+					container 
+					spacing={1} 
+					direction="column" 
+					alignItems="center">
 						
 					<ButtonGroup 
 						size="large" 
@@ -148,6 +143,7 @@ class LoginFormContent extends Component {
 					</ButtonGroup>
 					
 					<LoginFormError {...this.props} />
+					
 
 					<Table className={classes.tableContainer}>
 						<TableBody>

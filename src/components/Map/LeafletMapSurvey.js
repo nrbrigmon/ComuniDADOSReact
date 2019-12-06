@@ -9,28 +9,48 @@ import * as _constants from "constants/mapping";
 
 class LeafletMapSurvey extends Component {
 
+	handleMapCenterChange = ({lat, lng}) => {
+		// console.log(lat, lng)
+		this.props.updateMapCenterCoordinates([lat, lng])
+	}
+
+	handleMapZoomChange = (zoom) => {
+		// console.log(zoom)
+		this.props.updateMapZoom(zoom)
+	}
+
   render() {
-    let { coordinates } = this.props.map_constants;
-		let { classes, mapLayers, userLocation, preferredLanguage, chapaEvents, metricSelection } = this.props;
-		let displayMarkers = false;
-		
-		if (chapaEvents.length >= 1) {
-			displayMarkers = true;
-		}
+    let { mapCenterCoordinates, mapZoom } = this.props.surveyMap;
+	let { classes, mapLayers, userLocation, preferredLanguage, chapaEvents, metricSelection } = this.props;
+	let displayMarkers = false;
+	let variableMapCenter;
 	
-		return (
-			<Map 
-				className={classes.surveyMap} 
-				center={coordinates} 
-				zoom={15}>
-				
-				{ userLocation.show ? 
-					<FindMeIcon location={userLocation} language={preferredLanguage} /> : 
-					<div></div> }
+	if (chapaEvents.length >= 1) {
+		displayMarkers = true;
+	}
+	if (userLocation.show){
+		variableMapCenter = [userLocation.lat, userLocation.long]
+	} else {
+		variableMapCenter = mapCenterCoordinates;
+	}
 
-				{ displayMarkers ? <ChapaMarkers events={chapaEvents} selection={metricSelection} /> : <div></div> }
+	return (
+		<Map 
+			className={classes.surveyMap} 
+			center={variableMapCenter} 
+			zoom={mapZoom}
+			onMoveend={e=>this.handleMapCenterChange(e.target.getCenter()) }
+			onZoomend={e=>this.handleMapZoomChange(e.target.getZoom())}
+			>
+			
+			
+			{ userLocation.show ? 
+				<FindMeIcon location={userLocation} language={preferredLanguage} /> : 
+				<div></div> }
 
-				{_constants.BASE_MAP_OPTIONS(mapLayers, classes)}				
+			{ displayMarkers ? <ChapaMarkers events={chapaEvents} selection={metricSelection} /> : <div></div> }
+
+			{_constants.BASE_MAP_OPTIONS(mapLayers, classes)}				
 
       </Map>
     );

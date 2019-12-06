@@ -3,15 +3,13 @@ import React, { Component } from "react";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
-// import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
-import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
-import MenuItem from "@material-ui/core/MenuItem";
 import { EVENT_FORM_CONTENTS, BUTTON_ACTIONS } from "constants/forms";
 import { EVENT_CATEGORIES_EN,	EVENT_CATEGORIES_PR } from "constants/events";
 import LeafletMapEventSelect from "components/Map/LeafletMapEventSelect";
+import ChapaInputField from "components/Chapa/ChapaInputField";
 
 /** next step is to import the select options for CATEGORY.
  * the step after that is to post to EVENT MARKER
@@ -24,40 +22,62 @@ class EventFormContent extends Component {
 		eventDescription:'',
 		createdBy:'',
 		eventLat:0,
-		eventLng:0
+		eventLng:0,
+		potentialMarkerCoords: [],
+		editMode: false
 	}
 	
 	//if component mounts, we need to get the users location if possible, otherwise we have no coordinates
-	componentDidMount(){
-		if (this.props.userLocation.show === false){
-			this.props.addUserLocation(true)
-		}
-	}
+	// componentDidMount(){
+	// 	if (this.props.userLocation.show === false){
+	// 		this.props.addUserLocation(true)
+	// 	}
+	// }
 	handleChange = (e) =>{
 		// console.log(e.target)
-		console.log(this.state.eventLat)
 		this.setState({
-				[e.target.id]: e.target.value
-			})
+			[e.target.id]: e.target.value
+		})
 		localStorage.setItem('eventState', JSON.stringify({
 			...this.state,
 			[e.target.id]: e.target.value
 		})) 
 	}
+
+	setFeauxLocation = () => {
+
+		// if potentialMarkerCoords is empty, add mapcentercoords (original)
+		if (this.state.potentialMarkerCoords.length < 1){
+			this.props.addFeauxLocation(this.props.surveyMap.mapCenterCoordinates)
+		} else {
+			//else use potential markercoords as feauxuserlocation (user informed)
+			this.props.addFeauxLocation(this.state.potentialMarkerCoords)
+		}
+	}
+
+	potentialMarkerCoords = (coords) => {
+		this.setState({
+			potentialMarkerCoords: coords
+		})
+	}
+
 	updateEventLocation = ({lat, lng}) => {
-			this.setState({
-				eventLat: lat,
-				eventLng: lng
-			})
+		// console.log(lat, lng)
+		this.setState({
+			eventLat: lat,
+			eventLng: lng,
+			editMode: true
+		})
 		localStorage.setItem('eventState', JSON.stringify({
 			...this.state,
 			eventLat: lat,
 			eventLng: lng
 		})) 
-		console.log(lat, lng)
+		// console.log(lat, lng)
 	}
+
 	handleEventSubmit = (state, props) => {
-		console.log(state)
+		// console.log(state)
 		let newEvent = {
 			eventId: props.randomId, 
 			eventName: state.eventName,
@@ -77,46 +97,30 @@ class EventFormContent extends Component {
 	renderInputType = (elem, props) => {
 		// console.log(t)
 		let options = ( props.preferredLanguage === 'en' ? EVENT_CATEGORIES_EN : EVENT_CATEGORIES_PR )
-		if (elem.type === 'dropdown'){
-			return (
-				<TextField
-					id={elem.id}
-					select
-					className={props.classes.inputField}
-					value={this.state[elem.id]}
-					onChange={ e => {
-						e = { ...e, target: { ...e.target, id: elem.id } } 
-						// console.log(elem.id)
-						this.handleChange(e)
-					}}
-					margin="dense"
-					padding="dense"
-					variant="outlined"
-				>
-					{
-						options.map(item => (
-							<MenuItem key={item.value} value={item.value} id={item.id}>
-								{item.label}
-							</MenuItem>
-						)) 
-					}
-			</TextField>
-		)
-		} else{
 		
-			return (<TextField
-							id={elem.id}
-							className={props.classes.inputField}
-							value={this.state[elem.id]}
-							onChange={ e => this.handleChange(e)}
-							margin="dense"
-							padding="dense"
-							variant="outlined"
-							multiline={elem.type === "multiline"}
-							rows={elem.type === "multiline" ? 4 : 1}
-						/>)
-		}
+		return ( elem.type === 'dropdown' ? 
+				<ChapaInputField 
+						handleChange={ e => {
+								e = { ...e, target: { ...e.target, id: elem.id } } 
+								// console.log(elem.id)
+								this.handleChange(e)
+							}}
+						elem={elem}
+						state={this.state}
+						props={props}
+						options={options}
+				/> :
+						<ChapaInputField 
+							handleChange={ e => this.handleChange(e)}
+							// handleKeyPress={ e => this.handleKeyPress(e)}
+							elem={elem}
+							state={this.state}
+							props={props}
+							// error={this.props.userInfo.err}
+						/>
+						)
 	}
+
 	renderFormTable = (json, props) => {
 		let { classes } = props;
 		
@@ -127,7 +131,6 @@ class EventFormContent extends Component {
 
 					return(
 						<TableRow key={idx}>
-						<TableCell className={classes.tableCellDesc} > {elem.name }</TableCell>
 						<TableCell className={classes.tableCell} > 
 							{this.renderInputType(elem, props)}	
 						</TableCell>
@@ -144,27 +147,47 @@ class EventFormContent extends Component {
   render() {
 		let { classes, closePopUp, userLocation, preferredLanguage } = this.props;
 		let eventCoords = []
-		if (this.state.eventLat === 0){
+		if (this.props.userLocation.show && this.state.editMode === false){
 			eventCoords = [userLocation.lat, userLocation.long]
 		} else {
 			eventCoords = [this.state.eventLat, this.state.eventLng]
 		}
-		// console.log(this.props)
+		// console.log(eventCoords)
+		// console.log(this.props.userLocation)
     return (<div>
 			<Grid container>
 				<Grid item sm={6} xs={12} className={classes.formSection}> 
 					{ this.renderFormTable(EVENT_FORM_CONTENTS[preferredLanguage], this.props) }		
 				</Grid>
 				<Grid item sm={6} xs={12} className={classes.formSection}> 
-					<LeafletMapEventSelect {...this.props} eventCoords={eventCoords} updateEventLocation={this.updateEventLocation}/>					
+					<LeafletMapEventSelect 
+						{...this.props} 
+						eventCoords={eventCoords} 
+						updateEventLocation={this.updateEventLocation} 
+						updatePotentialMarker={this.potentialMarkerCoords} 
+						/>					
 				</Grid>
 				<Grid item sm={12} xs={12} className={classes.buttonGroup}>
+				{/* IF there is not user location, and no current location -- we can add a point manually */}
+					
+					{ !this.props.userLocation.show && eventCoords[0] === 0 ? 
 					<Button 
+						hidden={false} //hide if there is a marker or user location
+						onClick={() => this.setFeauxLocation()}
+						variant="contained" 
+						className={classes.actionButton}
+						color="secondary" >{BUTTON_ACTIONS[preferredLanguage]['addPoint']}</Button>
+					 :
+					<Button 
+						//hide if there is no location or marker
 						disabled={this.props.userLocation.show === false} //disable submit if no user location available
 						onClick={() => this.handleEventSubmit(this.state, this.props)}
 						variant="contained" 
 						className={classes.actionButton}
 						color="secondary" >{BUTTON_ACTIONS[preferredLanguage]['submit']}</Button>
+					}
+					{/* IF there is not user location, submit will be disabled until point is added */}
+
 					<Button 
 						onClick={() => closePopUp() }
 						variant="contained" 

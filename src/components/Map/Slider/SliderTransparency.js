@@ -3,19 +3,19 @@ import Slider from '@material-ui/core/Slider';
 
 // import Popover from '@material-ui/core/Popover';
 import withStyles from "@material-ui/core/styles/withStyles";
-import SliderTransparencyStyle from "./SliderTransparencyStyle";
+import SliderStyle from "./SliderStyle";
 
 
 class SliderTransparency extends Component {
 
-	_onSliderUpdate(obj, evt){
+	_onSliderUpdate(obj, evt, updateOpacity){
 		let adjusted_variable = ( Number(evt) / 100 ).toFixed(1)
-		this.props.updateLayerOpacity(adjusted_variable)
+		updateOpacity(adjusted_variable)
 	}
 
 	render(){
-		let { classes, mapLayers } = this.props
-		let adjusted_opacity = ( Number(mapLayers.baseMapOpacity) * 100 )
+		let { classes, action, baseMapOpacity } = this.props
+		let adjusted_opacity = ( Number(baseMapOpacity) * 100 )
 		// console.log(adjusted_opacity)
 		return (
 		<div >
@@ -27,11 +27,11 @@ class SliderTransparency extends Component {
         // marks
         min={0}
 				max={100}
-				onChange={(obj, evt) => this._onSliderUpdate(obj, evt)}
+				onChange={(obj, evt) => this._onSliderUpdate(obj, evt, action)}
       />
 
 		</div>)
 	}
 }
 
-export default withStyles(SliderTransparencyStyle)(SliderTransparency);
+export default withStyles(SliderStyle)(SliderTransparency);
