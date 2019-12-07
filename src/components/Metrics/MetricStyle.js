@@ -1,10 +1,24 @@
 export default theme => ({
-  root: {
-    background: "black"
-  },
+  container: {
+		background: 'black'
+	},
+	container2:{
+		[theme.breakpoints.down('xs')]: {
+			margin: '0px',
+			padding: '0px'
+    },
+		[theme.breakpoints.up('sm')]: {
+			margin: '0px 10px 0px 10px',
+			padding: '0px 10px 0px 10px',
+		},
+	},
   formControl: {
-		minWidth: '175px',
-		[theme.breakpoints.down('sm')]: {
+		minWidth: '125px',
+		[theme.breakpoints.down('xs')]: {
+			width: '150px',
+			margin: '0px 5px',
+    },
+		[theme.breakpoints.up('sm')]: {
 			width: '175px',
 			margin: '0px 10px',
     },
@@ -13,7 +27,7 @@ export default theme => ({
 			margin: '0px 15px',
     },
     [theme.breakpoints.up('lg')]: {
-			width: '300px',
+			width: '350px',
 			margin: '0px 25px',
     },
 		borderRadius: '4px',

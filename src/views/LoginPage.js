@@ -18,10 +18,10 @@ class LoginPage extends Component {
   render() {
 		let { classes, ...rest} = this.props;
     return (
-		<Container maxWidth="md">
-			<Paper className={classes.paperContainer}>
+	<Container maxWidth="md">
+		<Paper className={classes.paperContainer}>
 			
-				<LoginFormContainer {...rest} />
+			<LoginFormContainer {...rest} />
 		
 		</Paper>
 	</Container>)

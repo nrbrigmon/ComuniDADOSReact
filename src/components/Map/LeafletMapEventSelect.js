@@ -53,7 +53,7 @@ class LeafletMapEventSelect extends Component {
 
   render() {
     	let { mapCenterCoordinates } = this.props.surveyMap;
-		let { classes, preferredLanguage, userLocation, eventCoords, variableMapCenter } = this.props;
+		let { classes, preferredLanguage, userLocation, eventCoords } = this.props;
 		let coordinates = [];
 		// console.log(this.props)
 		if (userLocation.show){

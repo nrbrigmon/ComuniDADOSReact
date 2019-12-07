@@ -11,6 +11,7 @@ import { Typography, DialogContent } from "@material-ui/core";
 
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
+import { COLOR_PALETTE } from "constants/forms"
 
 class ColorPaletteSelector extends Component {
   state = {
@@ -38,7 +39,7 @@ class ColorPaletteSelector extends Component {
   };
 
   render() {
-		let { classes, action } = this.props;
+		let { classes, preferredLanguage, action } = this.props;
     return (
       <div >
 
@@ -48,7 +49,7 @@ class ColorPaletteSelector extends Component {
 						gutterBottom
 						className={classes.clickMe} 
 						onClick={() => this._handleClickOpen()}>
-						Click to change color palette
+						{ COLOR_PALETTE[preferredLanguage]["change"] }
 					</Typography>
 				</div>
 
@@ -61,7 +62,7 @@ class ColorPaletteSelector extends Component {
 					<IconButton aria-label="close" className={classes.closeButton} onClick={this._handleClose}>
 						<CloseIcon />
 					</IconButton>
-						Select a Color Palette:
+						{ COLOR_PALETTE[preferredLanguage]["instruction"] }
 					</DialogTitle>
 
 					<DialogContent dividers>

@@ -8,20 +8,14 @@ import Header from "components/Header/Header";
 
 
 class App extends Component {
-  componentDidMount() {
-    // console.log("baseline mounted")
-  }
 
   render() {
-    // let hist = createBrowserHistory();
-    // console.log(this.props);
     return (
       <div>
         {/* inside app, w router */}
         <CssBaseline />
         <Header />
 				<BrowserRouter >
-          {/* <Router history={hist}> */}
           <Switch>
             {indexRoutes.map((elem, key) => {
               if (elem.path) {

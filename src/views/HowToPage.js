@@ -3,9 +3,12 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from "actions";
 
-import Container from '@material-ui/core/Container';
-import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
+import { getVideoInstructions } from "utils/language_utils";
 import { Paper } from "@material-ui/core";
+
+import withStyles from "@material-ui/core/styles/withStyles";
+import GlobalStyle from "constants/global_style";
 
 class HowToPage extends Component {
 	
@@ -14,27 +17,32 @@ class HowToPage extends Component {
 	}
 
   render() {
-		let { preferredLanguage } = this.props;
+		let { preferredLanguage, classes } = this.props;
     return (
-		<Container maxWidth="md">
-			<Paper style={{margin:'40px',padding:'40px'}}>
-				<Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
-					ComuniDADOS
-				</Typography>
-				<Typography variant="h5" color="textSecondary" paragraph>
-
-					<iframe src="https://drive.google.com/file/d/1BRxfzB0arMBTpdw7xxRZDJniEJPHrxUb/preview" 
-					title="how-to-comunidados"
-					width="100%" height="480" frameBorder="0" gesture="media" allow="encrypted-media"></iframe>
-
-								{ (
-					preferredLanguage === 'en' ? 'Watch the above video for a quick, one minute introduction.' : 'Assista ao vídeo acima para uma rápida introdução de um minuto.')}
-    
-
-	</Typography>
+			<Grid container
+				direction="row"
+				justify="center"
+				alignItems="center" >
+				<Grid item xs={12} sm={8} md={6}>
+					<Paper className={classes.paperContainer}>
+							<div className={classes.headline}>
+							ComuniDADOS
+						</div>
+						<div className={classes.basicText}>
 	
-	</Paper>
-</Container>)
+							{ getVideoInstructions(preferredLanguage)}
+	
+						</div>
+						<div className={classes.basicText}>
+							<iframe src="https://drive.google.com/file/d/1BRxfzB0arMBTpdw7xxRZDJniEJPHrxUb/preview" 
+							title="how-to-comunidados"
+							width="100%" height="480" frameBorder="0" gesture="media" allow="encrypted-media"></iframe>
+
+						</div>
+					
+					</Paper>
+			</Grid>
+		</Grid>)
   }
 }
 
@@ -44,8 +52,8 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(
+export default withStyles(GlobalStyle)(connect(
   mapStateToProps,
   actions
-)(HowToPage);
+)(HowToPage));
 

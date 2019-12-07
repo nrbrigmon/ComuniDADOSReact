@@ -68,3 +68,18 @@ export const updateColorPalette = (palette) => {
 	}
 	return action
 }
+
+export const updateMapCenterCoordinates = (coords) => {
+	const action = {
+		type: "UPDATE_MAP_CENTER_COORDINATES",
+		payload: coords
+	}
+	return action
+}
+export const updateMapZoom = (zoom) => {
+	const action = {
+		type: "UPDATE_MAP_ZOOM",
+		payload: zoom
+	}
+	return action
+}

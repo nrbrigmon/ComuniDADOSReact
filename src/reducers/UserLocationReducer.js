@@ -26,7 +26,7 @@ function updateUserLocation(state, payload){
 	errMsg: '' 
 */
 export default function(state = getSchemas.userLocation, { type, payload }) {
-	// console.log(state)
+	console.log(state)
   switch (type) {
     case "NO_LOCATION":
       return getSchemas.userLocation;
