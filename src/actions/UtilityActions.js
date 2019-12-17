@@ -5,3 +5,17 @@ export const fetchRandomId = () => {
   return action;
 };
 
+export const startLoadingAnimation = () => {
+  const action = {
+    type: "START_LOADING_ANIMATION"
+  };
+  return action;
+};
+
+export const stopLoadingAnimation = () => {
+  const action = {
+    type: "STOP_LOADING_ANIMATION"
+  };
+  return action;
+};
+

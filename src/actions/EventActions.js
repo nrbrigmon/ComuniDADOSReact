@@ -1,11 +1,13 @@
 import axios from 'axios';
+import { API_CONFIG } from "constants/axios_config";
 
 export const postNewEvent = (event) => async dispatch => {
 	
-	const res = await axios.post(process.env.REACT_APP_API_URL+'api/chapa_event/', event);	
-	// console.log(res)
+	API_CONFIG.data = event;
+	const res = await axios.post(process.env.REACT_APP_API_URL+'api/chapa_event/', API_CONFIG);	
+	console.log(res)
 
-	dispatch({ type: 'NEW_CHAPA_EVENT', payload: res.data });
+	dispatch({ type: 'NEW_CHAPA_EVENT', payload: res.data.data });
 }
 
 export const fetchAllEvents = () => async dispatch => {

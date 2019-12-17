@@ -4,22 +4,26 @@ import LoginFormStyle from "components/LoginForm/LoginFormStyle";
 import LoginFormWelcome from "components/LoginForm/LoginFormWelcome";
 import LoginFormContent from "components/LoginForm/LoginFormContent";
 
+import LoadingLinear from "components/Animation/LoadingLinear/LoadingLinear"
 
 class LoginFormContainer extends Component {
-	
-  render() {
-		let { classes, ...rest } = this.props;
+
+	render() {
+		let { classes, loadAnimation, ...rest } = this.props;
 		//the only way you get a token is from the database... so this means you are logged in...
 		let { token } = rest.userInfo;
+		// console.log(loadAnimation)
+		// console.log(rest.userInfo)
+	return (<div>
+				{ loadAnimation ? <LoadingLinear /> : <span />}
 
-    return (<div>
-						{ token.length >= 3  ?
-							<LoginFormWelcome {...rest} /> :
-							<LoginFormContent {...this.props} />
-						}
+				{ token.length >= 3  ?
+					<LoginFormWelcome {...rest} /> :
+					<LoginFormContent {...this.props} />
+				}
 			</div>
-    );
-  }
+	);
+	}
 }
 
 export default withStyles(LoginFormStyle)(LoginFormContainer);

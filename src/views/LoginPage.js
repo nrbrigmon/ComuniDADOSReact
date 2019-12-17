@@ -31,9 +31,10 @@ class LoginPage extends Component {
 function mapStateToProps(state) {
   return {
 		preferredLanguage: state.preferredLanguage
-		,userInfo: state.userInfo
+		,loadAnimation: state.loadAnimation
 		,navLocation: state.navLocation
 		,randomId: state.randomId
+		,userInfo: state.userInfo
   };
 }
 

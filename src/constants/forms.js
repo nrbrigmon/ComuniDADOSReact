@@ -50,15 +50,15 @@ export const EVENT_FORM_CONTENTS = {
 		header: ['Field Name', 'User Input'],
 		rows: [{
 				name: 'Event Name',
-				id: 'eventName',
+				id: 'eventname',
 				type: 'text'
 			},{
 				name: 'Event Category',
-				id: 'eventCategory',
+				id: 'eventcategory',
 				type: 'dropdown'
 			},{
 				name: 'Notes',
-				id: 'eventDescription',
+				id: 'eventdescription',
 				type: 'multiline'
 			}
 		]
@@ -68,15 +68,15 @@ export const EVENT_FORM_CONTENTS = {
 		header: ['Field Name', 'User Input'],
 		rows: [{
 			name: 'Nome do Evento',
-			id: 'eventName',
+			id: 'eventname',
 			type: 'text'
 		},{
 			name: 'Descrição do Evento',
-			id: 'eventCategory',
+			id: 'eventcategory',
 			type: 'dropdown'
 		},{
 			name: 'Notas',
-			id: 'eventDescription',
+			id: 'eventdescription',
 			type: 'multiline'
 		}
 	]

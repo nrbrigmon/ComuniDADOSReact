@@ -9,13 +9,17 @@ import GlobalStyle from "constants/global_style";
 
 class LoginFormWelcome extends Component {
 	
+	componentDidMount(){
+		console.log("welcome, update animation")
+		this.props.stopLoadingAnimation()
+	}
 	handleSignOut = () => {
 		this.props.userSignOut()
 		navigateTo("login", this.props);
 	}
 	
   render() {
-		let { classes, userInfo, preferredLanguage } = this.props;
+	let { classes, userInfo, preferredLanguage } = this.props;
     return (<div>
 			<Grid 
 				className={classes.centralAlign}

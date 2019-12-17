@@ -11,18 +11,14 @@ import { EVENT_CATEGORIES_EN,	EVENT_CATEGORIES_PR } from "constants/events";
 import LeafletMapEventSelect from "components/Map/LeafletMapEventSelect";
 import ChapaInputField from "components/Chapa/ChapaInputField";
 
-/** next step is to import the select options for CATEGORY.
- * the step after that is to post to EVENT MARKER
- * the step after that is to view the events by query... need to cache data
- */
 class EventFormContent extends Component {
 	state = {
-		eventName:'',
-		eventCategory:'',
-		eventDescription:'',
-		createdBy:'',
-		eventLat:0,
-		eventLng:0,
+		eventname:'',
+		eventcategory:'',
+		eventdescription:'',
+		createdby:'',
+		eventlatitude:0,
+		eventlongitude:0,
 		potentialMarkerCoords: [],
 		editMode: false
 	}
@@ -64,14 +60,14 @@ class EventFormContent extends Component {
 	updateEventLocation = ({lat, lng}) => {
 		// console.log(lat, lng)
 		this.setState({
-			eventLat: lat,
-			eventLng: lng,
+			eventlatitude: lat,
+			eventlongitude: lng,
 			editMode: true
 		})
 		localStorage.setItem('eventState', JSON.stringify({
 			...this.state,
-			eventLat: lat,
-			eventLng: lng
+			eventlatitude: lat,
+			eventlongitude: lng
 		})) 
 		// console.log(lat, lng)
 	}
@@ -79,12 +75,12 @@ class EventFormContent extends Component {
 	handleEventSubmit = (state, props) => {
 		// console.log(state)
 		let newEvent = {
-			eventId: props.randomId, 
-			eventName: state.eventName,
-			eventCategory: state.eventCategory,
-			eventDescription: state.eventDescription,
-			eventLatitude: (state.eventLat === 0 ? props.userLocation.lat : state.eventLat),
-			eventLongitude: (state.eventLng === 0 ? props.userLocation.long : state.eventLng),
+			eventid: props.randomId, 
+			eventname: state.eventname,
+			eventcategory: state.eventcategory,
+			eventdescription: state.eventdescription,
+			eventlatitude: (state.eventlatitude === 0 ? props.userLocation.lat : state.eventlatitude),
+			eventlongitude: (state.eventlongitude === 0 ? props.userLocation.long : state.eventlongitude),
 			createdBy: props.userInfo.username
 		}
 		// console.log(newEvent)
@@ -150,7 +146,7 @@ class EventFormContent extends Component {
 		if (this.props.userLocation.show && this.state.editMode === false){
 			eventCoords = [userLocation.lat, userLocation.long]
 		} else {
-			eventCoords = [this.state.eventLat, this.state.eventLng]
+			eventCoords = [this.state.eventlatitude, this.state.eventlongitude]
 		}
 		// console.log(eventCoords)
 		// console.log(this.props.userLocation)

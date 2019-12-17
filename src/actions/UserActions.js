@@ -24,16 +24,21 @@ export const handleUserUpdate = (_id, _val) => {
 }
 
 export const userLogin = (user) => async dispatch => {
-	console.log('user logging in with proxy...')
-	// console.log(API_CONFIG)
+	
 	API_CONFIG.data = user;
-	// console.log(process.env.REACT_APP_API_URL)
-	const res = await axios.post(process.env.REACT_APP_API_URL+'api/existing_user/', API_CONFIG);		
-	// console.log(res)
-	console.log('received login response...')
-	// console.log(res)
+	
+	await axios.post(process.env.REACT_APP_API_URL+'api/existing_user/', API_CONFIG)
+		.then( (response) => {
+			dispatch({ type: 'EXISTNG_USER_LOGIN', payload: response.data });
+		})
+		.catch( (error) => {
+			console.log(Object.keys(error))
+			console.log(Object.values(error))
+			if (error.isAxiosError){
+				dispatch({ type: 'USER_LOGIN_NETWORK_FAIL', payload: 'Network error. Please try again later :(' });
+			}
+		})	
 
-	dispatch({ type: 'EXISTNG_USER_LOGIN', payload: res.data });
 }
 
 export const userRegister = (user) => async dispatch => {

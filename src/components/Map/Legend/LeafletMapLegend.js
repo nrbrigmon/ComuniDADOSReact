@@ -31,7 +31,7 @@ class LeafletMapLegend extends Component {
 							</li>
 						</ul>
 						<div className={classes.aboutText}>{about_text}</div>
-						<ColorPaletteSelector action={this.props.updateColorPalette} />
+						<ColorPaletteSelector action={this.props.updateColorPalette} preferredLanguage={this.props.preferredLanguage} />
 					</div>
 				</Paper>
 		</div>)

@@ -11,8 +11,8 @@ import { navigateTo } from "utils/nav_utils";
 import LoginFormResetPassword from "./LoginFormResetPassword";
 import LoginFormError from "components/LoginForm/LoginFormError";
 import { LOGIN_CONTENTS, BUTTON_ACTIONS } from "constants/forms";
-import { LOGIN_SCHEMA } from "schemas/loginSchema";
 import ChapaInputField from "components/Chapa/ChapaInputField";
+import { validateSchema } from "utils/state_utils"
 
 class LoginFormContent extends Component {
 	state = {
@@ -28,8 +28,8 @@ class LoginFormContent extends Component {
 	handleChange = (e) =>{
 		// console.log(e)
 		this.setState({
-				[e.target.id]: e.target.value
-			})
+			[e.target.id]: e.target.value
+		})
 		localStorage.setItem('state', JSON.stringify({
 			...this.state,
 			[e.target.id]: e.target.value
@@ -40,35 +40,36 @@ class LoginFormContent extends Component {
 	}
 
 	handleLoginEvent = () => {
+		//put loading animation in play
+		this.props.startLoadingAnimation()
 		
-		/// USER iS LOGGING IN
-		if (this.state.view === 'Login'){
-			this.props.userLogin(this.state)
-			//if success will navigate home
-			navigateTo("home", this.props);
+		let validCredentials = validateSchema(this.state)
+		//test credentials 
+		if (validCredentials.error !== undefined){
+			let errMsg = validCredentials.error.details[0].message;
+			this.props.userRegisterFail(errMsg)
+			// this.props.updateLoadingAnimation()
+
 		} else {
-			/// ELSE USER IS REGISTERING FOR FIRST TIME
-			let testCredentials = {
-				username: this.state.username,
-				password: this.state.password,
-				email: this.state.email
-			}
-			let validCredentials = LOGIN_SCHEMA.validate(testCredentials);
-			//test credentials 
-			if (validCredentials.error !== undefined){
-				let errMsg = validCredentials.error.details[0].message;
-				// console.log(validCredentials.error.details[0].message)
-				// console.log(typeof(validCredentials.error))
-				this.props.userRegisterFail(errMsg)
-			} else if (this.state.password !== this.state.passwordConfirm) {
-				this.props.userPasswordsNoMatch(this.props.preferredLanguage)
-			} else {
-				//success
-				this.props.userRegister(this.state);
+			// basic validation is passed
+			/// USER iS LOGGING IN
+			if (this.state.view === 'Login'){
+				this.props.userLogin(this.state)
 				//if success will navigate home
 				navigateTo("home", this.props);
-			}
+			} else {
+				/// USER IS REGISTERING
+				if (this.state.password !== this.state.passwordConfirm) {
+					this.props.userPasswordsNoMatch(this.props.preferredLanguage)
 
+				} else {
+					//success
+					this.props.userRegister(this.state);
+					//if success will navigate home
+					navigateTo("home", this.props);
+				}
+
+			}
 		}
 	}
 
@@ -113,7 +114,6 @@ class LoginFormContent extends Component {
 		let LoginText = BUTTON_ACTIONS[preferredLanguage]['login']
 		let RegisterText = BUTTON_ACTIONS[preferredLanguage]['signUp']
 		
-		
     return (<div>
 			{(
 				this.state.reset === false ?
@@ -123,7 +123,8 @@ class LoginFormContent extends Component {
 					spacing={1} 
 					direction="column" 
 					alignItems="center">
-						
+					
+
 					<ButtonGroup 
 						size="large" 
 						className={classes.buttonGroup}

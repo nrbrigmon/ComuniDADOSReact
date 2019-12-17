@@ -39,7 +39,8 @@ class ColorPaletteSelector extends Component {
   };
 
   render() {
-		let { classes, preferredLanguage, action } = this.props;
+    let { classes, preferredLanguage, action } = this.props;
+    // console.log(this.props)
     return (
       <div >
 

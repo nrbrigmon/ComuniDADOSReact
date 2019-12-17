@@ -12,8 +12,8 @@ function filterEventsByMetric(state, metric) {
 }
 
 function addNewEvent( state, newEvent ){
-	// console.log(state)
-	// console.log( newEvent )
+	console.log(state)
+	console.log( newEvent )
 	return [...state, newEvent ]
 }
 
@@ -26,10 +26,10 @@ export default function (state = [], {type, payload}) {
 		// console.log(state)
 		switch (type) {
 				case "NEW_CHAPA_EVENT":
-						addNewEvent( state, payload )
+						
 						// setCache("chapaEvents", newState)
 						// return newState;
-						return state;
+						return addNewEvent( state, payload );
 				case "ALL_CHAPA_EVENTS":
 					// console.log(payload)
 						setCache("chapaEvents", payload)

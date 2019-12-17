@@ -11,9 +11,6 @@ import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import EventFormContent from "./EventFormContent";
 
-// import Popover from '@material-ui/core/Popover';
-// import { POPOVER_TEXT } from "constants/forms";
-
 class EventFormDialog extends Component {
   state = {
 		open: false
@@ -43,63 +40,63 @@ class EventFormDialog extends Component {
 		let popUpText = POPOVER_TEXT[preferredLanguage]['postEvent'];
 		
     return (
-      <div >
+	<div >
 
-				<div 
-					onMouseEnter={this.props.updatePopOver}
-					onMouseLeave={this.props.updatePopOver}
-					id={popOverId}
-					className={classes.postEvent}
-					>
-					<Button 
-						onClick={() => this._handleClickOpen()}
-						variant="contained" 
-						size='medium'
-						disabled={ !loggedIn }
-						color="primary" ><RoomIcon size='sm' /> {BUTTON_ACTIONS[preferredLanguage]['postEvent']}</Button>
+		<div 
+			onMouseEnter={this.props.updatePopOver}
+			onMouseLeave={this.props.updatePopOver}
+			id={popOverId}
+			className={classes.postEvent}
+			>
+			<Button 
+				onClick={() => this._handleClickOpen()}
+				variant="contained" 
+				size='medium'
+				disabled={ !loggedIn }
+				color="primary" ><RoomIcon size='sm' /> {BUTTON_ACTIONS[preferredLanguage]['postEvent']}</Button>
 
-					<Popover
-							id="mouse-over-popover"
-							className={classes.popover}
-							classes={{ paper: classes.paper }}
-							open={openLogic}
-							anchorEl={popover.anchor}
-							anchorOrigin={{
-								vertical: 6,
-								horizontal: 'center'
-							}}
-							transformOrigin={{
-								vertical: 'top',
-								horizontal: 'center',
-							}}
-							onClose={this.props.updatePopOver}
-							disableRestoreFocus>
-							<Typography className={classes.text}> { popUpText } </Typography>
-					</Popover>
-				</div>
+			<Popover
+					id="mouse-over-popover"
+					className={classes.popover}
+					classes={{ paper: classes.paper }}
+					open={openLogic}
+					anchorEl={popover.anchor}
+					anchorOrigin={{
+						vertical: 6,
+						horizontal: 'center'
+					}}
+					transformOrigin={{
+						vertical: 'top',
+						horizontal: 'center',
+					}}
+					onClose={this.props.updatePopOver}
+					disableRestoreFocus>
+					<Typography className={classes.text}> { popUpText } </Typography>
+			</Popover>
+		</div>
 
-				<Dialog 
-					fullWidth={true}
-					onClose={this._handleClose} 
-					open={this.state.open}  >
-          
-					<DialogTitle id="simple-dialog-title" className={classes.formTitle}>	
-						
-						{ EVENT_FORM_CONTENTS[preferredLanguage]['title'] }
-						
-						<IconButton aria-label="close" onClick={this._handleClose} className={classes.iconExit}>
-							<CloseIcon />
-						</IconButton>
-						
-					</DialogTitle>
+		<Dialog 
+			fullWidth={true}
+			onClose={this._handleClose} 
+			open={this.state.open}  >
+	
+			<DialogTitle id="simple-dialog-title" className={classes.formTitle}>	
+				
+				{ EVENT_FORM_CONTENTS[preferredLanguage]['title'] }
+				
+				<IconButton aria-label="close" onClick={this._handleClose} className={classes.iconExit}>
+					<CloseIcon />
+				</IconButton>
 					
-					<DialogContent dividers>
+			</DialogTitle>
+				
+			<DialogContent dividers>
 						
-          	<EventFormContent {...this.props} closePopUp={this._handleClose} />
+          		<EventFormContent {...this.props} closePopUp={this._handleClose} />
 
-					</DialogContent>
+			</DialogContent>
         </Dialog>
-      </div>
+	</div>
     );
   }
 }

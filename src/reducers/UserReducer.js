@@ -44,16 +44,18 @@ export default function(state = getSchemas.userInfo, { type, payload }) {
 		state = getCache("userInfo")
 		// debugger
 	}
-  switch (type) {
-    case "DEFAULT_USER":
-      return state;
-    case "NEW_USER_REGISTER":
+	switch (type) {
+		case "DEFAULT_USER":
+			return state;
+		case "NEW_USER_REGISTER":
 			return registerUserResults(state, payload);
 		case "EXISTNG_USER_LOGIN":
 			return registerUserResults(state, payload);
 		case "PASSWORD_MATCH_FAIL":
 			return passwordMatchFail(state, payload);
 		case "USER_REGISTER_FAIL":
+			return registerUserResults(state, { err: true, errMsg: payload} )
+		case "USER_LOGIN_NETWORK_FAIL":
 			return registerUserResults(state, { err: true, errMsg: payload} )
 		case "UPDATE_USER_INFO":
 			return updateStateValue(state, payload._id, payload._val)

@@ -36,22 +36,22 @@ class LeafletMap extends Component {
 		}
 		
 		return (
-			<Map 
-				className={classes.map} 
-				center={coordinates} 
-				zoom={mapZoom}
-				fadeAnimation={true}
-				zoomAnimation={true}
-				>
-				
-				{ userLocation.show ? 
-					<FindMeIcon location={userLocation} language={preferredLanguage} /> : <div></div> }
+		<Map 
+			className={classes.map} 
+			center={coordinates} 
+			zoom={mapZoom}
+			fadeAnimation={true}
+			zoomAnimation={true}
+			>
+			
+			{ userLocation.show ? 
+				<FindMeIcon location={userLocation} language={preferredLanguage} /> : <div></div> }
 
-        {leaflet_layer}
+			{leaflet_layer}
 
-				{_constants.BASE_MAP_OPTIONS(mapLayers, classes)}
+			{_constants.BASE_MAP_OPTIONS(mapLayers, classes)}
 				
-      </Map>
+   	   </Map>
     );
   }
 }

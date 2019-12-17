@@ -72,6 +72,7 @@ class SurveyPage extends Component {
 function mapStateToProps(state) {
   return {
 		chapaEvents: state.chapaEvents
+		// ,loadAnimation: state.loadAnimation
 		,mapLayers: state.mapLayers
 		,metricSelection: state.metricSelection
 		,preferredLanguage: state.preferredLanguage

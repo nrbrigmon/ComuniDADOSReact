@@ -16,6 +16,7 @@ export default {
 			labelPR: ''
 		}
 	},
+	loadAnimation: false,
 	preferredLanguage: 'en',
 	metricSelection: {	
 		id: ""
@@ -45,14 +46,14 @@ export default {
 		mapZoom: 15
 	},
 	// chapaEvents: {
-	// 	eventId: '',
-	// 	eventName: '',
-	// 	eventCategory: '',
-	// 	eventDescription: '',
-	// 	eventLatitude: '',
-	// 	eventLongitude: '',
-	// 	createdBy: '',
-	// 	createdDate: ''
+	// 	eventid: '',
+	// 	eventname: '',
+	// 	eventcategory: '',
+	// 	eventdescription: '',
+	// 	eventlatitude: '',
+	// 	eventlongitude: '',
+	// 	createdby: '',
+	// 	createddate: ''
 	// },
 	popover: {
 		open: false,
