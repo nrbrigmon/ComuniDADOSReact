@@ -2,16 +2,6 @@ import getSchemas from "schemas/initialStates";
 import { setCache, getCache } from "utils/cache_utils";
 import { updateStateValue } from "utils/state_utils";
 
-function passwordMatchFail(state, payload){
-	let errorText = ( payload === 'en' ? 'Sorry! Your passwords do not match! Try again.' : 'Desculpa! Suas senhas não coincidem! Tente novamente.')
-	let newState = {
-		...state,
-		err: true,
-		errMsg: errorText
-	}
-	return newState
-}
-
 function registerUserResults(state, payload){
 	let registeredUser;
 	// console.log(payload)
@@ -51,9 +41,7 @@ export default function(state = getSchemas.userInfo, { type, payload }) {
 			return registerUserResults(state, payload);
 		case "EXISTNG_USER_LOGIN":
 			return registerUserResults(state, payload);
-		case "PASSWORD_MATCH_FAIL":
-			return passwordMatchFail(state, payload);
-		case "USER_REGISTER_FAIL":
+		case "USER_LOGIN_FAIL":
 			return registerUserResults(state, { err: true, errMsg: payload} )
 		case "USER_LOGIN_NETWORK_FAIL":
 			return registerUserResults(state, { err: true, errMsg: payload} )

@@ -19,3 +19,9 @@ export const stopLoadingAnimation = () => {
   return action;
 };
 
+export const closeToast = () => {
+  const action ={
+    type: "CLOSE_TOAST"
+  }
+  return action;
+}

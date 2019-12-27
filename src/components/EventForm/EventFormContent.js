@@ -7,7 +7,7 @@ import TableRow from "@material-ui/core/TableRow";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import { EVENT_FORM_CONTENTS, BUTTON_ACTIONS } from "constants/forms";
-import { EVENT_CATEGORIES_EN,	EVENT_CATEGORIES_PR } from "constants/events";
+import { EVENT_CATEGORIES_EN, EVENT_CATEGORIES_PR } from "constants/events";
 import LeafletMapEventSelect from "components/Map/LeafletMapEventSelect";
 import ChapaInputField from "components/Chapa/ChapaInputField";
 

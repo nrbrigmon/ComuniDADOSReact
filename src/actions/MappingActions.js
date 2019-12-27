@@ -83,3 +83,10 @@ export const updateMapZoom = (zoom) => {
 	}
 	return action
 }
+export const updateMapBounds = (bounds) => {
+	const action = {
+		type: "UPDATE_MAP_BOUNDS",
+		payload: bounds
+	}
+	return action
+}

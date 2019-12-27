@@ -36,39 +36,44 @@ class HeaderLinks extends Component {
       <List className={classes.drawer}>
 				
         {
-					indexRoutes.map((elem, idx) => {
-						let skip = false;
-						if ( loggedIn && elem.path === '/login'){
-							//then user is logged in do not show /login path/component
-							skip = true; 
-						} else if ( !loggedIn && elem.path === '/home'){
-							//then user is not logged in do not show /home path/component
-							skip = true; 
-						}
-					//if there is no path available or the logic says skip...
-						return ( elem.path === false || skip === true ? <div key={idx} /> : 
-							<ListItem 
-								button 
-								key={idx} 
-								// divider={true}
-								// disabled={pathname === elem.path}
-								selected={pathname === elem.path} 
-								style={pathname === elem.path ? {...selectedColor, ...selectedBg } : defaultStyle } 
-								onClick={(e) => this.listItemAction(e, elem) } >
-
-									<ListItemIcon 
-										style={pathname === elem.path ? selectedColor : defaultStyle }  > 
-									{ elem.icon } 
-									</ListItemIcon>
-										{	
-											//choose correct menu item text based on preferred language
-											<ListItemText primary={( preferredLanguage === 'en' ? elem.enName : elem.prName )} /> 
-										}
-							</ListItem>
-							)}
-						)
-					
+			indexRoutes.map((elem, idx) => {
+				let skip = false;
+				if ( loggedIn && elem.path === '/login'){
+					//then user is logged in do not show /login path/component
+					skip = true; 
+				} else if ( !loggedIn && elem.path === '/home'){
+					//then user is not logged in do not show /home path/component
+					skip = true; 
 				}
+				//if there is no path available or the logic says skip...
+				// console.log(elem)
+				let displayLogic = (skip === true ? false :  		//if custom logic says to skip it
+									elem.path === false ? false : 	//if there is not path
+									elem.path.includes("password") ? false : true ) //if password is in the path
+									// console.log(displayLogic)
+				return ( displayLogic === false ? <div key={idx} /> : 
+					<ListItem 
+						button 
+						key={idx} 
+						// divider={true}
+						// disabled={pathname === elem.path}
+						selected={pathname === elem.path} 
+						style={pathname === elem.path ? {...selectedColor, ...selectedBg } : defaultStyle } 
+						onClick={(e) => this.listItemAction(e, elem) } >
+
+						<ListItemIcon 
+							style={pathname === elem.path ? selectedColor : defaultStyle }  > 
+						{ elem.icon } 
+						</ListItemIcon>
+							{	
+								//choose correct menu item text based on preferred language
+								<ListItemText primary={( preferredLanguage === 'en' ? elem.enName : elem.prName )} /> 
+							}
+					</ListItem>
+				)}
+			)
+			
+		}
       </List>
     );
   }

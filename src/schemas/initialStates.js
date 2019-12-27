@@ -1,4 +1,4 @@
-import { MAP_CENTER_COORDS } from "constants/mapping";
+import { DEFAULT_MAP_COORDS, DEFAULT_MAP_ZOOM } from "constants/mapping";
 
 export default {
 	randomId: "32432",
@@ -42,8 +42,14 @@ export default {
 		errMsg: ''
 	},
 	surveyMap: {
-		mapCenterCoordinates: MAP_CENTER_COORDS,
-		mapZoom: 15
+		mapCenterCoordinates: DEFAULT_MAP_COORDS,
+		mapZoom: DEFAULT_MAP_ZOOM,
+		mapBounds: null
+	},
+	toast: {
+		display: false,
+		message: '',
+		type: ''
 	},
 	// chapaEvents: {
 	// 	eventid: '',

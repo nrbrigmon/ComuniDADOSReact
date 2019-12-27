@@ -12,7 +12,7 @@ import MetricReducer from "./MetricReducer";
 import PopOverReducer from "./PopOverReducer";
 import SurveyMapReducer from "./SurveyMapReducer";
 import LoadingAnimationReducer from "./LoadingAnimationReducer";
-
+import ToastReducer from "./ToastReducer";
 
 export default combineReducers({
 	chapaEvents: EventReducer,
@@ -25,6 +25,7 @@ export default combineReducers({
 	preferredLanguage: LanguageReducer,
 	randomId: UtilityReducer,
 	surveyMap: SurveyMapReducer,
+	toast: ToastReducer,
   	userInfo: UserReducer,
 	userLocation: UserLocationReducer
 });

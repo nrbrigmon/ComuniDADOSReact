@@ -1,5 +1,8 @@
 import { COLOR_SCHEMES, DESCRIPTION_LOOKUP, DESCRIPTION_LOOKUP_PR, LEGEND_LOOKUP, LEGEND_LOOKUP_PR }from "constants/lookup_variables";
 import { district_metrics } from "constants/metrics";
+import { getCache } from "utils/cache_utils";
+import * as turf from '@turf/turf'
+import L from 'leaflet'
 
 /* UTILITY FUNCTIONS */
 let toTitleCase = function(str) {
@@ -153,8 +156,8 @@ let selectColorValue = function(_x, _br, _max, _pal){
 							? _pal[1]
 							: _pal[0];
 }
-let myFillColor = function(feature, sent_props, chosenPalette) {
-	// console.log(chosenPalette)
+let myFillColor = function(feature, sent_props, chosen_palette) {
+	// console.log(chosen_palette)
 	let { breaks, max, value } = sent_props;
 	let metric_value = feature.properties[value];
 	// let metric_type = sent_props.value;
@@ -166,15 +169,15 @@ let myFillColor = function(feature, sent_props, chosenPalette) {
 	if (metric_value === null) {
 		return '#999999';
 	} else {
-		return selectColorValue(metric_value, breaks, max, chosenPalette);
+		return selectColorValue(metric_value, breaks, max, chosen_palette);
 	}
 }
 
 /* POPUP FUNCTIONS */
-let getPopupContent = function(feature, metric, preferredLanguage) {
+let getPopupContent = function(feature, metric, pref_lang) {
 	// console.log(metric)
 	let _location = toTitleCase(feature.properties['LABEL'].substr(2, 20));
-	let _location_label = (preferredLanguage === 'en' ? 'LOCATION' : 'LOCALIZAÇÃO');
+	let _location_label = (pref_lang === 'en' ? 'LOCATION' : 'LOCALIZAÇÃO');
 	let _content = '<p><b>' + _location_label +': </b>' + _location;
 	let _value = feature.properties[metric.value];
 	if (metric.value.length > 1){
@@ -208,12 +211,12 @@ export function set_style(feature, metric, palette) {
 	return newStyle
 }
 
-export function basic_popup(feature, layer, metric, preferredLanguage ) {
+export function basic_popup(feature, layer, metric, pref_lang ) {
 	layer.on({
 		click: highlightFeature
 	});
 	// console.log(feature)
-	let popupContent = getPopupContent(feature, metric, preferredLanguage);
+	let popupContent = getPopupContent(feature, metric, pref_lang);
 	layer.bindPopup(popupContent);
 }
 
@@ -243,12 +246,12 @@ export const getColorPalette = function(palette_type) {
 	}
 } 
 
-export function getDescription(preferredLanguage, val) {
-	return (preferredLanguage === 'en' ? DESCRIPTION_LOOKUP[val] : DESCRIPTION_LOOKUP_PR[val]);
+export function getDescription(pref_lang, val) {
+	return (pref_lang === 'en' ? DESCRIPTION_LOOKUP[val] : DESCRIPTION_LOOKUP_PR[val]);
 }
 
-export function legendHelper(preferredLanguage, min, max, type, label) {
-	let lkp_val = (preferredLanguage === 'en' ? LEGEND_LOOKUP[type] : LEGEND_LOOKUP_PR[type]);
+export function legendHelper(pref_lang, min, max, type, label) {
+	let lkp_val = (pref_lang === 'en' ? LEGEND_LOOKUP[type] : LEGEND_LOOKUP_PR[type]);
 	// console.log(lkp_val)
 	if (type === undefined){
 		return []
@@ -294,4 +297,123 @@ export const translatePlaceholder = function(new_lang, lkp_value) {
 		translatedMetric = foundMetric.labelPR;
 	}
 	return translatedMetric
+}
+
+/**
+ * @param text string representing category of marker
+ * @returns leaflet icon object
+ */
+export const getMarkerIcon = (marker_category) => {
+	// console.log(marker_category)
+	//source: http://icon-park.com/icon/simple-location-map-pin-icon2-orange-free-vector-data/
+	let icon_png = (
+		marker_category === 'Noise'		? "../icons/blue_pin.png" : 
+		marker_category === 'Pollution' ? "../icons/brown_pin.png" : 
+		marker_category === 'Energy' 	? "../icons/green_pin.png" : 
+		marker_category === 'Safety' 	? "../icons/yellow_pin.png" : 
+		marker_category === 'Other' 	? "../icons/grey_pin.png" : 
+										"../icons/turquoise_pin.png" )
+	return L.icon({
+		iconUrl: icon_png,
+		iconSize: [24,32], //width, height
+		iconAnchor: [13, 44],
+		popupAnchor: [0,-34],
+		shadowUrl: null,
+		shadowSize: null,
+		shadowAnchor: null
+	});
+}
+
+
+/**
+ * @param array of arrays with latitude and longitude decimal values
+ * @returns centroid array pf bounding box around points
+ */
+const getCentroidFromPoints = (coord_array) => {
+
+	//if there is only one point, return single point
+	if (coord_array.length === 1){
+		// console.log(coord_array[0].length )
+		return coord_array[0]
+	} else {
+		let bboxPolygon = getBoundingBox(coord_array);
+		let centroid = turf.centroid(bboxPolygon);
+		return centroid.geometry.coordinates;
+	}
+}
+
+
+/**
+ * @param array of arrays with latitude and longitude decimal values
+ * @returns polygon representing bounding box
+ */
+const getBoundingBox = (coord_array) => {
+	console.log(coord_array)
+	//if there is only one point, duplicate point
+	if (coord_array.length === 1){
+		return coord_array[0]
+	}
+	let line = turf.lineString(coord_array);
+	let bbox = turf.bbox(line);
+
+	return turf.bboxPolygon(bbox);
+	
+}
+
+/**
+ * @param {array} array_of_obj marker objects in array
+ * @returns {array} array of values of points only
+ */
+const convertMarkersToArray = (array_of_obj) => {
+	console.log(array_of_obj)
+	let singleArray = array_of_obj.map( item => {
+		return [ item.eventlatitude, item.eventlongitude]
+	})
+	// console.log(array_of_obj)
+	// console.log(singleArray)
+	return singleArray
+}
+
+/**
+ * 
+ * @param {string} selection category of marker
+ * @returns {array} filtered array
+ */
+export const filterSelectedMarkers = (selection) => {
+	return (selection === 'All' ? getCache("chapaEvents") : 
+		getCache("chapaEvents").filter( item => {
+			return selection === item.eventcategory
+		})
+	)
+}
+/**
+ * 
+ * @param {string} selection category of marker
+ * @returns {array} centroid array
+ */
+export const getCentroidFromSelection = (selectedMarkers) => {
+	
+	let convertedArray = convertMarkersToArray(selectedMarkers)
+	// console.log(event_array
+	
+	return getCentroidFromPoints(convertedArray)
+}
+
+/**
+ * 
+ * @param {string} selection category of marker
+ * @returns {Object} Leaflet object representing map bounds
+ */
+export const getEventBoundsFromSelection = (selectedMarkers) => {
+	//get filtered selection
+	let convertedArray = convertMarkersToArray(selectedMarkers)
+	//get bounding box
+	let bboxPolygon = getBoundingBox(convertedArray);
+	//get nw and se corner of box
+	let bboxCoords = turf.coordAll(bboxPolygon)
+	console.log(bboxCoords)
+	let corner_1 = L.latLng(bboxCoords[0][0], bboxCoords[0][1])
+	let corner_2 = L.latLng(bboxCoords[2][0], bboxCoords[2][1])
+	let bounds = L.latLngBounds(corner_1, corner_2);
+	return bounds;
 }

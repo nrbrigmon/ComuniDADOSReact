@@ -10,12 +10,11 @@ export default function(state = getSchemas.surveyMap, { type, payload }) {
 	// }
   switch (type) {
     case "UPDATE_MAP_CENTER_COORDINATES":
-			// setCache("preferredLanguage", payload)
-			// console.log(payload)
-			// console.log(state)
-			return updateStateValue(state, "mapCenterCoordinates", payload);
-		case "UPDATE_MAP_ZOOM":
-			return updateStateValue(state, "mapZoom", payload)
+		return updateStateValue(state, "mapCenterCoordinates", payload);
+	case "UPDATE_MAP_ZOOM":
+		return updateStateValue(state, "mapZoom", payload)
+	case "UPDATE_MAP_BOUNDS":
+		return updateStateValue(state, "mapBounds", payload)
     default:
       return state;
   }

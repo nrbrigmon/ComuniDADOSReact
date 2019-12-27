@@ -34,6 +34,7 @@ function mapStateToProps(state) {
 		,loadAnimation: state.loadAnimation
 		,navLocation: state.navLocation
 		,randomId: state.randomId
+		,toast: state.toast
 		,userInfo: state.userInfo
   };
 }

@@ -5,6 +5,8 @@ import LoginFormWelcome from "components/LoginForm/LoginFormWelcome";
 import LoginFormContent from "components/LoginForm/LoginFormContent";
 
 import LoadingLinear from "components/Animation/LoadingLinear/LoadingLinear"
+import SimpleToast from "components/Toast/SimpleToast"
+
 
 class LoginFormContainer extends Component {
 
@@ -21,6 +23,8 @@ class LoginFormContainer extends Component {
 					<LoginFormWelcome {...rest} /> :
 					<LoginFormContent {...this.props} />
 				}
+
+				<SimpleToast {...this.props.toast} closeToast={this.props.closeToast} />
 			</div>
 	);
 	}

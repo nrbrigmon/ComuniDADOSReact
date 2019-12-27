@@ -86,17 +86,17 @@ export const EVENT_FORM_CONTENTS = {
 export const BUTTON_ACTIONS = 
 	{
 		en: {
-				submit: 'Submit',
-				cancel: 'Cancel',
-				postEvent: 'Post Event',
-				login: 'Login',
-				signUp: 'Register',
-				signOut: 'Sign Out',
-				sendEmail: 'Send Email',
-				type: 'text',
-				addPoint: 'Add Point'
-			}
-		,
+			submit: 'Submit',
+			cancel: 'Cancel',
+			postEvent: 'Post Event',
+			login: 'Login',
+			signUp: 'Register',
+			signOut: 'Sign Out',
+			sendEmail: 'Send Email',
+			type: 'text',
+			addPoint: 'Add Point',
+			resetPassword: 'Reset Password'
+		},
 		pr: {
 			submit: 'Enviar',
 			cancel: 'Cancelar',
@@ -106,7 +106,8 @@ export const BUTTON_ACTIONS =
 			signOut: 'Sair',
 			sendEmail: 'Enviar Email',
 			type: 'text',
-			addPoint: 'Adicionar Ponto'
+			addPoint: 'Adicionar Ponto',
+			resetPassword: 'Redefinir Senha'
 		}
 }
 
@@ -142,7 +143,7 @@ export const COLOR_PALETTE = {
 		,instruction: "Select a Color Palette:"
 	},
 	pr: {
-		change: "Mostre sua Localização"
+		change: "Clique para alterar a paleta de cores"
 		,instruction: "Selecione uma paleta de cores:"
 	}
 }

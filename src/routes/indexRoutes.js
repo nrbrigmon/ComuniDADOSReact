@@ -5,6 +5,7 @@ import NotFound404 from "views/NotFound404";
 import HowToPage from "views/HowToPage";
 import SurveyPage from "views/SurveyPage";
 import LoginPage from "views/LoginPage";
+import LoginResetPage from "views/LoginResetPage";
 
 import MapIcon from "@material-ui/icons/Map"
 import InfoIcon from "@material-ui/icons/Info"
@@ -23,6 +24,7 @@ var indexRoutes = [
   { path: "/", enName: "MAP", prName: 'MAPA', component: MappingPage, exact: true, icon: <MapIcon /> },
   { path: "/survey", enName: "SURVEY", prName: 'PESQUISA', component: SurveyPage, exact: true, icon: <ListAltIcon /> },
   { path: "/login", enName: "LOGIN", prName: 'CONECTE', component: LoginPage, exact: true, icon: <ExitToAppIcon /> },
+  { path: "/password-reset", enName: "RESET", prName: 'REDEFINIR', component: LoginResetPage, exact: false, icon: <ExitToAppIcon /> },
   { path: "/portugues", enName: "PORTUGUÊS", prName: 'ENGLISH', component: LandingPage, exact: true, icon: <LanguageIcon /> },
   { path: false, component: NotFound404 }
 ];

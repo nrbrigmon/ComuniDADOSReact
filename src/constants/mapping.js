@@ -20,7 +20,8 @@ export const SAO_MAP = {
 }
 
 // Map Options for Map
-export const MAP_CENTER_COORDS = [-23.6321, -46.453];
+export const DEFAULT_MAP_COORDS = [-8.2483213,-78.2228874];
+export const DEFAULT_MAP_ZOOM = 3
 
 //Map Base Map PROVIDERS HERE: https://leaflet-extras.github.io/leaflet-providers/preview/
 export const BASE_MAP_OPTIONS = function(_mapLayers) {

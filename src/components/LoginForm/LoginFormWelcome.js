@@ -10,7 +10,7 @@ import GlobalStyle from "constants/global_style";
 class LoginFormWelcome extends Component {
 	
 	componentDidMount(){
-		console.log("welcome, update animation")
+		// console.log("welcome, update animation")
 		this.props.stopLoadingAnimation()
 	}
 	handleSignOut = () => {

@@ -42,28 +42,42 @@ export const userLogin = (user) => async dispatch => {
 }
 
 export const userRegister = (user) => async dispatch => {
-	console.log('registering new user...')
+	// console.log('registering new user...')
 	// console.log(user)
 	API_CONFIG.data = user;
 	const res = await axios.post(process.env.REACT_APP_API_URL+'api/new_user/', API_CONFIG);		
 	// const res = await axios.post('/api/new_user/', user);	
-	console.log('received registered response...')
+	// console.log('received registered response...')
 	// console.log(res)
 
 	dispatch({ type: 'NEW_USER_REGISTER', payload: res.data });
 }
 
-export const userPasswordsNoMatch = (lang) => {
-	const action = {
-		type: "PASSWORD_MATCH_FAIL"
-		,payload: lang
-	};
-	return action
+export const userUpdatePassword = (user) => async dispatch => {
+	
+	API_CONFIG.data = user;
+	let { email } = user;
+	// console.log(API_CONFIG)
+	await axios.put(process.env.REACT_APP_API_URL+'api/existing_user/'+email, API_CONFIG)
+		.then( (response) => {
+			if (response.err){
+				dispatch({ type: 'SEND_TOAST_INFO', payload: response.errMsg });
+			} else {
+				dispatch({ type: 'SEND_TOAST_SUCCESS', payload: 'Password Updated! Login using your new credentials' });
+			}
+		})
+		.catch( (error) => {
+			console.log(Object.keys(error))
+			console.log(Object.values(error))
+			if (error.isAxiosError){
+				dispatch({ type: 'USER_LOGIN_NETWORK_FAIL', payload: 'Network error. Please try again later :(' });
+			}
+		})	
 }
 
-export const userRegisterFail = (msg) => {
+export const userLoginFail = (msg) => {
 	const action = {
-		type: "USER_REGISTER_FAIL"
+		type: "USER_LOGIN_FAIL"
 		,payload: msg
 	};
 	return action
@@ -74,7 +88,7 @@ export const addUserLocation = (show) => async dispatch => {
 	if (show){
 		const res = await getUserCoordinates();
 		// console.log(res)
-		dispatch({ type: "ADD_USER_LOCATION",	payload: res });
+		dispatch({ type: "ADD_USER_LOCATION", payload: res });
 	} else {
 		//if we decide not to show, we remove location
 		dispatch({ type: "NO_LOCATION",	payload: show });
@@ -110,5 +124,24 @@ export const userSignOut =  () => {
 		type: "SIGN_OUT_USER"
 	};
 	return action
+
+}
+
+
+export const sendPasswordResetEmail = (user) => async dispatch => {
+	
+	API_CONFIG.data = user;
+	
+	await axios.post(process.env.REACT_APP_API_URL+'api/password_reset/', API_CONFIG)
+		.then( (response) => {
+			dispatch({ type: 'SEND_TOAST_SUCCESS', payload: 'Email Sent! Check your inbox for resetting instructions.' });
+		})
+		.catch( (error) => {
+			console.log(Object.keys(error))
+			console.log(Object.values(error))
+			if (error.isAxiosError){
+				dispatch({ type: 'SEND_TOAST_ERROR', payload: 'Network error. Please try again later :(' });
+			}
+		})	
 
 }

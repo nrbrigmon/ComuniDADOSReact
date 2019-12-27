@@ -7,12 +7,11 @@ import Button from "@material-ui/core/Button";
 import Grid from '@material-ui/core/Grid';
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 
-import { navigateTo } from "utils/nav_utils";
 import LoginFormResetPassword from "./LoginFormResetPassword";
 import LoginFormError from "components/LoginForm/LoginFormError";
 import { LOGIN_CONTENTS, BUTTON_ACTIONS } from "constants/forms";
 import ChapaInputField from "components/Chapa/ChapaInputField";
-import { validateSchema } from "utils/state_utils"
+import { handleLoginEvent } from "utils/user_utils"
 
 class LoginFormContent extends Component {
 	state = {
@@ -39,44 +38,11 @@ class LoginFormContent extends Component {
 		}
 	}
 
-	handleLoginEvent = () => {
-		//put loading animation in play
-		this.props.startLoadingAnimation()
-		
-		let validCredentials = validateSchema(this.state)
-		//test credentials 
-		if (validCredentials.error !== undefined){
-			let errMsg = validCredentials.error.details[0].message;
-			this.props.userRegisterFail(errMsg)
-			// this.props.updateLoadingAnimation()
-
-		} else {
-			// basic validation is passed
-			/// USER iS LOGGING IN
-			if (this.state.view === 'Login'){
-				this.props.userLogin(this.state)
-				//if success will navigate home
-				navigateTo("home", this.props);
-			} else {
-				/// USER IS REGISTERING
-				if (this.state.password !== this.state.passwordConfirm) {
-					this.props.userPasswordsNoMatch(this.props.preferredLanguage)
-
-				} else {
-					//success
-					this.props.userRegister(this.state);
-					//if success will navigate home
-					navigateTo("home", this.props);
-				}
-
-			}
-		}
-	}
 
 	handleKeyPress = (e) => {
 		// console.log(e.key)
 		if (e.key === "Enter" ){
-			this.handleLoginEvent()
+			handleLoginEvent(this.props, this.state)
 		}
 	}
 
@@ -154,7 +120,7 @@ class LoginFormContent extends Component {
 				
 					<Grid item className={classes.section}>
 						<Button 
-							onClick={() => this.handleLoginEvent()}
+							onClick={() => handleLoginEvent(this.props, this.state)}
 							variant="contained" 
 							size="large"
 							color="primary" >
