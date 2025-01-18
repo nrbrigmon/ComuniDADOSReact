@@ -16,7 +16,7 @@ class BaseMapToggle extends Component {
 
 		_handleMouseClick = (action, baseMapSelection) => {
 			//we only have 3 base maps so the toggle will select numbers 0, 1, 2
-			baseMapSelection = (baseMapSelection+1) % 3;
+			baseMapSelection = (baseMapSelection+1) % 2;
 			// console.log(baseMapSelection)
 			action(baseMapSelection)
 		}

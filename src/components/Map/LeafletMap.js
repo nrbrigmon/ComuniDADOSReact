@@ -47,7 +47,7 @@ class LeafletMap extends Component {
 				center={coordinates} 
 				zoom={15}>
 				
-        {leaflet_layer}
+        		{leaflet_layer}
 
 				{_constants.BASE_MAP_OPTIONS(mapLayers, classes)}
 				
