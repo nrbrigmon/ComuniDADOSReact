@@ -30,7 +30,7 @@ export const BASE_MAP_OPTIONS = function(_mapLayers) {
     <LayersControl.BaseLayer name="OSM B&W" checked={0 === baseMapSelection}>
       <TileLayer
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-        url="https://{s}.tile-cyclosm.openstreetmap.fr/[cyclosm|cyclosm-lite]/{z}/{x}/{y}.png"
+        url="https://tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png"
 				opacity={baseMapOpacity}
       />
     </LayersControl.BaseLayer>
