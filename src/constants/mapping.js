@@ -30,7 +30,7 @@ export const BASE_MAP_OPTIONS = function(_mapLayers) {
     <LayersControl.BaseLayer name="OSM B&W" checked={0 === baseMapSelection}>
       <TileLayer
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-        url="https://tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png"
+        url="https://tiles.stadiamaps.com/tiles/stamen_toner/{z}/{x}/{y}.png"
 				opacity={baseMapOpacity}
       />
     </LayersControl.BaseLayer>
@@ -48,18 +48,18 @@ export const BASE_MAP_OPTIONS = function(_mapLayers) {
 					url="http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
 					opacity={baseMapOpacity}
 				/>
-				<TileLayer
+				{/* <TileLayer
 					attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-					url="http://stamen-tiles-{s}.a.ssl.fastly.net/toner-lines/{z}/{x}/{y}.{ext}"
+					url="https://a.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"
 					ext="png"
 					opacity={baseMapOpacity}
 				/>
 				<TileLayer
 					attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-					url="http://stamen-tiles-{s}.a.ssl.fastly.net/toner-labels/{z}/{x}/{y}.{ext}"
+					url="https://b.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"
 					ext="png"
 					opacity={baseMapOpacity}
-				/>
+				/> */}
 			</LayerGroup>
     </LayersControl.BaseLayer>
   </LayersControl>
